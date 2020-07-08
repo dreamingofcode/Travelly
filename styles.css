@@ -1,0 +1,210 @@
+/* GLOBAL STYLES? */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+}
+h1 {
+  font-size: 4.6rem;
+}
+li,
+button,
+label,
+input,
+p {
+  font-size: 2rem;
+}
+h2 {
+  font-size: 4.8rem;
+}
+h3 {
+  font-size: 3rem;
+  font-weight: 400;
+}
+h4,
+h5 {
+  font-size: 2.8rem;
+}
+a {
+  color: white;
+  text-decoration: none;
+}
+button {
+  padding: 2rem 6rem;
+  background-color: #4c6e97;
+  border: none;
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: all 1s ease-in-out;
+  /* animation: cloudAnimations 2s infinite; */
+}
+button:hover {
+  background-color: #334459;
+  font-size: 2.6rem;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+}
+/* navigation section with hero */
+.main-head {
+  background-color: #131c27;
+  color: white;
+}
+nav {
+  min-height: 10vh;
+  display: flex;
+  width: 90%;
+  padding: 2rem; /* vertical? */
+  margin: auto;
+  flex-wrap: wrap; /*for mobile resposiveness on the nav buttons*/
+}
+nav ul {
+  display: flex;
+  flex: 1 1 40rem; /*40 rem allows for quicker switch in screen size*/
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+}
+#logo {
+  font-family: 'Pattaya', sans-serif;
+  font-weight: 400;
+  display: flex;
+  flex: 5 1 40rem;
+  justify-content: flex-start; /* used to align horizontally */
+  align-items: center; /* used to align vertically */
+}
+.hero {
+  min-height: 90vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), transparent),
+    url('./images/landing-page.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* vertically  */
+  align-items: center; /* horizontally */
+  text-align: center;
+}
+.hero h3 {
+  padding: 5rem;
+}
+/* locations section */
+#locations {
+  min-height: 100vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), transparent),
+    url('./images/new-york-page.png');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.locations-head {
+  width: 90%;
+  margin: auto;
+}
+.locations-head h2 {
+  padding: 1rem 0rem;
+  text-decoration: underline;
+  text-decoration-thickness: 0.9rem;
+}
+.locations-head h3 {
+  padding: 4rem 0rem 0rem;
+  /* background: linear-gradient(#131c27,#663b34);
+    background-clip: text;
+    -webkit-text-fill-color: transparent; */
+}
+
+.cloud {
+  height: 45rem;
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  pointer-events: none;
+}
+.moving-cloud-1 {
+    animation: cloudAnimations 3s infinite alternate-reverse;
+}
+.moving-cloud-2 {
+    animation: cloudAnimations 5s infinite alternate-reverse;
+
+  top: 10%;
+  z-index: -1;
+  opacity: 0.9;
+}
+@keyframes buttonAnimations {
+  0% {
+    background: lightblue;
+  }
+  25% {
+    background: lightsalmon;
+  }
+  100% {
+    background: lime;
+  }
+}
+@keyframes cloudAnimations {
+    0% {
+ transform: translate(10%,-15%);
+    }
+  
+    100% {
+        transform: translate(0%,0%);
+    }
+  }
+/* media query */
+@media screen and (max-width: 932px) {
+  html {
+    font-size: 45%;
+  }
+  nav {
+    text-align: center;
+  }
+  #logo {
+    padding: 2rem;
+    justify-content: center;
+    /* align-items: center; */
+  }
+  .cloud{
+      height: 40rem;
+  }
+  .moving-cloud-2{
+      top:5%
+  }
+}
+@media screen and (max-width: 320px) {
+    html {
+      font-size: 45%;
+    }
+    nav {
+      text-align: center;
+    }
+    #logo {
+      padding: 2rem;
+      justify-content: center;
+      /* align-items: center; */
+    }
+    .locations-head h3{
+       align-items: center;
+       background: #4c6e97 ;
+       color: white;
+       text-align: center;
+       justify-content: center;
+      
+      
+    }
+    .cloud{
+        height: 30rem;
+    }
+    .moving-cloud-2{
+        top:5%
+    }
+  }
