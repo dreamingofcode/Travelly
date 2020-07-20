@@ -1,4 +1,5 @@
 import React from 'react';
+
 import mobiscroll from '@mobiscroll/react';
 import '@mobiscroll/react/dist/css/mobiscroll.min.css';
 
@@ -10,7 +11,7 @@ mobiscroll.settings = {
 class BookingForm extends React.Component {
   constructor(props) {
     super(props);
-this.wrapper=React.createRef()
+    this.wrapper = React.createRef();
     const now = new Date();
     let departureDate = new Date(
       now.getFullYear(),
@@ -267,4 +268,4 @@ this.wrapper=React.createRef()
     );
   }
 }
-export default BookingForm
+export default BookingForm;
