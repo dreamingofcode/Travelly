@@ -1,0 +1,389 @@
+/* GLOBAL STYLES? */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+}
+
+
+h1 {
+  font-size: 4.6rem;
+}
+li,
+button,
+label,
+input,
+p {
+  font-size: 2rem;
+}
+h2 {
+  font-size: 4.8rem;
+}
+h3 {
+  font-size: 3rem;
+  font-weight: 400;
+}
+h4,
+h5 {
+  font-size: 2.8rem;
+}
+a {
+  color: white;
+  text-decoration: none;
+}
+button {
+  padding: 2rem 6rem;
+  background-color: #4c6e97;
+  border: none;
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: all 1s ease-in-out;
+  /* animation: cloudAnimations 2s infinite; */
+}
+button:hover {
+  background-color: #334459;
+  font-size: 2rem;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+}
+/* navigation section with hero */
+.main-head {
+  background-color: #131c27;
+  color: white;
+  position: sticky;
+  top:0px;
+  z-index: 1;
+}
+nav {
+  min-height: 10vh;
+  display: flex;
+  width: 90%;
+  padding: 2rem; /* vertical? */
+  margin: auto;
+  flex-wrap: wrap; /*for mobile resposiveness on the nav buttons*/
+}
+nav ul {
+  display: flex;
+  flex: 1 1 40rem; /*40 rem allows for quicker switch in screen size*/
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+}
+#logo {
+  font-family: 'Pattaya', sans-serif;
+  font-weight: 400;
+  display: flex;
+  flex: 5 1 40rem;
+  justify-content: flex-start; /* used to align horizontally */
+  align-items: center; /* used to align vertically */
+}
+.hero {
+  min-height: 90vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), transparent),
+    url('./images/landing-page.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* vertically  */
+  align-items: center; /* horizontally */
+  text-align: center;
+}
+.hero h3 {
+  padding: 5rem;
+}
+/* locations section */
+#locations {
+  min-height: 100vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), transparent),
+    url('./images/new-york-page.png');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  position: relative;
+  left: 0px;
+  overflow: hidden;
+}
+.locations-head {
+  width: 90%;
+  margin: auto;
+}
+.locations-head h2 {
+  
+  padding: 0rem 0rem 0rem 0rem;
+  text-decoration: underline;
+  /* text-decoration-thickness: 0.9rem; */
+}
+.locations-head h3 {
+  padding:10px 70px 30px 0;
+ 
+}
+
+.cloud {
+  height: 45rem;
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  pointer-events: none;
+}
+.moving-cloud-1 {
+  animation: cloudAnimations 3s infinite alternate-reverse;
+}
+.moving-cloud-2 {
+  animation: cloudAnimations 5s infinite alternate-reverse;
+
+  top: 10%;
+  z-index: -1;
+  opacity: 0.9;
+}
+
+/* BENEFITS SECTION */
+
+.benefits-head {
+  background: #343c44;
+  padding: 3rem;
+  min-height: 30vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+}
+.benefits-head h3 {
+  padding: 1rem;
+}
+.cards {
+  width: 90%;
+  margin: auto;
+  display: flex;
+  min-height: 70vh;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.card {
+  text-align: center;
+  flex: 1 1 25rem;
+  min-height: 50vh;
+  margin: 2rem 5rem;
+  box-shadow: 30px 20px 10px rgba(0, 0, 0, 0.1),
+    0px 20px 20px rgba(0, 0, 0, 0.1); /*x value,y value , blur, color. */
+}
+.card button{
+  border-radius: 10px;
+ 
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+.card h4,.card p {
+  padding: 1rem;
+}
+
+.cards img {
+  max-width: 20%;
+  max-height: 10%;
+  margin: 2rem;
+}
+.card-icon {
+  background-color: teal;
+  /* justify-content: center;
+    align-items: center; */
+}
+
+#contacts{
+  min-height: 100vh;
+  background:linear-gradient(rgba(0, 0, 0, 0.5), transparent), url('./images/contact-mountain.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background-position: center; */
+}
+.form-wrapper{
+  background: rgb(19,28,39,0.8);
+  width: 60%;
+  color: white;
+  border-radius: 20px;
+}
+.form-head{
+  text-align: center;
+  padding:4rem
+}
+.name-form,.email-form{
+  padding:2rem;
+  text-align: center;
+}
+.form-wrapper label{
+  margin:0rem 3rem
+}
+.form-wrapper button{
+  width: 100%;
+  padding: 2rem;
+  margin-top: 8rem;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius:20px ;
+}
+.form-wrapper input{
+  padding:1rem 3rem;
+}
+footer{
+  color:white;
+  background: rgba(19, 28, 39, 1);
+}
+.footer-wrapper{
+  display: flex;
+  padding:3rem  ;
+  width: 90%;
+  margin: auto;
+  min-height: 10vh;
+  align-items: center;
+  flex-wrap: wrap;
+
+}
+footer h5{
+  flex:1 1 40rem;
+}
+footer ul{
+  display: flex;
+  flex: 10 1 40rem;
+  list-style: none;
+  justify-content: space-between;
+  align-items: center;
+}
+@keyframes buttonAnimations {
+  0% {
+    background: lightblue;
+  }
+  25% {
+    background: lightsalmon;
+  }
+  100% {
+    background: lime;
+  }
+}
+@keyframes cloudAnimations {
+  0% {
+    transform: translate(10%, -15%);
+  }
+
+  100% {
+    transform: translate(0%, 0%);
+  }
+}
+/* media query */
+@media screen and (max-width: 952px) {
+  footer{
+    text-align: center;
+  }
+  footer h5{
+    margin-bottom: 5rem;
+  }
+  .form-wrapper{
+    width: 100%;
+  }
+  .cards{
+    display: flex;
+    flex: wrap;
+  }
+}
+@media screen and (max-width: 932px) {
+  
+  html {
+    font-size: 45%;
+  }
+  nav {
+    text-align: center;
+  }
+  #logo {
+    padding: 2rem;
+    justify-content: center;
+    /* align-items: center; */
+  }
+  
+  .cloud {
+    height: 40rem;
+  }
+  .moving-cloud-2 {
+    top: 5%;
+  }
+  footer{
+    text-align: center;
+  }
+  footer h5{
+    font-size: large;
+    padding-bottom: 5rem;
+  }
+}
+@media screen and (max-width: 320px) {
+  html {
+    font-size: 45%;
+  }
+  nav {
+    text-align: center;
+  }
+  #logo {
+    padding: 2rem;
+    justify-content: center;
+    /* align-items: center; */
+  }
+
+  .locations-head h3 {
+    align-items: center;
+    background: #4c6e97;
+    color: white;
+    text-align: center;
+    justify-content: center;
+  }
+  .cloud {
+    height: 30rem;
+  }
+
+  .moving-cloud-2 {
+    top: 5%;
+  }
+  footer{
+    text-align: center;
+  }
+  footer h5{
+    padding-bottom: 5rem;
+  }
+}
+
+
+/* range inputs */
+
+.md-flight-booking .md-time-range {
+  overflow: hidden;
+  width: 99%;
+}
+
+.mbsc-ios .md-time-range {
+  background: black;
+}
+
+.md-time-range .mbsc-input {
+  float: left;
+  width: 50%;
+  box-sizing: border-box;
+}
+
+.mbsc-ios .md-time-range .mbsc-input {
+  display: block;
+}
+
+.mbsc-ios .md-time-range .mbsc-input .mbsc-label {
+  font-size: 14px;
+  padding-left: 1.14285em;
+  padding-top: 0.75em;
+  line-height: 22px;
+}
