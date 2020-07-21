@@ -1,0 +1,138 @@
+.body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  min-height: 90vh;
+  box-sizing: border-box;
+  background: linear-gradient(#46a8be80, transparent),
+    url('../images/new-york-page.png');
+  background-position: right;
+  
+}
+.body1 {
+  width: 80%;
+  box-sizing: border-box;
+  object-position: center;
+  display: flex;
+  margin-left: 130px;
+  position: flex;
+  align-self: center;
+  align-content: center;
+  justify-content: center;
+}
+h1 {
+  font-family: 'Pattaya', sans-serif;
+}
+.flightForm {
+  width: 100%;
+  margin: auto;
+  padding: 6rem;
+  box-sizing: border-box;
+overflow-x: hidden;
+}
+.flightForm h1{
+    font-size: 8rem;
+    padding: 4rem;
+}
+.cloud,
+.cloud1 {
+    overflow-x: hidden;
+  height: 45rem;
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  pointer-events: none;
+}
+.cloud3 {
+  height: 45rem;
+  left: -10%;
+  position: absolute;
+  top: 10%;
+  z-index: -1;
+  opacity: 0.6;
+  animation: cloudAnimation 5s infinite alternate-reverse;
+}
+.plane1 {
+  height: 100px;
+  right: 0;
+
+  margin-right: 500px;
+  animation: planeAnimation 10s ease-in infinite;
+}
+.moving-cloud-2 {
+  top: 1%;
+}
+@keyframes cloudAnimation {
+  0% {
+
+    transform: translate(5%, -15%) rotateX(360deg) rotateY(180deg);
+  }
+
+  100% {
+  
+    transform:  translate(0%, 0%)rotateX(360deg) rotateY(180deg);
+  }
+}
+@keyframes planeAnimation {
+  0% {
+    transform:  scale(.5) rotate(0deg) translate(-300px, 400px);
+
+    /*  */
+  }
+ 
+   50% {
+    transform: scale(1) rotate(30deg) translate(0px, 200px);
+
+  } 
+
+  100% {
+    transform:  scale(2.8) rotate(20deg) translate(300px, -400px);
+  }
+}
+
+/* media query */
+@media screen and (max-width: 952px) {
+  .flightForm {
+    width: 100%;
+    margin: auto;
+    padding:0rem;
+    box-sizing: border-box;
+
+  }
+  .body1 {
+    width: 100%;
+    box-sizing: border-box;
+    object-position: center;
+    display: flex;
+    margin: auto;
+    position: flex;
+    align-self: center;
+    align-content: center;
+    justify-content: center;
+  }
+}
+@media screen and (max-width: 452px) {
+    .flightForm {
+      width: 100%;
+      margin: auto;
+      padding:2rem;
+      box-sizing: border-box;
+  
+    }
+    .flightForm h1{
+        margin:2rem;
+        margin-bottom: -100px;
+        font-size:40px ;
+    }
+    .body1 {
+      width: 100%;
+      box-sizing: border-box;
+      object-position: center;
+      display: flex;
+      margin: auto;
+    
+    }
+    .cloud,.cloud1,.cloud3{
+        display: none;
+    }
+  }

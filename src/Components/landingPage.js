@@ -3,7 +3,8 @@ import airplaneIcon from '../icons/plane.svg';
 import hotel from '../icons/bed-solid.svg';
 import road from '../icons/route-solid.svg';
 import cloud from '../images/cloud.png';
-import '../styles.css'
+import logo from '../icons/airplane.svg';
+import '../styles.css';
 class LandingPage extends React.Component {
   render() {
     return (
@@ -14,7 +15,6 @@ class LandingPage extends React.Component {
             Start your perfect travelling experience at an affordable price{' '}
             <br />
             with Travelly <br />
-            Contact us now below
           </h3>
           <button>
             <a href="/flightSearch">Book Now</a>
@@ -23,6 +23,7 @@ class LandingPage extends React.Component {
         <section id="locations">
           <header className="locations-head">
             <h2>The sky is the Limit!</h2>
+
             <h3>
               Take a Look at your possibilities! Over 250 countries at the
               lowest rates possible
@@ -31,10 +32,12 @@ class LandingPage extends React.Component {
             <img src={cloud} className="moving-cloud-2 cloud" />
           </header>
         </section>
- 
+
         <section id="benefits">
           <header className="benefits-head">
+
             <h2>All Your Travel Needs In One Place</h2>
+            <img className="globe" src={logo} alt="animated-logo" />
             <h3>
               Avoid the hazzle of Travelling by using resources readily
               available to you! Everything from picking the perfect hotel,
@@ -61,7 +64,7 @@ class LandingPage extends React.Component {
               <p>
                 Find Hotels located near popular Hot-Spots at reduced rates!
               </p>
-              <button>Find Hotels</button>
+              <button><a href="/flightSearch">Find Hotels</a></button>
             </div>
             <div className="card">
               <div className="card-icon">
@@ -72,7 +75,7 @@ class LandingPage extends React.Component {
                 Search for the lowest prices and compare your flight options to
                 better accommodate you
               </p>
-              <button>Find Flights</button>
+              <button><a href="/flightSearch">Find Flights</a></button>
             </div>
           </div>
         </section>
