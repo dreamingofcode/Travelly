@@ -153,32 +153,32 @@ class BookingForm extends React.Component {
         };
         sendSearch = (event) => {
           event.preventDefault()
-          unirest.get("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/SFO-sky/JFK-sky/2019-01-01?inboundpartialdate=2019-09-01")
-.header("X-RapidAPI-Host", "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com")
-.header("X-RapidAPI-Key", "SIGN-UP-FOR-KEY")
-.end(function (result) {
-  console.log(result.status, result.headers, result.body);
-});
           const API_URL="https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/SFO-sky/JFK-sky/2019-09-01?inboundpartialdate=2019-12-01"
           const API_KEY="78658dd993msha58b4f039c6c59ep11289djsn173e61927b34"
-          unirest.post("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/pricing/v1.0")
-          .header("X-RapidAPI-Host", "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com")
-          .header("X-RapidAPI-Key", "78658dd993msha58b4f039c6c59ep11289djsn173e61927b34")
-          .header("Content-Type", "application/x-www-form-urlencoded")
-          .send("inboundDate=2020-09-10")
-          .send("cabinClass=business")
-          .send("children=0")
-          .send("infants=0")
-          .send("country=US")
-          .send("currency=USD")
-          .send("locale=en-US")
-          .send("originPlace=SFO-sky")
-          .send("destinationPlace=LHR-sky")
-          .send("outboundDate=2020-09-01")
-          .send("adults=1")
-          .end(function (result) {
-            console.log(result.status, result.headers, result.body);
-          });
+//           unirest.get("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/SFO-sky/JFK-sky/2019-01-01?inboundpartialdate=2019-09-01")
+// .header("X-RapidAPI-Host", API_URL)
+// .header("X-RapidAPI-Key", API_KEY)
+// .end(function (result) {
+//   console.log(result.status, result.headers, result.body);
+// });
+//           unirest.post("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/pricing/v1.0")
+//           .header("X-RapidAPI-Host", "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com")
+//           .header("X-RapidAPI-Key", "78658dd993msha58b4f039c6c59ep11289djsn173e61927b34")
+//           .header("Content-Type", "application/x-www-form-urlencoded")
+//           .send("inboundDate=2020-09-10")
+//           .send("cabinClass=business")
+//           .send("children=0")
+//           .send("infants=0")
+//           .send("country=US")
+//           .send("currency=USD")
+//           .send("locale=en-US")
+//           .send("originPlace=SFO-sky")
+//           .send("destinationPlace=LHR-sky")
+//           .send("outboundDate=2020-09-01")
+//           .send("adults=1")
+//           .end(function (result) {
+//             console.log(result.status, result.headers, result.body);
+//           });
           fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/SFO-sky/JFK-sky/2019-09-01?inboundpartialdate=2019-12-01", {
             "method": "GET",
             "headers": {
