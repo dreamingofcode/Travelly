@@ -9,7 +9,6 @@ html {
   font-size: 62.5%;
 }
 
-
 h1 {
   font-size: 4.6rem;
 }
@@ -57,7 +56,7 @@ body {
   background-color: #131c27;
   color: white;
   position: sticky;
-  top:0px;
+  top: 0px;
   z-index: 1;
 }
 nav {
@@ -118,19 +117,22 @@ nav ul {
   width: 90%;
   margin: auto;
 }
-.locations-head h2 {
-  
-  padding: 0rem 0rem 0rem 0rem;
-  text-decoration: underline;
-  /* text-decoration-thickness: 0.9rem; */
-}
+.locations-head h2,
 .locations-head h3 {
-  padding:10px 70px 30px 0;
- 
+  display: flex;
+  justify-content: start;
+  text-decoration: underline;
+  padding: 1rem;
 }
-.globe{
-  height: 250px;
 
+.locations-head button {
+  display: flex;
+  justify-content: start;
+  text-decoration: none;
+margin-top: 20px;
+}
+.globe {
+  height: 250px;
 }
 .cloud {
   height: 45rem;
@@ -182,13 +184,14 @@ nav ul {
   box-shadow: 30px 20px 10px rgba(0, 0, 0, 0.1),
     0px 20px 20px rgba(0, 0, 0, 0.1); /*x value,y value , blur, color. */
 }
-.card button{
+.card button {
   border-radius: 10px;
- 
+
   margin-top: 40px;
   margin-bottom: 30px;
 }
-.card h4,.card p {
+.card h4,
+.card p {
   padding: 1rem;
 }
 
@@ -203,9 +206,10 @@ nav ul {
     align-items: center; */
 }
 
-#contacts{
+#contacts {
   min-height: 100vh;
-  background:linear-gradient(rgba(0, 0, 0, 0.5), transparent), url('./images/contact-mountain.png');
+  background: linear-gradient(rgba(0, 0, 0, 0.5), transparent),
+    url('./images/contact-mountain.png');
   background-size: cover;
   background-repeat: no-repeat;
   display: flex;
@@ -213,51 +217,51 @@ nav ul {
   justify-content: center;
   /* background-position: center; */
 }
-.form-wrapper{
-  background: rgb(19,28,39,0.8);
+.form-wrapper {
+  background: rgb(19, 28, 39, 0.8);
   width: 60%;
   color: white;
   border-radius: 20px;
 }
-.form-head{
+.form-head {
   text-align: center;
-  padding:4rem
+  padding: 4rem;
 }
-.name-form,.email-form{
-  padding:2rem;
+.name-form,
+.email-form {
+  padding: 2rem;
   text-align: center;
 }
-.form-wrapper label{
-  margin:0rem 3rem
+.form-wrapper label {
+  margin: 0rem 3rem;
 }
-.form-wrapper button{
+.form-wrapper button {
   width: 100%;
   padding: 2rem;
   margin-top: 8rem;
   border-bottom-left-radius: 20px;
-  border-bottom-right-radius:20px ;
+  border-bottom-right-radius: 20px;
 }
-.form-wrapper input{
-  padding:1rem 3rem;
+.form-wrapper input {
+  padding: 1rem 3rem;
 }
-footer{
-  color:white;
+footer {
+  color: white;
   background: rgba(19, 28, 39, 1);
 }
-.footer-wrapper{
+.footer-wrapper {
   display: flex;
-  padding:3rem  ;
+  padding: 3rem;
   width: 90%;
   margin: auto;
   min-height: 10vh;
   align-items: center;
   flex-wrap: wrap;
-
 }
-footer h5{
-  flex:1 1 40rem;
+footer h5 {
+  flex: 1 1 40rem;
 }
-footer ul{
+footer ul {
   display: flex;
   flex: 10 1 40rem;
   list-style: none;
@@ -286,22 +290,26 @@ footer ul{
 }
 /* media query */
 @media screen and (max-width: 952px) {
-  footer{
+  footer {
     text-align: center;
   }
-  footer h5{
+  footer h5 {
     margin-bottom: 5rem;
   }
-  .form-wrapper{
+  .form-wrapper {
     width: 100%;
   }
-  .cards{
+  .cards {
     display: flex;
     flex: wrap;
   }
+  
+  .locations-head h3{
+    display: none;
+    text-align: center;
+  }
 }
 @media screen and (max-width: 932px) {
-  
   html {
     font-size: 45%;
   }
@@ -313,20 +321,31 @@ footer ul{
     justify-content: center;
     /* align-items: center; */
   }
-  
-  
+
   .cloud {
     height: 40rem;
   }
   .moving-cloud-2 {
     top: 5%;
   }
-  footer{
+  footer {
     text-align: center;
   }
-  footer h5{
+  footer h5 {
     font-size: large;
     padding-bottom: 5rem;
+  }
+  .globe {
+    height: 200px;
+  }
+  .locations-head button,
+  .locations-head button a {
+    justify-content: center;
+    align-self: center;
+    align-content: center;
+    text-decoration: none;
+    color: black;
+    text-decoration: none;
   }
 }
 @media screen and (max-width: 320px) {
@@ -349,6 +368,10 @@ footer ul{
     text-align: center;
     justify-content: center;
   }
+  .locations-head button {
+    justify-content: center;
+    text-decoration: none;
+  }
   .cloud {
     height: 30rem;
   }
@@ -356,14 +379,13 @@ footer ul{
   .moving-cloud-2 {
     top: 5%;
   }
-  footer{
+  footer {
     text-align: center;
   }
-  footer h5{
+  footer h5 {
     padding-bottom: 5rem;
   }
 }
-
 
 /* range inputs */
 

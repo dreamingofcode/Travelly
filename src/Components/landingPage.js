@@ -24,10 +24,30 @@ class LandingPage extends React.Component {
           <header className="locations-head">
             <h2>The sky is the Limit!</h2>
 
-            <h3>
-              Take a Look at your possibilities! Over 250 countries at the
-              lowest rates possible
+            <h3
+              style={{
+                textDecoration: 'none',
+                justifyContent: 'start',
+              }}
+            >
+              Take a Look at your possibilities!
             </h3>
+
+            <h3
+              style={{
+                textDecoration: 'none',
+              }}
+            >
+              {' '}
+              Over 250 countries at the lowest rates possible!
+            </h3>
+            <button>
+              <a href="/">SIGN IN </a>
+            </button>
+            <button>
+              <a href="/">Sign Up </a>
+            </button>
+
             <img src={cloud} className="moving-cloud-1 cloud" />
             <img src={cloud} className="moving-cloud-2 cloud" />
           </header>
@@ -35,7 +55,6 @@ class LandingPage extends React.Component {
 
         <section id="benefits">
           <header className="benefits-head">
-
             <h2>All Your Travel Needs In One Place</h2>
             <img className="globe" src={logo} alt="animated-logo" />
             <h3>
@@ -64,7 +83,9 @@ class LandingPage extends React.Component {
               <p>
                 Find Hotels located near popular Hot-Spots at reduced rates!
               </p>
-              <button><a href="/flightSearch">Find Hotels</a></button>
+              <button>
+                <a href="/flightSearch">Find Hotels</a>
+              </button>
             </div>
             <div className="card">
               <div className="card-icon">
@@ -75,7 +96,9 @@ class LandingPage extends React.Component {
                 Search for the lowest prices and compare your flight options to
                 better accommodate you
               </p>
-              <button><a href="/flightSearch">Find Flights</a></button>
+              <button>
+                <a href="/flightSearch">Find Flights</a>
+              </button>
             </div>
           </div>
         </section>
