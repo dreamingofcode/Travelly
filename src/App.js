@@ -17,7 +17,7 @@ function App() {
           <h1 id="logo"><a href="/">Travelly</a></h1>
           <ul>
             <li>
-              <a href="#locations">Locations</a>
+              <a href="#locations">Account</a>
             </li>
             <li>
               <a href="#benefits">Benefits</a>
@@ -39,17 +39,17 @@ function App() {
           <h5>Travelly &copy;</h5>
           <ul>
             <li>
-              <a href="#">
+              <a href="/">
                 <img src={twitter} alt="twitter" />
               </a>
             </li>
             <li>
-              <a href="#">
+              <a href="/">
                 <img src={youtube} alt="youtube" />
               </a>
             </li>
             <li>
-              <a href="#">
+              <a href="/">
                 <img src={instagram} alt="instagram.svg" />
               </a>
             </li>

@@ -1,8 +1,11 @@
 import React from 'react';
-
 import mobiscroll from '@mobiscroll/react';
 import '@mobiscroll/react/dist/css/mobiscroll.min.css';
+import './bookingForm.css';
 
+import cloud from '../images/cloud.png';
+import plane from '../icons/planeicon.svg';
+import unirest from 'unirest';
 mobiscroll.settings = {
   theme: 'ios',
   themeVariant: 'light',
@@ -148,123 +151,163 @@ class BookingForm extends React.Component {
       return ret;
     },
   };
+  sendSearch = (event) => {
+    event.preventDefault();
+    const API_URL =
+      'https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/SFO-sky/JFK-sky/2019-09-01?inboundpartialdate=2019-12-01';
+    const API_KEY = '78658dd993msha58b4f039c6c59ep11289djsn173e61927b34';
+    fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/SFO-sky/JFK-sky/2020-09-01?inboundpartialdate=2020-12-01", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
+		"x-rapidapi-key": "78658dd993msha58b4f039c6c59ep11289djsn173e61927b34"
+	}
+})
+.then((resp) => resp.json())
+.then(response => {
+	console.log(response);
+})
+.catch(err => {
+	console.log(err);
+});
+  };
 
   render() {
     return (
-      <mobiscroll.Form>
-        <mobiscroll.Segmented
-          value="round"
-          checked={this.state.tripType === 'round'}
-          onChange={this.tripTypeChange}
-          name="flightType"
-        >
-          Round trip
-        </mobiscroll.Segmented>
-        <mobiscroll.Segmented
-          value="oneway"
-          checked={this.state.tripType === 'oneway'}
-          onChange={this.tripTypeChange}
-          name="flightType"
-        >
-          One way
-        </mobiscroll.Segmented>
-        <mobiscroll.FormGroup>
-          <mobiscroll.Select
-            value={this.state.origin}
-            data={this.remoteData}
-            multiline={2}
-            height={50}
-            filter={true}
-          >
-            <mobiscroll.Input placeholder="Please select...">
-              Origin
-            </mobiscroll.Input>
-          </mobiscroll.Select>
-          <mobiscroll.Select
-            data={this.remoteData}
-            multiline={2}
-            height={50}
-            filter={true}
-            placeholder="Please select a city"
-          >
-            <mobiscroll.Input>Destination</mobiscroll.Input>
-          </mobiscroll.Select>
-          <mobiscroll.Range
-            value={this.state.timeRange}
-            onSet={this.rangeSet}
-            onSetDate={this.rangeChange}
-            onBeforeClose={this.rangeClose}
-            min={new Date()}
-            showSelector={false}
-          >
-            <mobiscroll.RangeStart>
-              <mobiscroll.Input>Leaving</mobiscroll.Input>
-            </mobiscroll.RangeStart>
-            <mobiscroll.RangeEnd disabled={this.state.tripType === 'oneway'}>
-              <mobiscroll.Input>Returning</mobiscroll.Input>
-            </mobiscroll.RangeEnd>
-          </mobiscroll.Range>
-        </mobiscroll.FormGroup>
-        <mobiscroll.FormGroup>
-          <mobiscroll.Stepper
-            value={this.state.adults}
-            onChange={this.adultsChange}
-            min={1}
-            max={15}
-            data-val="left"
-          >
-            Adults
-            <span className="mbsc-desc">From 14 years</span>
-          </mobiscroll.Stepper>
-          <mobiscroll.Stepper
-            value={this.state.children}
-            onChange={this.childrenChange}
-            min={0}
-            max={15}
-            data-val="left"
-          >
-            Children
-            <span className="mbsc-desc">2-14 years</span>
-          </mobiscroll.Stepper>
-          <mobiscroll.Stepper
-            value={this.state.infant}
-            onChange={this.infantChange}
-            min={0}
-            max={10}
-            data-val="left"
-          >
-            Infant
-            <span className="mbsc-desc">0-2 years</span>
-          </mobiscroll.Stepper>
-          <mobiscroll.Segmented
-            value="economy"
-            checked={this.state.tripClass === 'economy'}
-            onChange={this.tripClassChange}
-            name="flightClass"
-          >
-            Economy
-          </mobiscroll.Segmented>
-          <mobiscroll.Segmented
-            value="comfort"
-            checked={this.state.tripClass === 'comfort'}
-            onChange={this.tripClassChange}
-            name="flightClass"
-          >
-            Comfort
-          </mobiscroll.Segmented>
-          <mobiscroll.Segmented
-            value="business"
-            checked={this.state.tripClass === 'business'}
-            onChange={this.tripClassChange}
-            name="flightClass"
-          >
-            Business
-          </mobiscroll.Segmented>
-        </mobiscroll.FormGroup>
-        <div className="mbsc-btn-group-block">
-          <mobiscroll.Button>Find Flights</mobiscroll.Button>
-        </div>
-      </mobiscroll.Form>
+      <div className="body flightForm">
+        <h1>Catch Your FLight</h1>
+        <img className="plane1 " src={plane} alt="animated-plane" />
+        <img
+          className="cloud moving-cloud-2"
+          src={cloud}
+          alt="animated-cloud"
+        />
+        <img
+          className="cloud3 moving-cloud-3"
+          src={cloud}
+          alt="animated-cloud"
+        />
+        <body className="body1">
+          <mobiscroll.Form>
+            <mobiscroll.Segmented
+              value="round"
+              checked={this.state.tripType === 'round'}
+              onChange={this.tripTypeChange}
+              name="flightType"
+            >
+              Round trip
+            </mobiscroll.Segmented>
+            <mobiscroll.Segmented
+              value="oneway"
+              checked={this.state.tripType === 'oneway'}
+              onChange={this.tripTypeChange}
+              name="flightType"
+            >
+              One way
+            </mobiscroll.Segmented>
+            <mobiscroll.FormGroup>
+              <mobiscroll.Select
+                value={this.state.origin}
+                data={this.remoteData}
+                multiline={2}
+                height={50}
+                filter={true}
+              >
+                <mobiscroll.Input placeholder="Please select...">
+                  Origin
+                </mobiscroll.Input>
+              </mobiscroll.Select>
+              <mobiscroll.Select
+                data={this.remoteData}
+                multiline={2}
+                height={50}
+                filter={true}
+                placeholder="Please select a city"
+              >
+                <mobiscroll.Input>Destination</mobiscroll.Input>
+              </mobiscroll.Select>
+              <mobiscroll.Range
+                value={this.state.timeRange}
+                onSet={this.rangeSet}
+                onSetDate={this.rangeChange}
+                onBeforeClose={this.rangeClose}
+                min={new Date()}
+                showSelector={false}
+              >
+                <mobiscroll.RangeStart>
+                  <mobiscroll.Input>Leaving</mobiscroll.Input>
+                </mobiscroll.RangeStart>
+                <mobiscroll.RangeEnd
+                  disabled={this.state.tripType === 'oneway'}
+                >
+                  <mobiscroll.Input>Returning</mobiscroll.Input>
+                </mobiscroll.RangeEnd>
+              </mobiscroll.Range>
+            </mobiscroll.FormGroup>
+            <mobiscroll.FormGroup>
+              <mobiscroll.Stepper
+                value={this.state.adults}
+                onChange={this.adultsChange}
+                min={1}
+                max={15}
+                data-val="left"
+              >
+                Adults
+                <span className="mbsc-desc">From 14 years</span>
+              </mobiscroll.Stepper>
+              <mobiscroll.Stepper
+                value={this.state.children}
+                onChange={this.childrenChange}
+                min={0}
+                max={15}
+                data-val="left"
+              >
+                Children
+                <span className="mbsc-desc">2-14 years</span>
+              </mobiscroll.Stepper>
+              <mobiscroll.Stepper
+                value={this.state.infant}
+                onChange={this.infantChange}
+                min={0}
+                max={10}
+                data-val="left"
+              >
+                Infant
+                <span className="mbsc-desc">0-2 years</span>
+              </mobiscroll.Stepper>
+              <mobiscroll.Segmented
+                value="economy"
+                checked={this.state.tripClass === 'economy'}
+                onChange={this.tripClassChange}
+                name="flightClass"
+              >
+                Economy
+              </mobiscroll.Segmented>
+              <mobiscroll.Segmented
+                value="comfort"
+                checked={this.state.tripClass === 'comfort'}
+                onChange={this.tripClassChange}
+                name="flightClass"
+              >
+                Comfort
+              </mobiscroll.Segmented>
+              <mobiscroll.Segmented
+                value="business"
+                checked={this.state.tripClass === 'business'}
+                onChange={this.tripClassChange}
+                name="flightClass"
+              >
+                Business
+              </mobiscroll.Segmented>
+            </mobiscroll.FormGroup>
+            <div className="mbsc-btn-group-block">
+              <button onClick={(event) => this.sendSearch(event)}>
+                Find Flights
+              </button>
+            </div>
+          </mobiscroll.Form>
+        </body>
+      </div>
     );
   }
 }
