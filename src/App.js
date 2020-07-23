@@ -10,7 +10,9 @@ import LandingPage from './Components/landingPage'
 import BookingForm from './Components/bookingForm'
 
 function App() {
-  return (
+  return( 
+  <React.Fragment>
+  
     <div className="App">
       <header className="main-head">
         <nav>
@@ -32,6 +34,7 @@ function App() {
      
   <Switch>
   <Route exact path="/" component={LandingPage}/>
+
     <Route exact path="/flightSearch" component={BookingForm}/>
   </Switch>
       <footer>
@@ -57,6 +60,7 @@ function App() {
         </div>
       </footer>
     </div>
+    </React.Fragment>
   );
 }
 

@@ -5,7 +5,6 @@ import './bookingForm.css';
 
 import cloud from '../images/cloud.png';
 import plane from '../icons/planeicon.svg';
-import unirest from 'unirest';
 mobiscroll.settings = {
   theme: 'ios',
   themeVariant: 'light',
@@ -156,20 +155,25 @@ class BookingForm extends React.Component {
     const API_URL =
       'https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/SFO-sky/JFK-sky/2019-09-01?inboundpartialdate=2019-12-01';
     const API_KEY = '78658dd993msha58b4f039c6c59ep11289djsn173e61927b34';
-    fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/SFO-sky/JFK-sky/2020-09-01?inboundpartialdate=2020-12-01", {
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-host": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
-		"x-rapidapi-key": "78658dd993msha58b4f039c6c59ep11289djsn173e61927b34"
-	}
-})
-.then((resp) => resp.json())
-.then(response => {
-	console.log(response);
-})
-.catch(err => {
-	console.log(err);
-});
+    fetch(
+      'https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/SFO-sky/JFK-sky/2020-09-01?inboundpartialdate=2020-12-01',
+      {
+        method: 'GET',
+        headers: {
+          'x-rapidapi-host':
+            'skyscanner-skyscanner-flight-search-v1.p.rapidapi.com',
+          'x-rapidapi-key':
+            '78658dd993msha58b4f039c6c59ep11289djsn173e61927b34',
+        },
+      }
+    )
+      .then((resp) => resp.json())
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   render() {
