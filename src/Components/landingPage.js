@@ -1,14 +1,31 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
 import airplaneIcon from '../icons/plane.svg';
 import hotel from '../icons/bed-solid.svg';
 import road from '../icons/route-solid.svg';
 import cloud from '../images/cloud.png';
 import logo from '../icons/airplane.svg';
-import '../styles.css';
+import MyVerticallyCenteredModal from './signUpModal.js';
+// import '../styles.css';
+
 class LandingPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      modalShow: true,
+    };
+  }
+  openModal = () => {
+    this.setState({ modalShow: !this.state.modalShow });
+    console.log(this.state);
+  };
   render() {
     return (
       <div>
+        <MyVerticallyCenteredModal
+          show={this.state.modalShow}
+          onHide={() => this.openModal()}
+        />
         <section className="hero">
           <h2>Travel beyond</h2>
           <h3>
@@ -44,9 +61,13 @@ class LandingPage extends React.Component {
             <button>
               <a href="/">SIGN IN </a>
             </button>
-            <button>
-              <a href="/">Sign Up </a>
-            </button>
+            <Button
+              onClick={(event) => {
+                this.openModal(event);
+              }}
+            >
+              Sign Up!
+            </Button>
 
             <img src={cloud} className="moving-cloud-1 cloud" />
             <img src={cloud} className="moving-cloud-2 cloud" />
