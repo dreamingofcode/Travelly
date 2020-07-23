@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
 import airplaneIcon from '../icons/plane.svg';
 import hotel from '../icons/bed-solid.svg';
 import road from '../icons/route-solid.svg';
@@ -18,6 +18,16 @@ class LandingPage extends React.Component {
   openModal = () => {
     this.setState({ modalShow: !this.state.modalShow });
     console.log(this.state);
+  };
+  changeUserType = (e) => {
+    console.log('puta', e.target.name);
+    let type = 'guest';
+    if (e.target.name === 'newUser') {
+      type = 'new';
+    } else {
+      type = 'existing';
+    }
+    this.props.alterUserType(type);
   };
   render() {
     return (
@@ -58,16 +68,24 @@ class LandingPage extends React.Component {
               {' '}
               Over 250 countries at the lowest rates possible!
             </h3>
-            <button>
+            <button
+              name="activeUser"
+              onMouseOver={(e) => this.changeUserType(e)}
+              onClick={(event) => {
+                this.openModal(event);
+              }}
+            >
               <a href="/">SIGN IN </a>
             </button>
-            <Button
+            <button
+              name="newUser"
+              onMouseOver={(e) => this.changeUserType(e)}
               onClick={(event) => {
                 this.openModal(event);
               }}
             >
               Sign Up!
-            </Button>
+            </button>
 
             <img src={cloud} className="moving-cloud-1 cloud" />
             <img src={cloud} className="moving-cloud-2 cloud" />
@@ -145,4 +163,20 @@ class LandingPage extends React.Component {
     );
   }
 }
-export default LandingPage;
+const mapStateToProps = (state) => {
+  return {
+    userType: state.userType,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    alterUserType: (type) => {
+      const action = {
+        type: 'CHANGE_USER_TYPE',
+        userType: type,
+      };
+      dispatch(action);
+    },
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);
