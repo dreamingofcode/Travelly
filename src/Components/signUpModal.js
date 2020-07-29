@@ -1,34 +1,114 @@
-import React from 'react';
+import React, { useState} from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
+import { useHistory } from "react-router-dom";
 import Modal from 'react-bootstrap/Modal';
 import palm from '../images/palm.png';
 import palmRightSide from '../images/rightPalm.png';
 
-function MyVerticallyCenteredModal(props) {
-  return (
+function SignUpModal(props) {
+  let history = useHistory();
+  // const history = useHistory();
+  const [userData, setUserData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    rePassword: '',
+  });
 
-    <React.Fragment className="modal">
+  function createUser(event) {
+    event.preventDefault();
+    if (props.userType === 'existing') signIn(event);
+    else {
+      if (userData.password !== userData.rePassword) {
+        alert('ERROR: Both passwords in password fields MUST match!');
+      }
+
+      fetch('http://localhost:3000/api/v1/user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          user: {
+            name: `${userData.email}`,
+            email: `${userData.email}`,
+            password: `${userData.password}`,
+          },
+        }),
+      })
+        .then((r) => r.json())
+        .then((data) => {
+          if (data.error) {
+            alert(data.error);
+          } else {
+            alert('Your Account was successfully created!');
+            console.log(data);
+            localStorage.setItem('token', data.jwt);
+            props.onHide()
+            history.push('/')
+          }
+        });
+    }
+  }
+  const signIn = (event) => {
+    event.preventDefault();
+    const configObj = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({
+        user: {
+          email: `${userData.email}`,
+          password: `${userData.password}`,
+        },
+      }),
+    };
+
+    fetch(`http://localhost:3000/api/v1/login`, configObj)
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log('user logging in data', data);
+        if (data.error) {
+          alert(data.error);
+        } else {
+          props.loginSuccess(data);
+          localStorage.setItem('token', data.jwt);
+          props.onHide()
+          history.push('/')
+        }
+      });
+  };
+
+  return (
+    <React.Fragment>
       <Modal
+        className="modal"
         {...props}
         size="lg"
         animation={true}
         aria-labelledby="contained-modal-title-vcenter"
-        // autoFocus={true}
-        // backdrop="static"
+        autoFocus={true}
+        backdrop="static"
         centered
       >
         <header>
           <Modal.Header>
             <Modal.Title id="contained-modal-title-vcenter">
-             {/* {!this.props.userType? null:
-              this.props.userType === 'active' ? (
-                <h1>Sign In!</h1>
+              {props.userType === 'existing' ? (
+                <div>
+                  <h1>Welcome Back!</h1>
+                  <h4>Sign In below to continue your Journey!</h4>
+                </div>
               ) : (
-                <h1>Sign Up!</h1>
-              )} */}
-               <h1>Sign Up!</h1>
-              <h4>Create Your Free Travelly Account Below</h4>
+                <div>
+                  <h1>Sign Up!</h1>
+                  <h4>Create Your Free Travelly Account Below</h4>
+                </div>
+              )}
             </Modal.Title>
           </Modal.Header>
         </header>
@@ -37,29 +117,56 @@ function MyVerticallyCenteredModal(props) {
           <img className="palmRight" src={palmRightSide} alt="rightPalmLeaf" />
 
           <form>
+            {props.userType === 'existing' ? null : (
+              <div>
+                <input
+                  onChange={(event) =>
+                    setUserData({ ...userData, name: event.target.value })
+                  }
+                  required
+                  type="text"
+                  name="name"
+                  placeholder="Enter Full Name"
+                />{' '}
+              </div>
+            )}
+
             <input
+              onChange={(event) =>
+                setUserData({ ...userData, email: event.target.value })
+              }
               required
               type="text"
               name="email"
               placeholder="Enter Email"
             />
             <input
+              onChange={(event) =>
+                setUserData({ ...userData, password: event.target.value })
+              }
               required
               type="text"
               name="password"
               placeholder="Enter Password"
             />
-            <input
-              required
-              type="text"
-              name="re-password"
-              placeholder="Re-enter Password"
-            />
-            <button>Submit</button>
+            {props.userType === 'existing' ? null : (
+              <div>
+                <input
+                  onChange={(event) =>
+                    setUserData({ ...userData, rePassword: event.target.value })
+                  }
+                  required
+                  type="text"
+                  name="re-password"
+                  placeholder="Re-enter Password"
+                />
+              </div>
+            )}
+
+            <button onClick={(event) => createUser(event)}>Submit</button>
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <div>{/* <h1 className="logo bags">Travelly</h1> */}</div>
           <Button onClick={props.onHide}>Close</Button>
         </Modal.Footer>
       </Modal>
@@ -69,20 +176,18 @@ function MyVerticallyCenteredModal(props) {
 const mapStateToProps = (state) => {
   return {
     userType: state.userType,
-  };
+    userCreate: state.userCreate,
+  }
 };
-const mapDispatchToProps = (dispatch) => {
-  return {
-    alterUserType: (type) => {
-      const action = {
-        type: 'CHANGE_USER_TYPE',
-        userType: type,
-      };
-      dispatch(action);
-    },
-  };
-};
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MyVerticallyCenteredModal);
+const mapDispatchToProps=dispatch=>{
+  return{
+    loginSuccess:user=>{
+      const action={
+        type:'USER_AUTH',
+        userAuth:user
+      }
+      dispatch(action)
+    }
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpModal);
