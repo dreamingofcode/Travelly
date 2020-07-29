@@ -1,4 +1,4 @@
-const initialState= null
+const initialState= "guest"
 
 export default function userAuth(state= initialState, action){
     switch (action.type){

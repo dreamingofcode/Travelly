@@ -5,22 +5,28 @@ import hotel from '../icons/bed-solid.svg';
 import road from '../icons/route-solid.svg';
 import cloud from '../images/cloud.png';
 import logo from '../icons/airplane.svg';
-import MyVerticallyCenteredModal from './signUpModal.js';
+import SignUpModal from './signUpModal.js';
+// import { signInUser } from '../reducers/actions/userActions';
 // import '../styles.css';
 
 class LandingPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modalShow: true,
+      modalShow: false,
     };
   }
+  // componentDidMount(){
+  //   if(!userAuth){
+  //     props.signInUser(email, password)
+  //   }
+  // }
   openModal = () => {
     this.setState({ modalShow: !this.state.modalShow });
     console.log(this.state);
   };
+
   changeUserType = (e) => {
-    console.log('puta', e.target.name);
     let type = 'guest';
     if (e.target.name === 'newUser') {
       type = 'new';
@@ -30,9 +36,12 @@ class LandingPage extends React.Component {
     this.props.alterUserType(type);
   };
   render() {
+    const { userData } = this.props;
+    const token = localStorage.token;
+
     return (
       <div>
-        <MyVerticallyCenteredModal
+        <SignUpModal
           show={this.state.modalShow}
           onHide={() => this.openModal()}
         />
@@ -50,7 +59,6 @@ class LandingPage extends React.Component {
         <section id="locations">
           <header className="locations-head">
             <h2>The sky is the Limit!</h2>
-
             <h3
               style={{
                 textDecoration: 'none',
@@ -68,24 +76,49 @@ class LandingPage extends React.Component {
               {' '}
               Over 250 countries at the lowest rates possible!
             </h3>
-            <button
-              name="activeUser"
-              onMouseOver={(e) => this.changeUserType(e)}
-              onClick={(event) => {
-                this.openModal(event);
-              }}
-            >
-              <a href="/">SIGN IN </a>
-            </button>
-            <button
-              name="newUser"
-              onMouseOver={(e) => this.changeUserType(e)}
-              onClick={(event) => {
-                this.openModal(event);
-              }}
-            >
-              Sign Up!
-            </button>
+            {userData ? (
+              <div>
+                <button
+                  name="activeUser"
+                  onMouseOver={(e) => this.changeUserType(e)}
+                  onClick={(event) => {
+                    this.openModal(event);
+                  }}
+                >
+                  <a href="/">VIEW ACCOUNT </a>
+                </button>
+                <button
+                  name="newUser"
+                  onClick={(event) => {
+                    localStorage.removeItem('token')
+                    this.props.history.push("/flightSearch")
+                  }}
+                >
+                  SIGN OUT
+                </button>
+              </div>
+            ) : (
+              <div>
+                <button
+                  name="activeUser"
+                  onMouseOver={(e) => this.changeUserType(e)}
+                  onClick={(event) => {
+                    this.openModal(event);
+                  }}
+                >
+                  <a href="/">SIGN IN </a>
+                </button>
+                <button
+                  name="newUser"
+                  onMouseOver={(e) => this.changeUserType(e)}
+                  onClick={(event) => {
+                    this.openModal(event);
+                  }}
+                >
+                  SIGN UP
+                </button>
+              </div>
+            )}
 
             <img src={cloud} className="moving-cloud-1 cloud" />
             <img src={cloud} className="moving-cloud-2 cloud" />
@@ -166,9 +199,11 @@ class LandingPage extends React.Component {
 const mapStateToProps = (state) => {
   return {
     userType: state.userType,
+    userData: state.userData,
   };
 };
 const mapDispatchToProps = (dispatch) => {
+  ///adds actions to props
   return {
     alterUserType: (type) => {
       const action = {

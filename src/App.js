@@ -1,5 +1,8 @@
-import React from 'react';
+import React,{ Component} from 'react';
+import {connect} from 'react-redux'
+
 import {Route,Switch} from 'react-router-dom'
+import {getProfileFetch} from './reducers/actions/userActions'
 import './styles.css';
 import './App.css';
 
@@ -8,9 +11,14 @@ import youtube from './icons/youtube.svg';
 import instagram from './icons/instagram.svg';
 import LandingPage from './Components/landingPage'
 import BookingForm from './Components/bookingForm'
+import signUpModal from './Components/signUpModal'
+class App extends Component {
+  componentWillMount() {
+    this.props.getProfileFetch();
+  }
+  render(){
 
-function App() {
-  return( 
+    return( 
   <React.Fragment>
   
     <div className="App">
@@ -34,8 +42,9 @@ function App() {
      
   <Switch>
   <Route exact path="/" component={LandingPage}/>
-
+    {/* <Route path="/" render={()=><LandingPage history={history}/>} /> */}
     <Route exact path="/flightSearch" component={BookingForm}/>
+    <Route exact path="/accountSignIn" component={signUpModal}/>
   </Switch>
       <footer>
         <div className="footer-wrapper">
@@ -62,6 +71,17 @@ function App() {
     </div>
     </React.Fragment>
   );
+}}
+const mapStateToProps=state=>{
+  return{ userData: state.userData}
 }
 
-export default App;
+const mapDispatchToProps= (dispatch)=>{
+  return{
+    getProfileFetch:()=>{
+      dispatch(getProfileFetch())
+    }
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps) (App);

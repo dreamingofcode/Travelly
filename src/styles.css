@@ -97,6 +97,7 @@ button:hover {
 }
 .modal button {
   margin-top: 3rem;
+  margin-bottom: 3rem;
 }
 .palmLeft {
   position: absolute;
@@ -201,7 +202,13 @@ nav ul {
 }
 .globe {
   height: 250px;
+  animation: globeAnimation 15s infinite linear;
 }
+@keyframes globeAnimation{
+  0% {transform: rotateY(0deg) translateX(0%);}
+  100% {transform: rotateY(360deg);}
+}
+
 .cloud {
   height: 45rem;
   position: absolute;
@@ -382,14 +389,18 @@ footer ul {
   }
 
   .locations-head h3 {
-    display: none;
-    text-align: center;
+    display: flex;
+    text-align: start;
+    margin-right: 70px;
   }
-  .modal input{
+  .modal header {
+    margin-top: 12rem;
+  }
+  .modal input {
     margin-top: 7rem;
   }
-  .palmLeft{
-z-index: -1;
+  .palmLeft {
+    z-index: -1;
   }
 }
 @media screen and (max-width: 932px) {
@@ -444,12 +455,13 @@ z-index: -1;
     /* align-items: center; */
   }
 
-  .locations-head h3 {
-    align-items: center;
-    background: #4c6e97;
-    color: white;
-    text-align: center;
-    justify-content: center;
+  .locations-head h3,.locations-head h2 {
+    display: flex;
+    align-items: start;
+    /* background: #4c6e97; */
+    /* color: white; */
+    text-align: start;
+    justify-content: start;
   }
   .locations-head button {
     justify-content: center;
@@ -469,7 +481,35 @@ z-index: -1;
     padding-bottom: 5rem;
   }
 }
-
+@media screen and (height: 1366px) {
+  .modal {
+    min-height: 160rem;
+    color: white;
+    position: absolute;
+    top: 0%;
+  }
+  .modal form {
+    min-height: 80rem;
+    min-width: 85rem;
+  }
+  .modal button {
+    display: flex;
+    margin-top: 3rem;
+    margin-right: 3rem;
+    margin: 0 auto;
+  }
+}
+@media screen and (max-height: 600px) {
+  .modal header {
+    margin-top: 15rem;
+  }
+  .modal form {
+    max-height: 30px;
+  }
+  .modal input {
+    margin-top: 9rem;
+  }
+}
 /* range inputs */
 
 .md-flight-booking .md-time-range {
