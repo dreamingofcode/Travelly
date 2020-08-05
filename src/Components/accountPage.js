@@ -11,8 +11,8 @@ function AccountPage(props) {
     console.log('useeffect');
   }, [props.userLoaded]);
   return (
-    <React.Fragment>
-      <div className="accountPage">
+    <div className="accountPage">
+      <div className="accountDetail">
         {props.userLoaded === false ? (
           <h1>IS LOADING..</h1>
         ) : (
@@ -34,7 +34,7 @@ function AccountPage(props) {
         }}>Book Your Next Adventure</button>
         <button className="button3">View Favorites</button>
       </div>{' '}
-    </React.Fragment>
+    </div>
   );
 }
 const mapStateToProps = (state) => {

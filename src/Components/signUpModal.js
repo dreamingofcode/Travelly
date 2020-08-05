@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
+import queryString from 'query-string';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+
 import Modal from 'react-bootstrap/Modal';
 import palm from '../images/palm.png';
 import palmRightSide from '../images/rightPalm.png';
+
+var urld = window.location.pathname;
+
+console.log('here@@@@', urld);
 
 function SignUpModal(props) {
   let history = useHistory();
@@ -14,10 +20,10 @@ function SignUpModal(props) {
     password: '',
     rePassword: '',
   });
-///TODO:seperate this functions
+  ///TODO:seperate this functions
   function createUser(event) {
     event.preventDefault();
-    if (props.userType === 'existing') signIn(event);
+    if (urld === "signin") signIn(event);
     else {
       if (userData.password !== userData.rePassword) {
         alert('ERROR: Both passwords in password fields MUST match!');
@@ -45,7 +51,6 @@ function SignUpModal(props) {
             alert('Your Account was successfully created!');
             console.log(data);
             localStorage.setItem('token', data.jwt);
-            props.onHide();
             history.push('/account-page');
           }
         });
@@ -77,101 +82,100 @@ function SignUpModal(props) {
           props.loginSuccess(data);
           props.updateUserData(data);
           localStorage.setItem('token', data.jwt);
-          props.onHide();
-          props.userLoaded()
-          history.push('/account-page');//TODO:RESTful urls
+          props.userLoaded();
+          history.push('/account-page'); //TODO:RESTful urls
         }
       });
   };
 
   return (
-    <React.Fragment>
-      <Modal
+    <div className="modal">
+      {/* <Modal
         className="modal"
-        {...props}
+        show={true} 
         size="lg"
         animation={true}
         aria-labelledby="contained-modal-title-vcenter"
         autoFocus={true}
         backdrop="static"
         centered
-      >
-        <header>
-          <Modal.Header>
-            <Modal.Title id="contained-modal-title-vcenter">
-              {props.userType === 'existing' ? (
-                <div>
-                  <h1>Welcome Back!</h1>
-                  <h4>Sign In below to continue your Journey!</h4>
-                </div>
-              ) : (
-                <div>
-                  <h1>Sign Up!</h1>
-                  <h4>Create Your Free Travelly Account Below</h4>
-                </div>
-              )}
-            </Modal.Title>
-          </Modal.Header>
-        </header>
-        <Modal.Body>
-          <img className="palmLeft" src={palm} alt="rightPalmLeaf" />
-          <img className="palmRight" src={palmRightSide} alt="rightPalmLeaf" />
+      > */}
+      <header>
+        {/* <Modal.Header>
+            <Modal.Title id="contained-modal-title-vcenter"> */}
+        {props.userType === 'existing' ? (
+          <div>
+            <h1>Welcome Back!</h1>
+            <h4>Sign In below to continue your Journey!</h4>
+          </div>
+        ) : (
+          <div>
+            <h1>Sign Up!</h1>
+            <h4>Create Your Free Travelly Account Below</h4>
+          </div>
+        )}
+        {/* </Modal.Title>
+          </Modal.Header> */}
+      </header>
+      {/* <Modal.Body> */}
+      <img className="palmLeft" src={palm} alt="rightPalmLeaf" />
+      <img className="palmRight" src={palmRightSide} alt="rightPalmLeaf" />
 
-          <form>
-            {props.userType === 'existing' ? null : (
-              <div>
-                <input
-                  onChange={(event) =>
-                    setUserData({ ...userData, name: event.target.value })
-                  }
-                  required
-                  type="text"
-                  name="name"
-                  placeholder="Enter Full Name"
-                />{' '}
-              </div>
-            )}
-
+      <form>
+        {props.userType === 'existing' ? null : (
+          <div>
             <input
               onChange={(event) =>
-                setUserData({ ...userData, email: event.target.value })
+                setUserData({ ...userData, name: event.target.value })
               }
               required
               type="text"
-              name="email"
-              placeholder="Enter Email"
-            />
+              name="name"
+              placeholder="Enter Full Name"
+            />{' '}
+          </div>
+        )}
+
+        <input
+          onChange={(event) =>
+            setUserData({ ...userData, email: event.target.value })
+          }
+          required
+          type="text"
+          name="email"
+          placeholder="Enter Email"
+        />
+        <input
+          onChange={(event) =>
+            setUserData({ ...userData, password: event.target.value })
+          }
+          required
+          type="text"
+          name="password"
+          placeholder="Enter Password"
+        />
+        {props.userType === 'existing' ? null : (
+          <div>
             <input
               onChange={(event) =>
-                setUserData({ ...userData, password: event.target.value })
+                setUserData({ ...userData, rePassword: event.target.value })
               }
               required
               type="text"
-              name="password"
-              placeholder="Enter Password"
+              name="re-password"
+              placeholder="Re-enter Password"
             />
-            {props.userType === 'existing' ? null : (
-              <div>
-                <input
-                  onChange={(event) =>
-                    setUserData({ ...userData, rePassword: event.target.value })
-                  }
-                  required
-                  type="text"
-                  name="re-password"
-                  placeholder="Re-enter Password"
-                />
-              </div>
-            )}
+          </div>
+        )}
 
-            <button onClick={(event) => createUser(event)}>Submit</button>
-          </form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={props.onHide}>Close</Button>
-        </Modal.Footer>
-      </Modal>
-    </React.Fragment>
+        <button onClick={(event) => createUser(event)}>Submit</button>
+      </form>
+      {/* </Modal.Body> */}
+      {/* <Modal.Footer> */}
+      <Button onClick={props.onHide}>Close</Button>
+      {/* </Modal.Footer> */}
+      {/* </Modal> */}
+    </div>
   );
 }
 const mapStateToProps = (state) => {
@@ -196,12 +200,12 @@ const mapDispatchToProps = (dispatch) => {
       };
       dispatch(action);
     },
-    userLoaded:()=>{
-      const action={
-        type:"USER_LOADED"
-      }
-      dispatch(action)
-    }
+    userLoaded: () => {
+      const action = {
+        type: 'USER_LOADED',
+      };
+      dispatch(action);
+    },
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(SignUpModal);

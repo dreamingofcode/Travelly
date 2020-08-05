@@ -11,10 +11,10 @@ class LandingPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modalShow: false,
+      modalShow: true,
     };
   }
- 
+
   openModal = () => {
     this.setState({ modalShow: !this.state.modalShow });
     console.log(this.state);
@@ -34,10 +34,10 @@ class LandingPage extends React.Component {
 
     return (
       <div>
-        <SignUpModal
+        {/* <SignUpModal
           show={this.state.modalShow}
           onHide={() => this.openModal()}
-        />
+        /> */}
         <section className="hero">
           <h2>Travel beyond</h2>
           <h3>
@@ -88,18 +88,21 @@ class LandingPage extends React.Component {
                 <button
                   name="activeUser"
                   onMouseOver={(e) => this.changeUserType(e)}
-                  onClick={(event) => {
-                    this.openModal(event);
+                  onClick={() => {
+                    this.props.history.push('/signin');
                   }}
                 >
                   <a href="/">SIGN IN </a>
                 </button>
                 <button
                   name="newUser"
-                  onMouseOver={(e) => this.changeUserType(e)}
-                  onClick={(event) => {
-                    this.openModal(event);
+                  onClick={() => {
+                    this.props.history.push('/signup');
                   }}
+                  // onMouseOver={(e) => this.changeUserType(e)}
+                  // onClick={(event) => {
+                  //   this.openModal(event);
+                  // }}
                 >
                   SIGN UP
                 </button>
