@@ -1,21 +1,20 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal';
 import palm from '../images/palm.png';
 import palmRightSide from '../images/rightPalm.png';
 
 function SignUpModal(props) {
   let history = useHistory();
-  // const history = useHistory();
   const [userData, setUserData] = useState({
     name: '',
     email: '',
     password: '',
     rePassword: '',
   });
-
+///TODO:seperate this functions
   function createUser(event) {
     event.preventDefault();
     if (props.userType === 'existing') signIn(event);
@@ -24,7 +23,7 @@ function SignUpModal(props) {
         alert('ERROR: Both passwords in password fields MUST match!');
       }
 
-      fetch('http://localhost:3000/api/v1/user', {
+      fetch('http://localhost:3000/api/v1/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -46,8 +45,8 @@ function SignUpModal(props) {
             alert('Your Account was successfully created!');
             console.log(data);
             localStorage.setItem('token', data.jwt);
-            props.onHide()
-            history.push('/')
+            props.onHide();
+            history.push('/account-page');
           }
         });
     }
@@ -76,9 +75,11 @@ function SignUpModal(props) {
           alert(data.error);
         } else {
           props.loginSuccess(data);
+          props.updateUserData(data);
           localStorage.setItem('token', data.jwt);
-          props.onHide()
-          history.push('/')
+          props.onHide();
+          props.userLoaded()
+          history.push('/account-page');//TODO:RESTful urls
         }
       });
   };
@@ -176,18 +177,31 @@ function SignUpModal(props) {
 const mapStateToProps = (state) => {
   return {
     userType: state.userType,
-    userCreate: state.userCreate,
-  }
+    userLoaded: state.userLoaded,
+  };
 };
-const mapDispatchToProps=dispatch=>{
-  return{
-    loginSuccess:user=>{
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loginSuccess: (user) => {
+      const action = {
+        type: 'USER_AUTH',
+        userAuth: user,
+      };
+      dispatch(action);
+    },
+    updateUserData: (user) => {
+      const action = {
+        type: 'FETCH_USER_DATA',
+        userData: user,
+      };
+      dispatch(action);
+    },
+    userLoaded:()=>{
       const action={
-        type:'USER_AUTH',
-        userAuth:user
+        type:"USER_LOADED"
       }
       dispatch(action)
     }
-  }
-}
+  };
+};
 export default connect(mapStateToProps, mapDispatchToProps)(SignUpModal);

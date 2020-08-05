@@ -6,8 +6,6 @@ import road from '../icons/route-solid.svg';
 import cloud from '../images/cloud.png';
 import logo from '../icons/airplane.svg';
 import SignUpModal from './signUpModal.js';
-// import { signInUser } from '../reducers/actions/userActions';
-// import '../styles.css';
 
 class LandingPage extends React.Component {
   constructor(props) {
@@ -16,11 +14,7 @@ class LandingPage extends React.Component {
       modalShow: false,
     };
   }
-  // componentDidMount(){
-  //   if(!userAuth){
-  //     props.signInUser(email, password)
-  //   }
-  // }
+ 
   openModal = () => {
     this.setState({ modalShow: !this.state.modalShow });
     console.log(this.state);
@@ -37,7 +31,6 @@ class LandingPage extends React.Component {
   };
   render() {
     const { userData } = this.props;
-    const token = localStorage.token;
 
     return (
       <div>
@@ -78,20 +71,13 @@ class LandingPage extends React.Component {
             </h3>
             {userData ? (
               <div>
-                <button
-                  name="activeUser"
-                  onMouseOver={(e) => this.changeUserType(e)}
-                  onClick={(event) => {
-                    this.openModal(event);
-                  }}
-                >
-                  <a href="/">VIEW ACCOUNT </a>
+                <button>
+                  <a href="/account-page">VIEW ACCOUNT </a>
                 </button>
                 <button
-                  name="newUser"
                   onClick={(event) => {
-                    localStorage.removeItem('token')
-                    this.props.history.push("/flightSearch")
+                    localStorage.removeItem('token');
+                    this.props.history.push('/flightSearch');
                   }}
                 >
                   SIGN OUT

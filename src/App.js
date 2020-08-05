@@ -1,6 +1,5 @@
 import React,{ Component} from 'react';
 import {connect} from 'react-redux'
-
 import {Route,Switch} from 'react-router-dom'
 import {getProfileFetch} from './reducers/actions/userActions'
 import './styles.css';
@@ -11,10 +10,13 @@ import youtube from './icons/youtube.svg';
 import instagram from './icons/instagram.svg';
 import LandingPage from './Components/landingPage'
 import BookingForm from './Components/bookingForm'
-import signUpModal from './Components/signUpModal'
+import AccountPage from './Components/accountPage'
+import userData from './reducers/userData';
+
 class App extends Component {
   componentWillMount() {
     this.props.getProfileFetch();
+    console.log("1")
   }
   render(){
 
@@ -35,6 +37,10 @@ class App extends Component {
             <li>
               <a href="#contacts">Contacts</a>
             </li>
+            {this.props.userData?<li onClick={(event) => {
+                    localStorage.removeItem('token');
+                    // this.props.history.push('/');
+                  }}><a href="/">Sign Out</a></li>:null}
           </ul>
         </nav>
       </header>
@@ -44,7 +50,7 @@ class App extends Component {
   <Route exact path="/" component={LandingPage}/>
     {/* <Route path="/" render={()=><LandingPage history={history}/>} /> */}
     <Route exact path="/flightSearch" component={BookingForm}/>
-    <Route exact path="/accountSignIn" component={signUpModal}/>
+    <Route exact path="/account-page" component={AccountPage}/>
   </Switch>
       <footer>
         <div className="footer-wrapper">
