@@ -1,7 +1,6 @@
 export const getProfileFetch = () => {
   return (dispatch) => {
     const token = localStorage.token;
-    console.log('ssssss', token);
     if (token) {
       fetch('http://localhost:3000/api/v1/profile', {
         method: 'GET',
@@ -18,7 +17,6 @@ export const getProfileFetch = () => {
             // If this happens, you may want to remove the invalid token.
             localStorage.removeItem('token');
           } else {
-            console.log("finnished fetch")
             dispatch(loginSuccess(data.user));
             dispatch(userLoaded());
           }

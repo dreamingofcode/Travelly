@@ -5,39 +5,22 @@ import hotel from '../icons/bed-solid.svg';
 import road from '../icons/route-solid.svg';
 import cloud from '../images/cloud.png';
 import logo from '../icons/airplane.svg';
-import SignUpModal from './signUpModal.js';
 
+let token = localStorage.getItem('token')
 class LandingPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      modalShow: true,
-    };
+  
+componentWillMount(){
+token = localStorage.getItem('token')
+
+};
+componentDidMount(){
+  token = localStorage.getItem('token')
   }
-
-  openModal = () => {
-    this.setState({ modalShow: !this.state.modalShow });
-    console.log(this.state);
-  };
-
-  changeUserType = (e) => {
-    let type = 'guest';
-    if (e.target.name === 'newUser') {
-      type = 'new';
-    } else {
-      type = 'existing';
-    }
-    this.props.alterUserType(type);
-  };
   render() {
     const { userData } = this.props;
 
     return (
       <div>
-        {/* <SignUpModal
-          show={this.state.modalShow}
-          onHide={() => this.openModal()}
-        /> */}
         <section className="hero">
           <h2>Travel beyond</h2>
           <h3>
@@ -69,15 +52,16 @@ class LandingPage extends React.Component {
               {' '}
               Over 250 countries at the lowest rates possible!
             </h3>
-            {userData ? (
+            {token != undefined? (
               <div>
-                <button>
-                  <a href="/account-page">VIEW ACCOUNT </a>
+                <button onClick={()=> this.props.history.push(`/account-page/${userData.id}`)}>
+                VIEW ACCOUNT
                 </button>
                 <button
                   onClick={(event) => {
                     localStorage.removeItem('token');
-                    this.props.history.push('/flightSearch');
+                    this.props.history.push('/account-page/1');
+                    //this will cause a refresh as the redirect will error out,it's intended purpose
                   }}
                 >
                   SIGN OUT
@@ -86,31 +70,24 @@ class LandingPage extends React.Component {
             ) : (
               <div>
                 <button
-                  name="activeUser"
-                  onMouseOver={(e) => this.changeUserType(e)}
                   onClick={() => {
                     this.props.history.push('/signin');
                   }}
                 >
-                  <a href="/">SIGN IN </a>
+                  LOGIN 
                 </button>
                 <button
-                  name="newUser"
                   onClick={() => {
                     this.props.history.push('/signup');
                   }}
-                  // onMouseOver={(e) => this.changeUserType(e)}
-                  // onClick={(event) => {
-                  //   this.openModal(event);
-                  // }}
                 >
-                  SIGN UP
+                 SIGN UP
                 </button>
               </div>
             )}
 
-            <img src={cloud} className="moving-cloud-1 cloud" />
-            <img src={cloud} className="moving-cloud-2 cloud" />
+            <img src={cloud} className="moving-cloud-1 cloud" alt="animated moving cloud" />
+            <img src={cloud} className="moving-cloud-2 cloud" alt="animated moving cloud" />
           </header>
         </section>
 
@@ -191,16 +168,5 @@ const mapStateToProps = (state) => {
     userData: state.userData,
   };
 };
-const mapDispatchToProps = (dispatch) => {
-  ///adds actions to props
-  return {
-    alterUserType: (type) => {
-      const action = {
-        type: 'CHANGE_USER_TYPE',
-        userType: type,
-      };
-      dispatch(action);
-    },
-  };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);
+
+export default connect(mapStateToProps, null)(LandingPage);

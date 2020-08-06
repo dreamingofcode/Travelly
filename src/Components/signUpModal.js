@@ -1,16 +1,8 @@
-import React, { useState } from 'react';
-import queryString from 'query-string';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
-
-import Modal from 'react-bootstrap/Modal';
 import palm from '../images/palm.png';
 import palmRightSide from '../images/rightPalm.png';
-
-var urld = window.location.pathname;
-
-console.log('here@@@@', urld);
 
 function SignUpModal(props) {
   let history = useHistory();
@@ -20,14 +12,22 @@ function SignUpModal(props) {
     password: '',
     rePassword: '',
   });
+  var urld = window.location.pathname;
+  useEffect(() => {
+    urld = window.location.pathname;
+  }, []);
   ///TODO:seperate this functions
   function createUser(event) {
     event.preventDefault();
-    if (urld === "signin") signIn(event);
+    if (urld === '/signin') signIn(event);
     else {
       if (userData.password !== userData.rePassword) {
         alert('ERROR: Both passwords in password fields MUST match!');
       }
+      if (!userData.email.includes("@")){
+        alert('ERROR: Please use a valid email address and try again!');
+
+      }else{
 
       fetch('http://localhost:3000/api/v1/users', {
         method: 'POST',
@@ -37,7 +37,7 @@ function SignUpModal(props) {
         },
         body: JSON.stringify({
           user: {
-            name: `${userData.email}`,
+            name: `${userData.name}`,
             email: `${userData.email}`,
             password: `${userData.password}`,
           },
@@ -50,10 +50,11 @@ function SignUpModal(props) {
           } else {
             alert('Your Account was successfully created!');
             console.log(data);
+            props.updateUserData(data);
             localStorage.setItem('token', data.jwt);
-            history.push('/account-page');
+            history.push(`/account-page/${data.user.id}`);
           }
-        });
+          });}
     }
   }
   const signIn = (event) => {
@@ -77,52 +78,38 @@ function SignUpModal(props) {
       .then((data) => {
         console.log('user logging in data', data);
         if (data.error) {
-          alert(data.error);
+          alert("Please check your credentials and try again");
         } else {
           props.loginSuccess(data);
           props.updateUserData(data);
           localStorage.setItem('token', data.jwt);
           props.userLoaded();
-          history.push('/account-page'); //TODO:RESTful urls
+          history.push(`/account-page/${data.user.id}`);
         }
       });
   };
 
   return (
     <div className="modal">
-      {/* <Modal
-        className="modal"
-        show={true} 
-        size="lg"
-        animation={true}
-        aria-labelledby="contained-modal-title-vcenter"
-        autoFocus={true}
-        backdrop="static"
-        centered
-      > */}
       <header>
-        {/* <Modal.Header>
-            <Modal.Title id="contained-modal-title-vcenter"> */}
-        {props.userType === 'existing' ? (
-          <div>
-            <h1>Welcome Back!</h1>
-            <h4>Sign In below to continue your Journey!</h4>
-          </div>
-        ) : (
+        {urld === '/signup' ? (
           <div>
             <h1>Sign Up!</h1>
             <h4>Create Your Free Travelly Account Below</h4>
           </div>
+        ) : (
+          <div>
+            <h1>Welcome Back!</h1>
+            <h4>Sign In below to continue your Journey!</h4>
+          </div>
         )}
-        {/* </Modal.Title>
-          </Modal.Header> */}
       </header>
-      {/* <Modal.Body> */}
+
       <img className="palmLeft" src={palm} alt="rightPalmLeaf" />
       <img className="palmRight" src={palmRightSide} alt="rightPalmLeaf" />
 
       <form>
-        {props.userType === 'existing' ? null : (
+        {urld === '/signup' ? (
           <div>
             <input
               onChange={(event) =>
@@ -131,11 +118,10 @@ function SignUpModal(props) {
               required
               type="text"
               name="name"
-              placeholder="Enter Full Name"
-            />{' '}
+            />{' '}<label>Full Name</label>
           </div>
-        )}
-
+        ) : null}
+       
         <input
           onChange={(event) =>
             setUserData({ ...userData, email: event.target.value })
@@ -143,44 +129,42 @@ function SignUpModal(props) {
           required
           type="text"
           name="email"
-          placeholder="Enter Email"
         />
-        <input
+        <label>Email</label>
+       <input
           onChange={(event) =>
             setUserData({ ...userData, password: event.target.value })
           }
           required
           type="text"
           name="password"
-          placeholder="Enter Password"
-        />
-        {props.userType === 'existing' ? null : (
+        /> <label>Password</label>
+        {urld === '/signin' ? null : (
           <div>
             <input
-              onChange={(event) =>
+              onChange={(event) =>{
+                console.log("money",userData)
                 setUserData({ ...userData, rePassword: event.target.value })
-              }
+              }}
               required
               type="text"
               name="re-password"
-              placeholder="Re-enter Password"
-            />
+              /> <label>Password</label>
           </div>
         )}
-
-        <button onClick={(event) => createUser(event)}>Submit</button>
+      
+        <button onClick={(event) => createUser(event)}>Submit</button><br/>
       </form>
-      {/* </Modal.Body> */}
-      {/* <Modal.Footer> */}
-      <Button onClick={props.onHide}>Close</Button>
-      {/* </Modal.Footer> */}
-      {/* </Modal> */}
+
+      <button onClick={()=>history.push("/")}>
+   Close
+      </button>
+        {urld==="/signin"?<h5><a href="/signup">Create An Account</a></h5>:<h5><a href="/signin">Sign Back In</a></h5>}
     </div>
   );
 }
 const mapStateToProps = (state) => {
   return {
-    userType: state.userType,
     userLoaded: state.userLoaded,
   };
 };

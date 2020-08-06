@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { getProfileFetch } from './reducers/actions/userActions';
+import ScrollToTop from "./ScrollToTop"
 import './styles.css';
 import './App.css';
 
@@ -15,7 +16,6 @@ import SignUpModal from './Components/signUpModal';
 class App extends Component {
   componentWillMount() {
     this.props.getProfileFetch();
-    console.log('1');
   }
   render() {
     return (
@@ -57,8 +57,9 @@ class App extends Component {
             <Route exact path="/signin" component={SignUpModal} />
 
             <Route exact path="/flightSearch" component={BookingForm} />
-            <Route exact path="/account-page" component={AccountPage} />
+            <Route exact path="/account-page/:id" component={AccountPage} />
           </Switch>
+          <ScrollToTop/>
           <footer>
             <div className="footer-wrapper">
               <h5>Travelly &copy;</h5>

@@ -15,7 +15,7 @@
   position: relative;
   border: black 1rem solid;
   border-radius: 100%;
-  height: 23rem;
+ 
   background-color: rgb(40, 41, 39);
   text-align: center;
   justify-content: center;
@@ -23,20 +23,23 @@
   /* opacity: 0.9; */
 }
 .button2 {
-  bottom: 10rem;
+  bottom: 6rem;
    z-index: 1;
+   height: 24rem;
 }
 .button1 {
-  bottom: 3rem;
+  height: 21rem;
+  bottom: 1rem;
   width: 30rem;
-  left: 3%;
+  left: 5%;
   
 }
 .button3 {
-  left: -4%;
+  height: 21rem;
+  left: -5%;
   width: 30rem;
   /* z-index: -1; */
-  bottom: 3rem;
+  bottom: 1rem;
 }
 .accountDetails {
   width: 90%;
@@ -66,8 +69,19 @@
   height: 40rem;
   width: 100%;
   left: 0%;
-  bottom: 0%;
+  bottom: -3%;
   z-index: -2;
+}
+.paper{
+  text-align: center;
+  justify-content: center;
+  align-self: center;
+  position: relative;
+  background: blanchedalmond;
+  top:10%;
+  width: 60%;
+  margin:auto;
+min-height: 500px;
 }
 .carScent {
   display: flex;
@@ -117,7 +131,7 @@
     background-size: cover;
     background-position: center;
     background-image: url('../images/moutainRoad.png');
-    width: fit-content;
+    /* width: fit-content; */
     height: 30rem;
     margin-top: 1rem;
     margin-bottom: 30rem;
