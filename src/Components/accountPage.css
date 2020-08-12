@@ -15,7 +15,7 @@
   position: relative;
   border: black 1rem solid;
   border-radius: 100%;
- 
+
   background-color: rgb(40, 41, 39);
   text-align: center;
   justify-content: center;
@@ -24,15 +24,14 @@
 }
 .button2 {
   bottom: 6rem;
-   z-index: 1;
-   height: 24rem;
+  z-index: 1;
+  height: 24rem;
 }
 .button1 {
   height: 21rem;
   bottom: 1rem;
   width: 30rem;
   left: 5%;
-  
 }
 .button3 {
   height: 21rem;
@@ -72,17 +71,73 @@
   bottom: -3%;
   z-index: -2;
 }
-.paper{
+.paper {
+  opacity: .4rem;
   text-align: center;
-  justify-content: center;
-  align-self: center;
   position: relative;
-  background: blanchedalmond;
-  top:10%;
-  width: 60%;
-  margin:auto;
-min-height: 500px;
+background:  url('../images/vectorstock_1462080.jpg');
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+  top: 3%;
+  width: 70%;
+  margin: auto;
+  min-height: 50rem;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: brown solid 1rem;
+
 }
+
+.paper li {
+  list-style-type: none;
+}
+.paper input,
+.paperInput {
+  height: 3rem;
+  width: 35rem;
+  text-align: center;
+  flex-wrap: wrap;
+}
+.paper label {
+  display: flex;
+  justify-content: center;
+}
+.paper button {
+  margin-top: 2rem;
+  margin-bottom: 2rem ;
+  margin-right: 3rem;
+  height: 4rem;
+  width: fit-content;
+  color:white;
+  font-family:sans-serif;
+ 
+  line-height: 0em;
+}
+.closing-icon{
+  height: 5rem;
+  color:black;
+  position: absolute;
+  right:1%;
+  top:1%;
+
+}
+.updateForm {
+  background: blanchedalmond;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+  width: 80%;
+  margin: auto;
+min-height: 480px;
+}
+.dateForm {
+  display: inline;
+  background: white;
+  border: rgb(142, 128, 128) 1px solid;
+  border-radius: 4%;
+}
+
 .carScent {
   display: flex;
   position: absolute;

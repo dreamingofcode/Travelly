@@ -5,6 +5,7 @@
   padding: 0;
   box-sizing: border-box;
 }
+ 
 html {
   font-size: 62.5%;
 }
@@ -48,33 +49,36 @@ button:hover {
   background-color: #334459;
   font-size: 2rem;
 }
+a:hover{
+  text-decoration: none;
+  color:white;
+}
 .modal {
   width: 100%;
   margin: 0 auto;
   position: absolute;
-  /* display: flex; */
+  display: inline-block;
   box-sizing: border-box;
   text-align: center;
-  min-height: 800px;
+  min-height: 1200px;
   background: url('./images/airplaneBackground.jpg');
   background-size: cover;
-  background-position: start;
+  background-position: center;
   flex-wrap: wrap;
   z-index: 0;
 }
 .modal header {
-  margin-top: 7rem;
+  margin-top: 15rem;
   margin-bottom: 4rem;
-  font-size: 6rem;
 }
 .modal h1 {
+  text-shadow: 1px 1px 2px red, 0  .1em brown, 0 0 7.2em rgb(251, 255, 7);
   font-size: 10rem;
   margin-top: 3rem;
-    text-shadow: 1px 1px 2px red, 0  .1em brown, 0 0 7.2em rgb(251, 255, 7);
 
 }
 .modal a{
-  text-decoration: underline;
+  text-decoration: underline !important;
   color:black
 }
 .modal form {
@@ -91,7 +95,7 @@ button:hover {
   background-size: cover;
   min-height: 420px;
   max-width: 620px;
-  flex-wrap: wrap;
+
 }
 .modal input {
   border: black solid 4px;
@@ -405,7 +409,7 @@ footer ul {
     margin-right: 70px;
   }
   .modal header {
-    margin-top: 12rem;
+    margin-top: 30rem;
   }
   .modal input {
     margin-top: 7rem;

@@ -8,13 +8,11 @@ import AccountDetails from './accountDetails';
 import AccountEditForm from './accountEditForm';
 import './accountPage.css';
 import dash from '../images/dash.png';
-import arrow from '../images/arrow.png';
-
-
+import arrow from '../icons/arrow.png';
 
 function AccountPage(props) {
   let history = useHistory();
-  const token = localStorage.getItem('token')
+  const token = localStorage.getItem('token');
   const { userData } = props;
   const [open, setOpen] = React.useState(false);
   const [editUser, seteditUser] = useState(false);
@@ -25,24 +23,25 @@ function AccountPage(props) {
   const handleClose = () => {
     setOpen(false);
   };
-  const [userInfo, setUserInfo] = useState(props.userData);
+  // const [userInfo, setUserInfo] = useState(props.userData);
   useEffect(() => {
-    setUserInfo(props.userData);
-  });
+    // setUserInfo(props.userData);
+  }, []);
 
   return (
     <div className="accountPage">
-    {token?null:history.push("/")}
+      {token ? null : history.push('/')}
       <div className="accountDetail">
         {props.userLoaded === false ? (
-          <div class="d-flex justify-content-center">
-          <h1>IS LOADING..</h1>
-  <div class="spinner-border" role="status">
-    <span class="sr-only">Loading...</span>
-  </div>
-</div>
+          <div className="d-flex justify-content-center">
+            <h1>IS LOADING..</h1>
+            <div className="spinner-border" role="status">
+              <span className="sr-only">Loading...</span>
+            </div>
+          </div>
         ) : (
-          <AccountDetails userInfo={userInfo} />
+          <AccountDetails 
+           />
         )}
         ;
         <img className="dashBoard" src={dash} />
@@ -75,35 +74,46 @@ function AccountPage(props) {
           >
             <Fade in={open}>
               <div className="paper">
-                <img
-                  src={arrow}
-                  style={{ height: '120px', marginBottom: '-30px' }}
-                  alt="arrow symbol"
-                />
-                <h1 id="transition-modal-title">
-                  {userData.name}'s Account Details
-                </h1>
+                <div className="updateForm">
+                  <img
+                    src={arrow}
+                    style={{ height: '120px', marginBottom: '-30px' }}
+                    alt="arrow symbol"
+                  />
+                  <h1 id="transition-modal-title">
+                    {userData.name}'s Account Details
+                  </h1>
+                  {editUser ? null : (
+                    <div>
+                      <p id="transition-modal-description">
+                        This information is used during flight searches in order
+                        to save you time!
+                      </p>{' '}
+                      <br />
+                    </div>
+                  )}
 
-                <p id="transition-modal-description">
-                  This information is used during flight searches in order to
-                  save you time!
-                </p>
-                <br />
-                {!editUser ? (
-                  <div>
-                    <ul>
-                      <li>Name: {userData.name}</li>
-                      <li>Date of Birth:{userData.dob}</li>
-                      <li>Email: {userData.email}</li>
-                      <li>Address: {userData.address}</li>
-                    </ul>
-                    <button onClick={() => seteditUser(true)}>
-                      Edit Details
-                    </button>
-                  </div>
-                ) : (
-                  <AccountEditForm userData={userData} history={history} seteditUser={seteditUser}/>
-                )}
+                  {!editUser ? (
+                    <div>
+                      <ul>
+                        <li>Name:   {userData.name}</li>
+                        <li>Date of Birth:   {userData.DOB}</li>
+                        <li>Email: {userData.email}</li>
+                        <li>Address: <br/> {userData.address}</li>
+                      </ul>
+                      <button onClick={() => seteditUser(true)}>
+                        Edit Details
+                      </button>
+                    </div>
+                  ) : (
+                    <AccountEditForm
+                      userData={userData}
+                      history={history}
+                      setOpen={setOpen}
+                      seteditUser={seteditUser}
+                    />
+                  )}
+                </div>
               </div>
             </Fade>
           </Modal>
