@@ -10,7 +10,7 @@ import twitter from './icons/twitter.svg';
 import youtube from './icons/youtube.svg';
 import instagram from './icons/instagram.svg';
 import LandingPage from './Components/landingPage';
-import BookingForm from './Components/bookingForm';
+import BookingSearchForm from './Components/bookingSearchForm';
 import AccountPage from './Components/accountPage';
 import SignUpModal from './Components/signUpModal';
 class App extends Component {
@@ -56,7 +56,7 @@ class App extends Component {
             <Route exact path="/signup" component={SignUpModal} />
             <Route exact path="/signin" component={SignUpModal} />
 
-            <Route exact path="/flightSearch" component={BookingForm} />
+            <Route exact path="/flightSearch" component={BookingSearchForm} />
             <Route exact path="/account-page/:id" component={AccountPage} />
           </Switch>
           <ScrollToTop/>

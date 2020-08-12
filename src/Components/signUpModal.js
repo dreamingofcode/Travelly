@@ -11,6 +11,8 @@ function SignUpModal(props) {
     email: '',
     password: '',
     rePassword: '',
+    DOB: new Date(),
+    address: 'Please Update!',
   });
   var urld = window.location.pathname;
   useEffect(() => {
@@ -24,37 +26,38 @@ function SignUpModal(props) {
       if (userData.password !== userData.rePassword) {
         alert('ERROR: Both passwords in password fields MUST match!');
       }
-      if (!userData.email.includes("@")){
+      if (!userData.email.includes('@')) {
         alert('ERROR: Please use a valid email address and try again!');
-
-      }else{
-
-      fetch('http://localhost:3000/api/v1/users', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify({
-          user: {
-            name: `${userData.name}`,
-            email: `${userData.email}`,
-            password: `${userData.password}`,
+      } else {
+        fetch('http://localhost:3000/api/v1/users', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
           },
-        }),
-      })
-        .then((r) => r.json())
-        .then((data) => {
-          if (data.error) {
-            alert(data.error);
-          } else {
-            alert('Your Account was successfully created!');
-            console.log(data);
-            props.updateUserData(data);
-            localStorage.setItem('token', data.jwt);
-            history.push(`/account-page/${data.user.id}`);
-          }
-          });}
+          body: JSON.stringify({
+            user: {
+              name: `${userData.name}`,
+              email: `${userData.email}`,
+              password: `${userData.password}`,
+              DOB: `${userData.DOB}`,
+              address: `${userData.address}`,
+            },
+          }),
+        })
+          .then((r) => r.json())
+          .then((data) => {
+            if (data.error) {
+              alert(data.error);
+            } else {
+              alert('Your Account was successfully created!');
+              console.log(data);
+              props.updateUserData(data);
+              localStorage.setItem('token', data.jwt);
+              history.push(`/account-page/${data.user.id}`);
+            }
+          });
+      }
     }
   }
   const signIn = (event) => {
@@ -78,7 +81,7 @@ function SignUpModal(props) {
       .then((data) => {
         console.log('user logging in data', data);
         if (data.error) {
-          alert("Please check your credentials and try again");
+          alert('Please check your credentials and try again');
         } else {
           props.loginSuccess(data);
           props.updateUserData(data);
@@ -118,10 +121,10 @@ function SignUpModal(props) {
               required
               type="text"
               name="name"
-            />{' '}<label>Full Name</label>
+            />{' '}
+            <label>Full Name</label>
           </div>
         ) : null}
-       
         <input
           onChange={(event) =>
             setUserData({ ...userData, email: event.target.value })
@@ -131,35 +134,42 @@ function SignUpModal(props) {
           name="email"
         />
         <label>Email</label>
-       <input
+        <input
           onChange={(event) =>
             setUserData({ ...userData, password: event.target.value })
           }
           required
           type="text"
           name="password"
-        /> <label>Password</label>
+        />{' '}
+        <label>Password</label>
         {urld === '/signin' ? null : (
           <div>
             <input
-              onChange={(event) =>{
-                console.log("money",userData)
-                setUserData({ ...userData, rePassword: event.target.value })
+              onChange={(event) => {
+                setUserData({ ...userData, rePassword: event.target.value });
               }}
               required
               type="text"
               name="re-password"
-              /> <label>Password</label>
+            />{' '}
+            <label>Password</label>
           </div>
         )}
-      
-        <button onClick={(event) => createUser(event)}>Submit</button><br/>
+        <button onClick={(event) => createUser(event)}>Submit</button>
+        <br />
       </form>
 
-      <button onClick={()=>history.push("/")}>
-   Close
-      </button>
-        {urld==="/signin"?<h5><a href="/signup">Create An Account</a></h5>:<h5><a href="/signin">Sign Back In</a></h5>}
+      <button onClick={() => history.push('/')}>Close</button>
+      {urld === '/signin' ? (
+        <h5>
+          <a href="/signup">Create An Account</a>
+        </h5>
+      ) : (
+        <h5>
+          <a href="/signin">Sign Back In</a>
+        </h5>
+      )}
     </div>
   );
 }
