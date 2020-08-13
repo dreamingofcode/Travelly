@@ -61,7 +61,7 @@ function SignUpModal(props) {
     }
   }
   const signIn = (event) => {
-    event.preventDefault();
+    // event.preventDe`ault();
     const configObj = {
       method: 'POST',
       headers: {

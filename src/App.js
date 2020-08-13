@@ -5,14 +5,16 @@ import { getProfileFetch } from './reducers/actions/userActions';
 import ScrollToTop from "./ScrollToTop"
 import './styles.css';
 import './App.css';
-
 import twitter from './icons/twitter.svg';
 import youtube from './icons/youtube.svg';
 import instagram from './icons/instagram.svg';
+
 import LandingPage from './Components/landingPage';
-import BookingSearchForm from './Components/bookingSearchForm';
-import AccountPage from './Components/accountPage';
 import SignUpModal from './Components/signUpModal';
+import AccountPage from './Components/accountPage';
+import BookingSearchForm from './Components/Flights/bookingSearchForm';
+import FlightSearchResults from './Components/Flights/flightSearchResults'
+// import FlightSearchResults from './reducers/flightSearchResults';
 class App extends Component {
   componentWillMount() {
     this.props.getProfileFetch();
@@ -55,8 +57,8 @@ class App extends Component {
             {/* <Route path="/" render={()=><LandingPage history={history}/>} /> */}
             <Route exact path="/signup" component={SignUpModal} />
             <Route exact path="/signin" component={SignUpModal} />
-
             <Route exact path="/flightSearch" component={BookingSearchForm} />
+            <Route exact path="/flightSearch-results" component={FlightSearchResults} />
             <Route exact path="/account-page/:id" component={AccountPage} />
           </Switch>
           <ScrollToTop/>

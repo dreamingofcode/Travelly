@@ -1,0 +1,343 @@
+.booking-page{
+  overflow-x: hidden;
+  min-height: 90vh;
+  box-sizing: border-box;
+  background: linear-gradient(#46a8be80, transparent),
+    url('../../images/new-york-page.png');
+    background-size: cover;
+  background-position:center;
+  width: 100%;
+  margin: auto;
+  padding: 6rem;
+  overflow-x: hidden;
+}
+/* header{
+  margin-bottom: -60px;
+} */
+
+.body1 {
+  margin-top: -200px;
+  background: #ced4da !important;
+  width: cover;
+  /* margin:auto; */
+  object-position: center;
+  display: inline-flex;
+  /* margin-left: 130px; */
+  /* position: flex; */
+  align-self: center;
+  align-content: center;
+  justify-content: center;
+}
+h1 {
+  font-family: 'Pattaya', sans-serif;
+}
+
+.booking-page h1 {
+  font-size: 10rem;
+  padding: 4rem;
+}
+body{
+  background:transparent;
+}
+/* ------booking form----- */
+
+
+.flight:hover{
+  background-color: #fff !important;
+  color:black;
+  transition: 0.5s;
+}
+.cloud,
+.cloud1 {
+  overflow-x: hidden;
+  height: 45rem;
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  pointer-events: none;
+}
+.cloud3 {
+  height: 45rem;
+  left: -10%;
+  position: absolute;
+  top: 10%;
+  z-index: -1;
+  animation: cloudAnimation 4s infinite alternate-reverse;
+}
+.plane1 {
+  height: 100px;
+  right: 0;
+  margin-right: 500px;
+  animation: planeAnimation 4s ease-in infinite;
+}
+.moving-cloud-2 {
+  top: 1%;
+}
+@keyframes cloudAnimation {
+  0% {
+    transform: translate(5%, -15%) rotateX(360deg) rotateY(180deg);
+  }
+  
+  100% {
+    transform: translate(0%, 0%) rotateX(360deg) rotateY(180deg);
+  }
+}
+@keyframes planeAnimation {
+  0% {
+    transform: scale(0.5) rotate(0deg) translate(-300px, 400px);
+
+    /*  */
+  }
+
+  50% {
+    transform: scale(1) rotate(30deg) translate(0px, 200px);
+  }
+
+  100% {
+    transform: scale(2.8) rotate(20deg) translate(300px, -400px);
+  }
+}
+
+/* media query */
+@media screen and (max-width: 952px) {
+  .booking-form-box{
+    width: 100% !important;
+    margin: auto;
+    padding: 0rem;
+    box-sizing: border-box;
+    /* background: #ced !important; */
+border:black solid 1rem;
+
+  }
+  .radio-btn{
+    margin-top: -10rem;
+  }
+  .body1 {
+    width: 100%;
+    box-sizing: border-box;
+    object-position: center;
+    display: flex;
+    margin: auto;
+    position: flex;
+    align-self: center;
+    align-content: center;
+    justify-content: center;
+  }
+}
+@media screen and (max-width: 452px) {
+  .booking-form-box {
+    width: 100%;
+    margin: auto;
+    padding: 2rem;
+    box-sizing: border-box;
+  }
+  .booking-form-box h1 {
+    margin: 2rem;
+    margin-bottom: -100px;
+    font-size: 40px;
+  }
+  .body1 {
+    width: 100%;
+    box-sizing: border-box;
+    object-position: center;
+    display: flex;
+    margin: auto;
+  }
+  
+  .booking-form-box{
+ height: 500px;
+ margin-top: -10rem;
+ background: #131c27;
+  }
+}
+
+
+
+
+
+
+
+
+
+/* Search Form */
+* {
+  box-sizing: border-box;
+}
+
+
+#search-form {
+  border: 1px solid #131c27;
+  width: 900px;
+  position: relative;
+}
+
+#header {
+  height: 80px;
+  background: #131c27;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+#header h1 {
+  color: #FFF;
+  margin-left: 20px;
+  font-size: 1.3em
+}
+
+.flight {
+  padding: 20px;
+}
+.flight input, select {
+    color: #6B6A6A;
+}
+
+.info-box {
+  padding: 10px 0;
+  margin-top: 20px;
+  flex: 1;
+  border-right: 20px solid transparent;
+}
+.info-box:last-child {
+  border-right: none;
+}
+.info-box label {
+  display: block;
+  color: #6B6A6A;
+  font-size: .9em;
+}
+.info-box input[type=text], input[type=submit], select {
+  border: none;
+  outline: none;
+  background: #E2E0E0;
+  margin-top: 5px;
+  width: 100%;
+  padding: 5px;
+  height: 30px;
+  border-radius: 3px;
+}
+
+#flight-type {
+  display: flex;
+  justify-content: flex-start;
+  border-bottom: 1px dotted silver;
+}
+#flight-type .info-box {
+  flex: 0 1 25%;
+  display:flex;
+  align-items: center;
+}
+
+#flight-depart {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dotted silver;
+}
+#flight-depart .info-box {
+  position: relative;
+}
+#depart-res, #arrive-res {
+  position: absolute;
+  background: #FFFFFF;
+}
+#depart-res p, #arrive-res p {
+  padding: 7px 2px;
+  border-bottom: 1px dotted silver;
+}
+#depart-res p:hover, #arrive-res p:hover {
+  background: #EDEDED;
+  cursor: pointer;
+}
+
+#flight-dates {
+  display: flex;
+  border-bottom: 1px dotted silver;
+}
+
+#flight-info {
+  display: flex;
+  border-bottom: 1px dotted silver;
+}
+
+#flight-search .info-box {
+  display: flex;
+  justify-content: center;
+}
+#flight-search input[type=submit] {
+  background: #55AF3A;
+  color: white;
+  padding: 0;
+  height: 50px;
+  font-size: 1.2em;
+}
+
+/* Calender */
+#calender {
+  border: 3px solid red;
+  padding: 5px;
+  opacity: 0;
+  background: #FFFFFF;
+  position: absolute;
+  transition: opacity .3s;
+  pointer-events: none;
+}
+#calender .nav {
+  padding: 3px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+#calender .nav button {
+  background: #FF3240;
+  border: none;
+  outline: none;
+  color: #FFFFFF;
+  padding: 5px 8px;
+  font-weight: 600;
+  border-radius: 3px;
+}
+table {
+  border: 1px solid #DBDBDB;
+  background: #F4F4F4;
+}
+table td {
+  border: 1px solid #DBDBDB;
+  padding: 5px;
+  text-align: center;
+  cursor: pointer;
+}
+.normal {
+  color: rgba(0,0,0,.8)
+}
+.today {
+  background: #FF3240;
+  color: #FFFFFF;
+}
+.closed {
+  color: #DBDBDB;
+  cursor: default;
+}
+.picked {
+  background: green;
+}
+#month {
+  display: inline-block;
+}
+
+#confirm {
+  width: 500px;
+  padding: 20px;
+  border: 5px solid #55AF3A;
+  margin: 20px auto;
+  opacity: 0;
+}
+#confirm h3 {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+#confirm p {
+  padding: 10px;
+}
+#confirm strong {
+  font-weight: 600;
+}

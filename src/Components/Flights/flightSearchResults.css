@@ -1,0 +1,26 @@
+.flight-search-results-page {
+  display: inline-block;
+  width: 100%;
+  background: rgb(220, 200, 197);
+}
+h1 {
+  margin-top: 6rem;
+}
+.flight-search-results-page button{
+    position: absolute;
+    height: 4rem;
+    justify-content: center;
+    text-align: center;
+    line-height: 0px;
+}
+form hr {
+  padding-top: 2rem;
+}
+
+form input,
+form label {
+  margin-right: 2rem;
+}
+.flight-details-card{
+    background:white;
+}
