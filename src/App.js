@@ -97,7 +97,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getProfileFetch: () => {
       dispatch(getProfileFetch());
-    },
+    }
+   
   };
 };
 

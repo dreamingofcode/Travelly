@@ -8,6 +8,7 @@
   background-position:center;
   width: 100%;
   margin: auto;
+  margin-top:-100px;
   padding: 6rem;
   overflow-x: hidden;
 }
@@ -110,7 +111,7 @@ border:black solid 1rem;
 
   }
   .radio-btn{
-    margin-top: -10rem;
+    margin-top:  -10rem;
   }
   .body1 {
     width: 100%;
@@ -193,7 +194,7 @@ border:black solid 1rem;
 
 .info-box {
   padding: 10px 0;
-  margin-top: 20px;
+  /* margin-top: 20px; */
   flex: 1;
   border-right: 20px solid transparent;
 }

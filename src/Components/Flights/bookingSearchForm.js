@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { connect } from 'react-redux';
 import './bookingSearchForm.css';
 
@@ -12,41 +12,41 @@ class BookingSearchForm extends React.Component {
   constructor(props) {
     super(props);
     this.wrapper = React.createRef();
-    const now = new Date();
-    let departureDate = new Date(
-      now.getFullYear(),
-      now.getMonth(),
-      now.getDate() + 3
-      );
-      let returnDate = new Date(
-        now.getFullYear(),
-        now.getMonth(),
-        now.getDate() + 7
-        );
-        
-        this.state = {
-          tripType: 'roundtrip',
-          origin: '',
-          destination: '',
-          departureDate: '',
-          returnDate: '',
-          adults: 1,
-          children: 0,
-          tripClass: 'economy',
-          locationResult: false,
-          locationDestinationResult: false,
-        };
-      }
-      setTripData = (event) => {
-        const key = event.target.name;
-        const value = event.target.value;
-        this.setState({ ...this.state, [key]: value });
-        console.log(this.state, 'joola', this.state.locationResult.Places);
-      };
-      locationSearch = (event) => {
-        const string = event.target.value;
-        const locationType = event.target.name;
-        fetch(
+
+    let today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+
+    this.state = {
+      today: yyyy+'-' + mm + '-' + dd,
+      tripType: 'roundtrip',
+      origin: '',
+      destination: '',
+      departureDate: '',
+      returnDate: '',
+      adults: 1,
+      children: 0,
+      tripClass: 'economy',
+      locationResult: false,
+      locationDestinationResult: false,
+    };
+    today = console.log(new Date(), this.state.today);
+  }
+ componentDidMount(){
+    this.setState({})
+ }
+  setTripData = (event) => {
+    const key = event.target.name;
+    const value = event.target.value;
+    this.setState({ ...this.state, [key]: value });
+    console.log(this.state, 'joola', this.state.locationResult.Places);
+  };
+  locationSearch = (event) => {
+    const string = event.target.value;
+    const locationType = event.target.name;
+    string !== ''
+      ? fetch(
           `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/US/USD/en-US/?query=${string}`,
           {
             method: 'GET',
@@ -55,55 +55,91 @@ class BookingSearchForm extends React.Component {
               'x-rapidapi-key': API_KEY,
             },
           }
-          )
+        )
           .then((resp) => resp.json())
           .then((resp) => {
             console.log(resp, 'search');
             locationType === 'origin'
-            ? this.setState({ ...this.state, locationResult: resp })
-            : this.setState({ ...this.state, locationDestinationResult: resp });
+              ? this.setState({ ...this.state, locationResult: resp })
+              : this.setState({
+                  ...this.state,
+                  locationDestinationResult: resp,
+                });
           })
           .catch((err) => {
             console.log(err);
-          });
-        };
+          })
+      : console.log('hi');
+  };
+
+  sendSearch(event) {
+    const {
+      tripType,
+      departureDate,
+      returnDate,
+      origin,
+      destination,
+    } = this.state;
+    event.preventDefault();
+    let setTripType = '';
+    tripType === 'roundtrip'
+      ? (setTripType = `?inboundpartialdate=${returnDate}`) &&  this.sendReturnSearch()
+      : (setTripType = '');
+    const API_URL = `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/${origin}/${destination}/${departureDate}${setTripType}`;
+    const TEMP_API_URL =
+      'https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/ATLA-sky/LASA-sky/2020-08-28?inboundpartialdate=2020-08-31';
+    console.log('here,here', API_URL);
+    fetch(API_URL, {
+      method: 'GET',
+      headers: {
+        'x-rapidapi-host': API_HOST,
+        'x-rapidapi-key': API_KEY,
+      },
+    })
+      .then((resp) => resp.json())
+      .then((response) => {
+        console.log(response);
+        localStorage.setItem('flightSearch_API_URL', API_URL)
+        this.props.flightSearchResults(response);
+     response.message||  response.Quotes.length <= 0 
+          ? alert('No Avialable Flights available please try')
+          : this.props.history.push('/flightSearch-results');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  sendReturnSearch(){
+    const {
+      returnDate,
+      origin,
+      destination,
+    } = this.state;
+    const RETURN_API_URL =`https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/${destination}/${origin}/${returnDate}`
+    fetch(RETURN_API_URL, {
+      method: 'GET',
+      headers: {
+        'x-rapidapi-host': API_HOST,
+        'x-rapidapi-key': API_KEY,
+      },
+    })
+      .then((resp) => resp.json())
+      .then((response) => {
+        console.log(response,"  this is the return");
+        localStorage.setItem('flightSearch_RETURN_API_URL', RETURN_API_URL)
+        this.props.returnFlightSearchResults(response);
+     response.message||  response.Quotes.length <= 0 
+          ? alert('No Avialable Flights available please try')
+          : this.props.history.push('/flightSearch-results');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  render() {
+    return (
+      <div className="booking-page">
         
-        sendSearch(event) {
-            const {
-              tripType,
-              departureDate,
-              returnDate,
-              origin,
-              destination,
-            } = this.state;
-            event.preventDefault();
-            let setTripType = '';
-            tripType === 'roundtrip'
-              ? (setTripType = `?inboundpartialdate=${returnDate}`)
-              : (setTripType = '');
-            const API_URL = `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/${origin}/${destination}/${departureDate}${setTripType}`;
-           const TEMP_API_URL= 'https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/ORD-sky/ATL-sky/2020-08-17?inboundpartialdate=2020-08-20'
-            console.log("here,here",API_URL)
-            fetch(TEMP_API_URL, {
-              method: 'GET',
-              headers: {
-                'x-rapidapi-host': API_HOST,
-                'x-rapidapi-key': API_KEY,
-              },
-            })
-              .then((resp) => resp.json())
-              .then((response) => {
-                console.log(response)
-                this.props.flightSearchResults(response)
-                this.props.history.push('/flightSearch-results');
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-          };
-        render() {
-          return (
-            <div className="booking-page">
         <header>
           <h1>Catch Your FLight</h1>
           <img className="plane1 " src={plane} alt="animated-plane" />
@@ -154,7 +190,7 @@ class BookingSearchForm extends React.Component {
                       <div className="info-box">
                         <label htmlFor="">LEAVING FROM</label>
                         <input
-                        placeholder="Search by city"
+                          placeholder="Search by city"
                           type="text"
                           id="dep-from"
                           name="origin"
@@ -168,6 +204,7 @@ class BookingSearchForm extends React.Component {
                           name="origin"
                           onChange={(e) => this.setTripData(e)}
                         >
+                          <option value="none">Select Airport</option>
                           {this.state.locationResult
                             ? this.state.locationResult.Places.map((result) => (
                                 <option value={result.PlaceId}>
@@ -195,6 +232,7 @@ class BookingSearchForm extends React.Component {
                           name="destination"
                           onChange={(e) => this.setTripData(e)}
                         >
+                          <option value="none">Select Airport</option>
                           {this.state.locationDestinationResult
                             ? this.state.locationDestinationResult.Places.map(
                                 (result) => (
@@ -220,6 +258,7 @@ class BookingSearchForm extends React.Component {
                           type="date"
                           id="leave-date"
                           name="departureDate"
+                          min={this.state.today}
                           // min=""CHECK THIS OUT!=====================================================
                           onChange={(e) => this.setTripData(e)}
                         />
@@ -229,8 +268,9 @@ class BookingSearchForm extends React.Component {
                           <label htmlFor="">RETURNING ON</label>
                           <input
                             type="date"
+                            min={this.state.departureDate}
                             id="return-date"
-                              name="returnDate"
+                            name="returnDate"
                             onChange={(e) => this.setTripData(e)}
                           />
                         </div>
@@ -297,21 +337,29 @@ class BookingSearchForm extends React.Component {
               </section>
             </div>
             <div id="confirm"></div>
+            
           </body>
         </div>
       </div>
     );
   }
 }
-const mapDispatchToProps=(dispatch)=>{
-return{
-  flightSearchResults:(results)=>{
-    const action={
-      type:"SET_FLIGHT_RESULTS",
-      results:results
-    }
-    dispatch(action)
-  }
-}
-}
-export default connect(null,mapDispatchToProps)(BookingSearchForm);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    flightSearchResults: (results) => {
+      const action = {
+        type: 'SET_FLIGHT_RESULTS',
+        results: results,
+      };
+      dispatch(action);
+    },
+    returnFlightSearchResults: (results) => {
+      const action = {
+        type: 'SET_RETURN_FLIGHT_RESULTS',
+        results: results,
+      };
+      dispatch(action);
+    },
+  };
+};
+export default connect(null, mapDispatchToProps)(BookingSearchForm);

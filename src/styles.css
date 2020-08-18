@@ -148,22 +148,24 @@ nav {
   min-height: 10vh;
   display: flex;
   width: 90%;
-  padding: 2rem; /* vertical? */
+  /* padding: 2rem; */
+  /* vertical? */
+  margin-top:600px;
   margin: auto;
   flex-wrap: wrap; /*for mobile resposiveness on the nav buttons*/
 }
 nav ul {
   display: flex;
-  flex: 1 1 40rem; /*40 rem allows for quicker switch in screen size*/
+  flex: 4 15 40rem; /*40 rem allows for quicker switch in screen size*/
   justify-content: space-around;
-  align-items: center;
+  align-items: flex-end;
   list-style: none;
 }
 #logo {
   font-family: 'Pattaya', sans-serif;
   font-weight: 400;
   display: flex;
-  flex: 5 1 40rem;
+  flex: 5 4 0rem;
   justify-content: flex-start; /* used to align horizontally */
   align-items: center; /* used to align vertically */
 }
@@ -191,7 +193,7 @@ nav ul {
     url('./images/new-york-page.png');
   background-size: cover;
   background-position: center;
-  display: flex;
+  /* display: flex; */
   align-items: center;
   position: relative;
   left: 0px;
@@ -200,6 +202,7 @@ nav ul {
 .locations-head {
   width: 90%;
   margin: auto;
+  margin-top: 8rem;
 }
 .locations-head h2,
 .locations-head h3 {
@@ -276,7 +279,6 @@ nav ul {
 }
 .card button {
   border-radius: 10px;
-
   margin-top: 40px;
   margin-bottom: 30px;
 }
