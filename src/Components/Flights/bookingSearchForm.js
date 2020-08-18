@@ -99,6 +99,7 @@ class BookingSearchForm extends React.Component {
       .then((resp) => resp.json())
       .then((response) => {
         console.log(response);
+        localStorage.setItem('flightSearch_API_URL', API_URL)
         this.props.flightSearchResults(response);
      response.message||  response.Quotes.length <= 0 
           ? alert('No Avialable Flights available please try')
@@ -125,6 +126,7 @@ class BookingSearchForm extends React.Component {
       .then((resp) => resp.json())
       .then((response) => {
         console.log(response,"  this is the return");
+        localStorage.setItem('flightSearch_RETURN_API_URL', RETURN_API_URL)
         this.props.returnFlightSearchResults(response);
      response.message||  response.Quotes.length <= 0 
           ? alert('No Avialable Flights available please try')
