@@ -29,7 +29,9 @@ function SignUpModal(props) {
       if (!userData.email.includes('@')) {
         alert('ERROR: Please use a valid email address and try again!');
       } else {
-        fetch('http://localhost:3000/api/v1/users', {
+        fetch('https://travelly-server.herokuapp.com/api/v1/users', {
+
+        // fetch('http://localhost:3000/api/v1/users', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -76,7 +78,7 @@ function SignUpModal(props) {
       }),
     };
 
-    fetch(`http://localhost:3000/api/v1/login`, configObj)
+    fetch(`https://travelly-server.herokuapp.com/api/v1/login`, configObj)
       .then((resp) => resp.json())
       .then((data) => {
         console.log('user logging in data', data);

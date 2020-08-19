@@ -27,9 +27,23 @@ form hr {
 
 form input,
 form label {
-  margin-right: 2rem;
+  margin-right: 10px;
+  margin-top: 3rem;
+}
+section h5{
+  background:#ced;
+  box-shadow: 35px 20px 3px rgba(0, 0, 0, 0.5);
+  width: 30%;
+  margin: auto;
+  margin-top: 4rem;
+  color:white;
+  text-shadow: 0px 0px 6px black, 0 0.12em rgb(140, 140, 169), 0 0 7.2em blue;
+font-size: 5rem;
+/* font-family: 'Pattaya', sans-serif; */
 }
 .flight-details-card {
+  overflow-x:hidden;
+  box-shadow: 0px 40px 10px rgba(0, 0, 0, 0.5);
   width: 95%;
   margin: auto;
   margin-top: 20px;
@@ -55,6 +69,7 @@ form label {
   position: absolute;
   top: 45%;
   left: 80%;
+  
 }
 .details img {
   display: block;
@@ -63,6 +78,15 @@ form label {
   width: auto;
   height: auto;
   margin-bottom: -5rem;
+  /* padding: 4rem; */
+  align-items: center;
+  justify-self: center;
+  text-align: center;
+}
+.details-img{
+
+  margin-top: 4rem;
+   padding-bottom:4rem;
 }
 
 .flight-details-card ul {
@@ -83,4 +107,23 @@ form label {
   margin-right: 5rem;
   display: inline-table;
   position: relative;
+}
+@media screen and (max-width: 952px) {
+  .flight-search-results-page {
+    display: inline-block;
+    width: 100%;
+    background: rgb(220, 200, 197);
+    margin-top: 21rem;
+  }
+  .flight-search-results-page h1, .flight-search-results-page h5 {
+    /* margin-top: 6rem; */
+    /* margin-bottom: 23rem; */
+    width: 100%;
+  }
+ .select{
+   position: absolute;;
+   display:flex;
+   left:45%;
+   top:70%;
+ }
 }

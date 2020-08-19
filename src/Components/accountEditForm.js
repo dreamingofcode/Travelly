@@ -48,7 +48,7 @@ function AccountEditForm(props) {
         },
       }),
     };
-    fetch(`http://localhost:3000/api/v1/users/${userData.id}`, configObj)
+    fetch(`https://travelly-server.herokuapp.com/api/v1/users/${userData.id}`, configObj)
       .then((resp) => resp.json())
       .then((data) => {
         if (data.error) {
@@ -61,7 +61,7 @@ function AccountEditForm(props) {
   const deleteAccount = () => {
     if (window.confirm('Are you sure you wish to delete your account?')) {
       const configObj = { method: 'DELETE' };
-      fetch(`http://localhost:3000/api/v1/users/${userData.id}`, configObj)
+      fetch(`https://travelly-server.herokuapp.com/api/v1/users/${userData.id}`, configObj)
         .then((resp) => resp.json())
         .then((data) => {
           localStorage.clear();
