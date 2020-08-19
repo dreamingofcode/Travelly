@@ -1,6 +1,6 @@
 /* GLOBAL STYLES? */
 * {
-  /* overflow-x: hidden; */
+  overflow-x: hidden;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -425,16 +425,24 @@ footer ul {
     font-size: 45%;
   }
   nav {
+    width: 100%;
     text-align: center;
+    position: fixed;
+    background:#131c27;
   }
   #logo {
+    min-width:160px;
+    min-height:80px;
     padding: 2rem;
     justify-content: center;
-    /* align-items: center; */
+  display: flex;
+  flex: 5 4 40rem;
+  align-items: center;
   }
 
   .cloud {
-    height: 40rem;
+    display: none;
+
   }
   .moving-cloud-2 {
     top: 5%;
@@ -469,6 +477,7 @@ footer ul {
   #logo {
     padding: 2rem;
     justify-content: center;
+    /* display: inline; */
     /* align-items: center; */
   }
 

@@ -2,7 +2,7 @@ export const getProfileFetch = () => {
   return (dispatch) => {
     const token = localStorage.token;
     if (token) {
-      fetch('http://localhost:3000/api/v1/profile', {
+      fetch('https://travelly-server.herokuapp.com/api/v1/profile', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

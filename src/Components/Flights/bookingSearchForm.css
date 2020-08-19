@@ -1,5 +1,6 @@
 .booking-page{
   overflow-x: hidden;
+  overflow-y: hidden;
   min-height: 90vh;
   box-sizing: border-box;
   background: linear-gradient(#46a8be80, transparent),
@@ -10,7 +11,6 @@
   margin: auto;
   margin-top:-100px;
   padding: 6rem;
-  overflow-x: hidden;
 }
 /* header{
   margin-bottom: -60px;
@@ -123,6 +123,13 @@ border:black solid 1rem;
     align-self: center;
     align-content: center;
     justify-content: center;
+  }
+  .booking-page {
+    border: 10px solid #131c27;
+    display: inline-block;
+    /* position: absolute; */
+    width: 100%;
+    position: relative;
   }
 }
 @media screen and (max-width: 452px) {

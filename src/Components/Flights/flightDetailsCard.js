@@ -15,12 +15,13 @@ import volaris from '../../images/airlines/volaris.png';
 import klm from '../../images/airlines/klm.png';
 
 function FlightDetailsCard(props) {
-  const { result, places } = props;
-  const origin = places[1].IataCode;
-  const destination = places[0].IataCode;
+  const { result, places , tripType} = props;
+  const origin = places[0].IataCode;
+  const destination = places[1].IataCode;
   const direct = result.Direct ? 'Nonestop' : 'Layover';
   const carrierId = result.OutboundLeg.CarrierIds;
   const price = result.MinPrice;
+const departureDate=result.OutboundLeg.DepartureDate
 
   // const departureDate= '2020-08-14T14:02:00'
   // console.log("hello",departureDate)
@@ -32,8 +33,8 @@ function FlightDetailsCard(props) {
   // const direct= noneStop? "Nonstop":"Layover"
   useEffect(() => {});
   const departureTime = () => {
-    let time = '2020-08-14T14:02:00';
-    // let time = result.QuoteDateTime;
+    let timess = new Date();
+    let time = result.QuoteDateTime;
     time = time.split(':'); // convert to array
     // fetch
     var hours = Number(time[0].split('T')[1]);
@@ -73,7 +74,6 @@ function FlightDetailsCard(props) {
       1467: { name: 'Spirit Airlines', image: spirit },
       1793: { name: 'United Airlines', image: unitedAirlines },
      852:{name: "Royal Air Maroc"},
-1065:{name: "Frontier Airlines"},
 1107:{name: "GOL Linhas Aéreas"},
 1218:{name: "Iberia"},
 1317:{name: "Korean Air"},
@@ -85,7 +85,7 @@ function FlightDetailsCard(props) {
   return (
     <div className="flight-details-card">
       <div className="details">
-        <img src={determineAirline(carrierId).image} alt="ariline logo" />
+        <img className="details-img" src={determineAirline(carrierId).image} alt="airline logo" />
         <hr />
         <ul>
           <li>{determineAirline(carrierId).name}</li>
@@ -96,13 +96,15 @@ function FlightDetailsCard(props) {
           <li>
             <h3>${price}</h3>
           </li>
-          <li> {origin + '-' + destination + '(' + direct + ')'}</li>
+          {tripType === "departure"?
+          <li> {origin + '-' + destination + '(' + direct + ')'}</li>:  <li> {destination+ '-' + origin + '(' + direct + ')'}</li> }
   <li>{}{departureTime()}</li>
         </ul>
       </div>
       <div className="select">
         {/* <p>Departure</p> */}
         <button>Select</button>
+       <p>{departureDate}</p> 
       </div>
     </div>
   );

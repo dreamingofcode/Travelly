@@ -21,17 +21,16 @@ class BookingSearchForm extends React.Component {
     this.state = {
       today: yyyy+'-' + mm + '-' + dd,
       tripType: 'roundtrip',
-      origin: '',
-      destination: '',
+      origin: 'ATLA-sky',
+      destination: 'LASA-sky',
       departureDate: '',
-      returnDate: '',
+      returnDate: '2020-08-31',
       adults: 1,
       children: 0,
       tripClass: 'economy',
       locationResult: false,
       locationDestinationResult: false,
     };
-    today = console.log(new Date(), this.state.today);
   }
  componentDidMount(){
     this.setState({})
@@ -83,13 +82,12 @@ class BookingSearchForm extends React.Component {
     event.preventDefault();
     let setTripType = '';
     tripType === 'roundtrip'
-      ? (setTripType = `?inboundpartialdate=${returnDate}`) &&  this.sendReturnSearch()
+      ? (setTripType = `?inboundpartialdate=${returnDate}`) 
       : (setTripType = '');
     const API_URL = `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/${origin}/${destination}/${departureDate}${setTripType}`;
     const TEMP_API_URL =
       'https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/ATLA-sky/LASA-sky/2020-08-28?inboundpartialdate=2020-08-31';
-    console.log('here,here', API_URL);
-    fetch(API_URL, {
+    fetch(TEMP_API_URL, {
       method: 'GET',
       headers: {
         'x-rapidapi-host': API_HOST,
@@ -99,11 +97,11 @@ class BookingSearchForm extends React.Component {
       .then((resp) => resp.json())
       .then((response) => {
         console.log(response);
-        localStorage.setItem('flightSearch_API_URL', API_URL)
+        localStorage.setItem('flightSearch_API_URL', TEMP_API_URL)
         this.props.flightSearchResults(response);
      response.message||  response.Quotes.length <= 0 
           ? alert('No Avialable Flights available please try')
-          : this.props.history.push('/flightSearch-results');
+          :  this.sendReturnSearch();
       })
       .catch((err) => {
         console.log(err);
@@ -116,6 +114,7 @@ class BookingSearchForm extends React.Component {
       destination,
     } = this.state;
     const RETURN_API_URL =`https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/${destination}/${origin}/${returnDate}`
+    console.log("apppp",RETURN_API_URL)
     fetch(RETURN_API_URL, {
       method: 'GET',
       headers: {
