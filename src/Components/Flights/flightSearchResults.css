@@ -3,7 +3,7 @@
   width: 100%;
   background: rgb(220, 200, 197);
 }
-h1 {
+.flight-search-results-page h1 {
   margin-top: 6rem;
 }
 .flight-search-results-page button {
@@ -12,6 +12,12 @@ h1 {
   margin-bottom: 2rem;
 
   line-height: 0px;
+}
+/* HERE WE WANT THE COLOR OF MY DISABLED BUTTONS TO BE DARKER , SELECTED DIV SHOULD BE VISUALIZED.GIT  */
+.flight-search-results-page button:hover {
+  /* background-color: none; */
+
+  /* font-size: 1rem; */
 }
 .flight-search-results-page section {
   background: linear-gradient(rgb(21, 96, 158), transparent);
@@ -25,10 +31,14 @@ form hr {
   padding-top: 2rem;
 }
 
-form input,
-form label {
-  margin-right: 10px;
-  margin-top: 3rem;
+form input {
+  margin-right: 3rem;
+  margin-bottom: 3rem;
+  display: inline-block;
+}
+form label{
+  margin-right: 1rem;
+  margin-bottom: -1rem;
 }
 section h5{
   background:#ced;
@@ -43,6 +53,7 @@ font-size: 5rem;
 }
 .flight-details-card {
   overflow-x:hidden;
+  overflow-y: hidden;
   box-shadow: 0px 40px 10px rgba(0, 0, 0, 0.5);
   width: 95%;
   margin: auto;
@@ -60,16 +71,21 @@ font-size: 5rem;
 }
 .specifics {
   display: block;
-
+  min-height:18rem;
   position: absolute;
   top: 35%;
   left: 45%;
 }
 .select {
+  min-height:8rem;
   position: absolute;
   top: 45%;
   left: 80%;
-  
+}
+.select p{
+  min-height:4rem;
+  display: flex;
+  bottom:-25%;
 }
 .details img {
   display: block;
@@ -113,7 +129,7 @@ font-size: 5rem;
     display: inline-block;
     width: 100%;
     background: rgb(220, 200, 197);
-    margin-top: 21rem;
+    margin-top: 0rem;
   }
   .flight-search-results-page h1, .flight-search-results-page h5 {
     /* margin-top: 6rem; */
@@ -125,5 +141,9 @@ font-size: 5rem;
    display:flex;
    left:45%;
    top:70%;
+ }
+ .select p{
+   position: absolute;
+   bottom:-26%;
  }
 }
