@@ -5,6 +5,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+* h1,* header,* h5, * h2, * h3, * button,* .select{
+  overflow-y: hidden;
+}
  
 html {
   font-size: 62.5%;
@@ -87,7 +90,7 @@ a:hover{
   z-index: 0;
   margin: 0 auto;
   margin-top: -3rem;
-  border: brown solid 5px;
+  /* border: brown solid 5px; */
   /* background: url('./images/travlBackground2.png'),orange; */
   background: linear-gradient(rgba(42, 60, 78, 0), transparent),
     rgba(73, 90, 185, 0.5);

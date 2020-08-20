@@ -1,7 +1,7 @@
 .booking-page{
   overflow-x: hidden;
   overflow-y: hidden;
-  min-height: 90vh;
+  min-height: 150vh;
   box-sizing: border-box;
   background: linear-gradient(#46a8be80, transparent),
     url('../../images/new-york-page.png');
@@ -9,7 +9,7 @@
   background-position:center;
   width: 100%;
   margin: auto;
-  margin-top:-100px;
+  margin-top:0px;
   padding: 6rem;
 }
 /* header{
@@ -37,7 +37,7 @@ h1 {
   font-size: 10rem;
   padding: 4rem;
 }
-body{
+.booking-page body{
   background:transparent;
 }
 /* ------booking form----- */
@@ -48,8 +48,8 @@ body{
   color:black;
   transition: 0.5s;
 }
-.cloud,
-.cloud1 {
+.booking-page .cloud,
+.booking-page .cloud1 {
   overflow-x: hidden;
   height: 45rem;
   position: absolute;
@@ -57,7 +57,7 @@ body{
   right: 0%;
   pointer-events: none;
 }
-.cloud3 {
+.booking-page .cloud3 {
   height: 45rem;
   left: -10%;
   position: absolute;
@@ -69,7 +69,7 @@ body{
   height: 100px;
   right: 0;
   margin-right: 500px;
-  animation: planeAnimation 4s ease-in infinite;
+  animation: planeAnimation 7s ease-in infinite;
 }
 .moving-cloud-2 {
   top: 1%;
@@ -124,6 +124,18 @@ border:black solid 1rem;
     align-content: center;
     justify-content: center;
   }
+  .booking-page body{
+    width: 100%;
+    height: 600px;
+    margin: auto;
+    margin-top: 12rem;
+    position: absolute;
+    top:10%;
+  }
+  .search-form{
+    background: #ced;
+
+  }
   .booking-page {
     border: 10px solid #131c27;
     display: inline-block;
@@ -139,6 +151,12 @@ border:black solid 1rem;
     padding: 2rem;
     box-sizing: border-box;
   }
+  .booking-page h1{
+    font-size: 7rem;
+    display: inline-block;
+    margin-top: 10rem;
+    margin-bottom: 160rem;
+  }
   .booking-form-box h1 {
     margin: 2rem;
     margin-bottom: -100px;
@@ -151,7 +169,14 @@ border:black solid 1rem;
     display: flex;
     margin: auto;
   }
-  
+  .booking-page body{
+    width: 100%;
+    height: 600px;
+    margin: auto;
+    margin-top: 22rem;
+    position: absolute;
+    top:10%;
+  }
   .booking-form-box{
  height: 500px;
  margin-top: -10rem;
@@ -168,31 +193,31 @@ border:black solid 1rem;
 
 
 /* Search Form */
-* {
+.booking-page * {
   box-sizing: border-box;
 }
 
 
-#search-form {
+.booking-page #search-form {
   border: 1px solid #131c27;
   width: 900px;
   position: relative;
 }
 
-#header {
+.booking-page #header {
   height: 80px;
   background: #131c27;
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
-#header h1 {
+.booking-page #header h1 {
   color: #FFF;
   margin-left: 20px;
   font-size: 1.3em
 }
 
-.flight {
+.booking-page .flight {
   padding: 20px;
 }
 .flight input, select {
@@ -210,7 +235,8 @@ border:black solid 1rem;
 }
 .info-box label {
   display: block;
-  color: #6B6A6A;
+  color: black;
+  padding-bottom: 1rem;
   font-size: .9em;
 }
 .info-box input[type=text], input[type=submit], select {
@@ -304,7 +330,7 @@ border:black solid 1rem;
   font-weight: 600;
   border-radius: 3px;
 }
-table {
+.booking-page table {
   border: 1px solid #DBDBDB;
   background: #F4F4F4;
 }
