@@ -15,9 +15,9 @@
 }
 /* HERE WE WANT THE COLOR OF MY DISABLED BUTTONS TO BE DARKER , SELECTED DIV SHOULD BE VISUALIZED.GIT  */
 .flight-search-results-page button:hover {
-  /* background-color: none; */
-
-  /* font-size: 1rem; */
+  background-color: orange;
+  font-size: 11rem;
+  
 }
 .flight-search-results-page section {
   background: linear-gradient(rgb(21, 96, 158), transparent);
