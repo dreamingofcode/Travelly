@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import spirit from '../../images/airlines/spirit.png';
 import britishAirways from '../../images/airlines/britishAirways.png';
@@ -17,14 +17,49 @@ import airFrance from '../../images/airlines/airFrance.png';
 import generic from '../../icons/airplane.png';
 
 function FlightDetailsCard(props) {
-  // const [toggleButton, setToggleButton] = useState(false)
-  const { result, places, tripType, departureDate,setToggleButton,id } = props;
-  console.log("udd ID", id)
-  const origin = places[0].IataCode;
-  const destination = places[1].IataCode;
-  const direct = result.Direct ? 'Nonestop' : 'Layover';
-  const carrierId = result.OutboundLeg.CarrierIds;
-  const price = result.MinPrice;
+  const [toggleButtonClassName, setToggleButtonClassName] = useState(
+    'flight-details-card'
+  );
+  const [toggleButtonStyle, setToggleButtonStyle] = useState('Select');
+
+  const {
+    // history,
+    result,
+    places,
+    tripType,
+    id,
+    setToggleButtonDisplay,
+    flightSelected,
+    setFlightSelected
+  } = props;
+  //////////////////////////////////////////////////FOR HARD CODED TESTING //////////////////////////////////// REMOVED
+  // const { result, places, tripType, departureDate,setToggleButtonDisplay,flightSelected,id } = props;
+
+  // console.log("udd ID", id)
+  // const origin = places[0].IataCode;
+  // const destination = places[1].IataCode;
+  // const direct = result.Direct ? 'Nonestop' : 'Layover';
+  // const carrierId = result.OutboundLeg.CarrierIds;
+  // const price = result.MinPrice;
+  //////////////////////////////////////////////////FOR HARD CODED TESTING //////////////////////////////////// REMOVED
+  const setToggleButton = () => {
+    toggleButtonClassName === 'flight-details-card'
+      ? setToggleButtonClassName('flight-details-card-selected-flight')
+      : setToggleButtonClassName('flight-details-card');
+      if ( toggleButtonStyle === 'Select'){
+        setToggleButtonStyle('Remove')
+   }else if (toggleButtonStyle === 'Remove'){
+     setToggleButtonStyle('Select')
+ 
+
+   }
+    
+    setToggleButtonDisplay(tripType, id,toggleButtonStyle);
+  };
+  // useEffect(() => {
+  //   // this.props.history.push('flightSearch-results')
+  //   console.log(":")
+  // }, [flightSelected]);
   const formatDepartureDate = () => {
     const dateString = departureDate
       .split('-')
@@ -37,18 +72,21 @@ function FlightDetailsCard(props) {
     const date = new Date(year, month - 1, day);
     return date.toString().split(' ').splice(0, 4).join().replace(/,/g, ' ');
   };
+  //////////////////////////////////////////////////FOR HARD CODED TESTING //////////////////////////////////// ADDED
 
-  // const departureDate= '2020-08-14T14:02:00'
-  // console.log("hello",departureDate)
-  //   const carrierId = [881];
-  //   const price = 335;
-  //   const origin = 'ORD';
-  //   const destination = 'ATL';
-  //   const noneStop = false;
-  // const direct= noneStop? "Nonstop":"Layover"
-  
+  const departureDate = '2020-08-14T14:02:00';
+  const carrierId = [881];
+  const price = 335;
+  const origin = 'ORD';
+  const destination = 'ATL';
+  const noneStop = false;
+  const direct = noneStop ? 'Nonstop' : 'Layover';
+  //////////////////////////////////////////////////FOR HARD CODED TESTING //////////////////////////////////// ADDED
+
   const departureTime = () => {
-    let time = result.QuoteDateTime;
+    // let time = result.QuoteDateTime;      //////////////////////////////////////////////////FOR HARD CODED TESTING //////////////////////////////////// ADDED
+
+    let time = '2018-03-08T04:54:00';
     time = time.split(':'); // convert to array
     // fetch
     var hours = Number(time[0].split('T')[1]);
@@ -92,7 +130,7 @@ function FlightDetailsCard(props) {
     else return 'unknown carrier';
   };
   return (
-    <div className="flight-details-card">
+    <div className={toggleButtonClassName}>
       <div className="details">
         <img
           className="details-img"
@@ -118,9 +156,11 @@ function FlightDetailsCard(props) {
         </ul>
       </div>
       <div className="select">
-        <button id={`${id}`} onClick={() => setToggleButton(id)}>
-          Select
-        </button>
+        {flightSelected.boolean && flightSelected.id !== id ? null : (
+          <button id={`${id}`} onClick={(id) => setToggleButton()}>
+            {toggleButtonStyle}
+          </button>
+        )}
 
         <p>{formatDepartureDate()}</p>
       </div>

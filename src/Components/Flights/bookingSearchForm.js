@@ -74,33 +74,46 @@ class BookingSearchForm extends React.Component {
       destination,
     } = this.state;
     event.preventDefault();
-    let setTripType = '';
-    tripType === 'roundtrip'
-      ? (setTripType = `?inboundpartialdate=${returnDate}`)
-      : (setTripType = '');
-    const API_URL = `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/${origin}/${destination}/${departureDate}${setTripType}`;
+    // let setTripType = '';
+    // tripType === 'roundtrip'
+    //   ? (setTripType = `?inboundpartialdate=${returnDate}`)
+    //   : (setTripType = '');
+    // const API_URL = `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/${origin}/${destination}/${departureDate}${setTripType}`;
+    // const TEMP_API_URL =
+    //   'https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/ATLA-sky/LASA-sky/2020-08-28?inboundpartialdate=2020-08-31';
+    //////////////////////////////////////////////////FOR HARD CODED TESTING //////////////////////////////////// REMOVED
+    // fetch(TEMP_API_URL, {
+    //   method: 'GET',
+    //   headers: {
+    //     'x-rapidapi-host': API_HOST,
+    //     'x-rapidapi-key': API_KEY,
+    //   },
+    // })
+    //   .then((resp) => resp.json())
+    //   .then((response) => {
+    //     localStorage.setItem('flightSearch_API_URL', TEMP_API_URL);
+
+    //     this.props.flightSearchResults(response);
+    //     response.message || response.Quotes.length <= 0
+    //       ? alert('No Avialable Flights available please try')
+    //       : this.sendReturnSearch();
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     alert(err);
+    //   });
+    //////////////////////////////////////////////////FOR HARD CODED TESTING //////////////////////////////////// REMOVED
     const TEMP_API_URL =
       'https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/ATLA-sky/LASA-sky/2020-08-28?inboundpartialdate=2020-08-31';
-    fetch(TEMP_API_URL, {
-      method: 'GET',
-      headers: {
-        'x-rapidapi-host': API_HOST,
-        'x-rapidapi-key': API_KEY,
-      },
-    })
-      .then((resp) => resp.json())
-      .then((response) => {
-        localStorage.setItem('flightSearch_API_URL', TEMP_API_URL);
+    const RETURN_TEMP_API_URL =
+      'https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/ATLA-sky/2020-08-28';
 
-        this.props.flightSearchResults(response);
-        response.message || response.Quotes.length <= 0
-          ? alert('No Avialable Flights available please try')
-          : this.sendReturnSearch();
-      })
-      .catch((err) => {
-        console.log(err);
-        alert(err);
-      });
+    localStorage.setItem('flightSearch_API_URL', TEMP_API_URL);
+    localStorage.setItem('flightSearch_RETURN_API_URL', RETURN_TEMP_API_URL);
+
+    this.props.history.push('/flightSearch-results');
+        //////////////////////////////////////////////////FOR HARD CODED TESTING ////////////////////////////////////ADDED ABOVE
+
   }
   sendReturnSearch() {
     const { returnDate, origin, destination } = this.state;
