@@ -101,6 +101,7 @@ class BookingSearchForm extends React.Component {
         console.log(err);
         alert(err);
       });
+      
   }
   sendReturnSearch() {
     const { returnDate, origin, destination } = this.state;

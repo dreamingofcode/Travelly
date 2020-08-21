@@ -1,4 +1,4 @@
-import React, {  useState } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import './flightSearchResults.css';
 import FlightDetailCards from './flightDetailsCard';
@@ -16,6 +16,14 @@ function FlightSearchResults(props) {
     departureDate: API_URL.split('/')[11].split('?')[0],
     returnDate: API_URL.split('/').pop().split('=')[1],
   });
+  const [departureFlightSelected, setDepartureFlightSelected] = useState({
+    boolean: false,
+    id: '',
+  });
+  const [returnFlightSelected, setReturnFlightSelected] = useState({
+    boolean: false,
+    id: '',
+  });
   const { departureDate, returnDate, tripType } = searchData;
   const { history, flightSearchResults, returnFlightSearchResults } = props;
   // useEffect(() => {}, []);
@@ -32,61 +40,78 @@ function FlightSearchResults(props) {
       setSearchData({ ...searchData, [key]: value });
     };
     const sendSearch = (e) => {
-      const { origin, destination } = searchData;
+    const { origin, destination } = searchData;
 
-      e.preventDefault();
-      let setTripType = '';
-      tripType === 'roundtrip'
-        ? (setTripType = `?inboundpartialdate=${returnDate}`)
-        : setReturnFlightSearchResults(null);
-      API_URL = `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/${origin}/${destination}/${departureDate}${setTripType}`;
-      RETURN_API_URL = `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/${destination}/${origin}/${returnDate}`;
-      tripType === 'roundtrip'
-        ? fetch(RETURN_API_URL, {
-            method: 'GET',
-            headers: {
-              'x-rapidapi-host': API_HOST,
-              'x-rapidapi-key': API_KEY,
-            },
-          })
-            .then((resp) => resp.json())
-            .then((response) => {
-              console.log('returnsearch', response);
-              localStorage.setItem(
-                'flightSearch_RETURN_API_URL',
-                RETURN_API_URL
-              );
-              props.setReturnFlightSearchResults(response);
-              response.message || response.Quotes.length <= 0
-                ? alert('No Avialable Flights available please try')
-                : this.props.history.push('/flightSearch-results');
-            })
-            .catch((err) => {
-              console.log(err);
-            })
-        : console.log('oneway');
-      fetch(API_URL, {
-        method: 'GET',
-        headers: {
-          'x-rapidapi-host': API_HOST,
-          'x-rapidapi-key': API_KEY,
-        },
-      })
-        .then((resp) => resp.json())
-        .then((response) => {
-          localStorage.setItem('flightSearch_API_URL', API_URL);
-          props.setFlightSearchResults(response);
-          response.message || response.Quotes.length <= 0
-            ? alert('No Avialable Flights available please try')
-            : this.props.history.push('/flightSearch-results');
+    e.preventDefault();
+    let setTripType = '';
+    tripType === 'roundtrip'
+      ? (setTripType = `?inboundpartialdate=${returnDate}`)
+      : setReturnFlightSearchResults(null);
+    API_URL = `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/${origin}/${destination}/${departureDate}${setTripType}`;
+    RETURN_API_URL = `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/${destination}/${origin}/${returnDate}`;
+    tripType === 'roundtrip'
+      ? fetch(RETURN_API_URL, {
+          method: 'GET',
+          headers: {
+            'x-rapidapi-host': API_HOST,
+            'x-rapidapi-key': API_KEY,
+          },
         })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    const setToggleButton = (id) => {
-      console.log("ddd",id)
-      document.getElementById(id).disabled = true;
+          .then((resp) => resp.json())
+          .then((response) => {
+            console.log('returnsearch', response);
+            localStorage.setItem('flightSearch_RETURN_API_URL', RETURN_API_URL);
+            props.setReturnFlightSearchResults(response);
+            response.message || response.Quotes.length <= 0
+              ? alert('No Avialable Flights available please try')
+              : this.props.history.push('/flightSearch-results');
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+      : console.log('oneway');
+    fetch(API_URL, {
+      method: 'GET',
+      headers: {
+        'x-rapidapi-host': API_HOST,
+        'x-rapidapi-key': API_KEY,
+      },
+    })
+      .then((resp) => resp.json())
+      .then((response) => {
+        localStorage.setItem('flightSearch_API_URL', API_URL);
+        props.setFlightSearchResults(response);
+        response.message || response.Quotes.length <= 0
+          ? alert('No Avialable Flights available please try')
+          : this.props.history.push('/flightSearch-results');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+    const setToggleButtonDisplay = (tripType, id, toggleButtonStyle) => {
+      //user should pick one ticket from departure and one ticket from return
+      //my code should be aware if one of each has been selected
+      //once one of each is seleceted, the continue button becomes apparent
+      // if i unselect a ticket  all ticket select buttons appear/enabled again .departure and returns are handled seperately
+      if (tripType === 'departure') {
+        if (toggleButtonStyle === 'Select')
+          setDepartureFlightSelected({ boolean: true, id: id });
+        if (toggleButtonStyle === 'Remove')
+          setDepartureFlightSelected({ boolean: false, id: '' });
+      }
+      if (tripType === 'return') {
+        if (toggleButtonStyle === 'Select')
+          setReturnFlightSelected({ boolean: true, id: id });
+        if (toggleButtonStyle === 'Remove')
+          setReturnFlightSelected({ boolean: false, id: '' });
+      }
+      console.log(
+        'depTTERTWGRTG',
+        departureFlightSelected,
+        returnFlightSelected
+      );
+      // document.getElementById(id).disabled = true;
     };
     return (
       <div className="flight-search-results-page">
@@ -166,10 +191,13 @@ function FlightSearchResults(props) {
               {flightSearchResults.Quotes.map((result) => {
                 return (
                   <FlightDetailCards
-                  id={result.QuoteId }
-                  setToggleButton={setToggleButton}
+                    id={result.QuoteId}
+                    setToggleButtonDisplay={setToggleButtonDisplay}
+
                     result={result}
                     tripType={'departure'}
+                    setFlightSelected={setDepartureFlightSelected}
+                    flightSelected={departureFlightSelected}
                     departureDate={departureDate}
                     places={flightSearchResults.Places}
                   />
@@ -188,10 +216,12 @@ function FlightSearchResults(props) {
               {returnFlightSearchResults.Quotes.map((result) => {
                 return (
                   <FlightDetailCards
-                  id={result.QuoteId + flightSearchResults.Quotes.length}
-                  setToggleButton={setToggleButton}
-                    result={result}
+                    id={result.QuoteId + flightSearchResults.Quotes.length}
+                    setToggleButtonDisplay={setToggleButtonDisplay}
                     tripType={'return'}
+                    setFlightSelected={setReturnFlightSelected}
+                    flightSelected={returnFlightSelected}
+                    result={result}
                     returnDate={searchData.returnDate}
                     departureDate={returnDate}
                     places={returnFlightSearchResults.Places}
@@ -201,6 +231,9 @@ function FlightSearchResults(props) {
             </div>
           ) : null}
         </section>
+        {departureFlightSelected.boolean && returnFlightSelected.boolean ? (
+          <button className="continue-button">Continue</button>
+        ) : null}
       </div>
     );
   }
