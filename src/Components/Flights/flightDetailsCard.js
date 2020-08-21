@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import spirit from '../../images/airlines/spirit.png';
 import britishAirways from '../../images/airlines/britishAirways.png';
@@ -15,7 +15,21 @@ import volaris from '../../images/airlines/volaris.png';
 import klm from '../../images/airlines/klm.png';
 
 function FlightDetailsCard(props) {
-  const { result, places } = props;
+  const [toggleButtonClassName, setToggleButtonClassName] = useState(
+    'flight-details-card'
+  );
+  const [toggleButtonStyle, setToggleButtonStyle] = useState('Select');
+
+  const {
+    result,
+    places,
+    tripType,
+    id,
+    setToggleButtonDisplay,
+    flightSelected,
+    setFlightSelected,
+    departureDate
+  } = props;
   const origin = places[1].IataCode;
   const destination = places[0].IataCode;
   const direct = result.Direct ? 'Nonestop' : 'Layover';
@@ -30,7 +44,32 @@ function FlightDetailsCard(props) {
   //   const destination = 'ATL';
   //   const noneStop = false;
   // const direct= noneStop? "Nonstop":"Layover"
-  useEffect(() => {});
+  const setToggleButton = () => {
+    toggleButtonClassName === 'flight-details-card'
+      ? setToggleButtonClassName('flight-details-card-selected-flight')
+      : setToggleButtonClassName('flight-details-card');
+      if ( toggleButtonStyle === 'Select'){
+        setToggleButtonStyle('Remove')
+   }else if (toggleButtonStyle === 'Remove'){
+     setToggleButtonStyle('Select')
+ 
+
+   }
+    
+    setToggleButtonDisplay(tripType, id,toggleButtonStyle);
+  };
+  const formatDepartureDate = () => {
+    const dateString = departureDate
+      .split('-')
+      .join()
+      .toString()
+      .replace(/,/g, '');
+    const year = dateString.substring(0, 4);
+    const month = dateString.substring(4, 6);
+    const day = dateString.substring(6, 8);
+    const date = new Date(year, month - 1, day);
+    return date.toString().split(' ').splice(0, 4).join().replace(/,/g, ' ');
+  };
   const departureTime = () => {
     let time = '2020-08-14T14:02:00';
     // let time = result.QuoteDateTime;
@@ -69,23 +108,26 @@ function FlightDetailsCard(props) {
       1972: { name: 'Volaris', image: volaris },
       1065: { name: 'Frontier Airlines', image: frontierAirlines },
       1368: { name: 'Lufthansa', image: lufthansa },
-      1324:{ name: "KLM",image:klm},
+      1324: { name: 'KLM', image: klm },
       1467: { name: 'Spirit Airlines', image: spirit },
       1793: { name: 'United Airlines', image: unitedAirlines },
-     852:{name: "Royal Air Maroc"},
-1065:{name: "Frontier Airlines"},
-1107:{name: "GOL Linhas Aéreas"},
-1218:{name: "Iberia"},
-1317:{name: "Korean Air"},
+      852: { name: 'Royal Air Maroc' },
+      1107: { name: 'GOL Linhas Aéreas' },
+      1218: { name: 'Iberia' },
+      1317: { name: 'Korean Air' },
     };
     if (airlines[`${carrierId}`]) return airlines[`${carrierId}`];
     else return 'unknown carrier';
     // console.log("nuitt",event.target)
   };
   return (
-    <div className="flight-details-card">
+    <div className={toggleButtonClassName}>
       <div className="details">
-        <img src={determineAirline(carrierId).image} alt="ariline logo" />
+        <img
+          className="details-img"
+          src={determineAirline(carrierId).image}
+          alt="airline logo"
+        />
         <hr />
         <ul>
           <li>{determineAirline(carrierId).name}</li>
@@ -97,12 +139,20 @@ function FlightDetailsCard(props) {
             <h3>${price}</h3>
           </li>
           <li> {origin + '-' + destination + '(' + direct + ')'}</li>
-  <li>{}{departureTime()}</li>
+          <li>
+            {}
+            {departureTime()}
+          </li>
         </ul>
       </div>
       <div className="select">
-        {/* <p>Departure</p> */}
-        <button>Select</button>
+        {flightSelected.boolean && flightSelected.id !== id ? null : (
+          <button id={`${id}`} onClick={(id) => setToggleButton()}>
+            {toggleButtonStyle}
+          </button>
+        )}
+
+        <p>{formatDepartureDate()}</p>
       </div>
     </div>
   );
