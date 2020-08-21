@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import spirit from '../../images/airlines/spirit.png';
 import britishAirways from '../../images/airlines/britishAirways.png';
@@ -13,30 +13,14 @@ import linearAir from '../../images/airlines/linearAir.png';
 import southwest from '../../images/airlines/southwest.png';
 import volaris from '../../images/airlines/volaris.png';
 import klm from '../../images/airlines/klm.png';
-import airFrance from '../../images/airlines/airFrance.png';
-import generic from '../../icons/airplane.png';
 
 function FlightDetailsCard(props) {
-  // const [toggleButton, setToggleButton] = useState(false)
-  const { result, places, tripType, departureDate,setToggleButton,id } = props;
-  console.log("udd ID", id)
-  const origin = places[0].IataCode;
-  const destination = places[1].IataCode;
+  const { result, places } = props;
+  const origin = places[1].IataCode;
+  const destination = places[0].IataCode;
   const direct = result.Direct ? 'Nonestop' : 'Layover';
   const carrierId = result.OutboundLeg.CarrierIds;
   const price = result.MinPrice;
-  const formatDepartureDate = () => {
-    const dateString = departureDate
-      .split('-')
-      .join()
-      .toString()
-      .replace(/,/g, '');
-    const year = dateString.substring(0, 4);
-    const month = dateString.substring(4, 6);
-    const day = dateString.substring(6, 8);
-    const date = new Date(year, month - 1, day);
-    return date.toString().split(' ').splice(0, 4).join().replace(/,/g, ' ');
-  };
 
   // const departureDate= '2020-08-14T14:02:00'
   // console.log("hello",departureDate)
@@ -46,13 +30,15 @@ function FlightDetailsCard(props) {
   //   const destination = 'ATL';
   //   const noneStop = false;
   // const direct= noneStop? "Nonstop":"Layover"
-  
+  useEffect(() => {});
   const departureTime = () => {
-    let time = result.QuoteDateTime;
+    let time = '2020-08-14T14:02:00';
+    // let time = result.QuoteDateTime;
     time = time.split(':'); // convert to array
     // fetch
     var hours = Number(time[0].split('T')[1]);
     var minutes = Number(time[1]);
+    var seconds = Number(time[2]);
     // calculate
     var timeValue;
     if (hours > 0 && hours <= 12) {
@@ -64,12 +50,15 @@ function FlightDetailsCard(props) {
     }
 
     timeValue += minutes < 10 ? ':0' + minutes : ':' + minutes; // get minutes
+    //timeValue += (seconds < 10) ? ":0" + seconds : ":" + seconds; get seconds
     timeValue += hours >= 12 ? ' PM' : ' AM'; // get AM/PM
+
+    // show
     return timeValue;
   };
+  const time = departureTime(); // your input
   const determineAirline = (carrierId) => {
     const airlines = {
-      838: { name: 'Air France', image: airFrance },
       819: { name: 'Aegean Airlines', image: aegeanAirlines },
       870: { name: 'JetBlue', image: jetBlue },
       881: { name: 'British Airways', image: britishAirways },
@@ -80,25 +69,23 @@ function FlightDetailsCard(props) {
       1972: { name: 'Volaris', image: volaris },
       1065: { name: 'Frontier Airlines', image: frontierAirlines },
       1368: { name: 'Lufthansa', image: lufthansa },
-      1324: { name: 'KLM', image: klm },
+      1324:{ name: "KLM",image:klm},
       1467: { name: 'Spirit Airlines', image: spirit },
       1793: { name: 'United Airlines', image: unitedAirlines },
-      852: { name: 'Royal Air Maroc', image: generic },
-      1107: { name: 'GOL Linhas Aéreas', image: generic },
-      1218: { name: 'Iberia', image: generic },
-      1317: { name: 'Korean Air', image: generic },
+     852:{name: "Royal Air Maroc"},
+1065:{name: "Frontier Airlines"},
+1107:{name: "GOL Linhas Aéreas"},
+1218:{name: "Iberia"},
+1317:{name: "Korean Air"},
     };
-    if (airlines[`${carrierId}`] !== null) return airlines[`${carrierId}`];
+    if (airlines[`${carrierId}`]) return airlines[`${carrierId}`];
     else return 'unknown carrier';
+    // console.log("nuitt",event.target)
   };
   return (
     <div className="flight-details-card">
       <div className="details">
-        <img
-          className="details-img"
-          src={determineAirline(carrierId).image}
-          alt="airline logo"
-        />
+        <img src={determineAirline(carrierId).image} alt="ariline logo" />
         <hr />
         <ul>
           <li>{determineAirline(carrierId).name}</li>
@@ -109,20 +96,13 @@ function FlightDetailsCard(props) {
           <li>
             <h3>${price}</h3>
           </li>
-          {tripType === 'departure' ? (
-            <li> {origin + '-' + destination + '(' + direct + ')'}</li>
-          ) : (
-            <li> {destination + '-' + origin + '(' + direct + ')'}</li>
-          )}
-          <li>{departureTime()}</li>
+          <li> {origin + '-' + destination + '(' + direct + ')'}</li>
+  <li>{}{departureTime()}</li>
         </ul>
       </div>
       <div className="select">
-        <button id={`${id}`} onClick={() => setToggleButton(id)}>
-          Select
-        </button>
-
-        <p>{formatDepartureDate()}</p>
+        {/* <p>Departure</p> */}
+        <button>Select</button>
       </div>
     </div>
   );

@@ -86,7 +86,7 @@ function FlightSearchResults(props) {
     };
     const setToggleButton = (id) => {
       console.log("ddd",id)
-      document.getElementById(id).disabled = true;
+      document.getElementById(`${id}`).disabled = true;
     };
     return (
       <div className="flight-search-results-page">
