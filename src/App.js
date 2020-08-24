@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { getProfileFetch } from './reducers/actions/userActions';
-import ScrollToTop from "./ScrollToTop"
+import ScrollToTop from './ScrollToTop';
 import './styles.css';
 import './App.css';
 import twitter from './icons/twitter.svg';
@@ -13,7 +13,9 @@ import LandingPage from './Components/landingPage';
 import SignUpModal from './Components/signUpModal';
 import AccountPage from './Components/accountPage';
 import BookingSearchForm from './Components/Flights/bookingSearchForm';
-import FlightSearchResults from './Components/Flights/flightSearchResults'
+import FlightSearchResults from './Components/Flights/flightSearchResults';
+import HotelSearchForm from './Components/Hotels/hotelSearchForm';
+import HotelSearchResults from './Components/Hotels/hotelSearchResults'
 // import FlightSearchResults from './reducers/flightSearchResults';
 class App extends Component {
   componentWillMount() {
@@ -58,10 +60,17 @@ class App extends Component {
             <Route exact path="/signup" component={SignUpModal} />
             <Route exact path="/signin" component={SignUpModal} />
             <Route exact path="/flightSearch" component={BookingSearchForm} />
-            <Route exact path="/flightSearch-results" component={FlightSearchResults} />
+            <Route exact path="/hotel-search" component={HotelSearchForm} />
+            <Route exact path="/hotel-results" component={HotelSearchResults} />
+
+            <Route
+              exact
+              path="/flightSearch-results"
+              component={FlightSearchResults}
+            />
             <Route exact path="/account-page/:id" component={AccountPage} />
           </Switch>
-          <ScrollToTop/>
+          <ScrollToTop />
           <footer>
             <div className="footer-wrapper">
               <h5>Travelly &copy;</h5>
@@ -97,8 +106,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getProfileFetch: () => {
       dispatch(getProfileFetch());
-    }
-   
+    },
   };
 };
 
