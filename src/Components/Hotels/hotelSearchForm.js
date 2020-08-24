@@ -15,15 +15,15 @@ class HotelSearchForm extends React.Component {
       today: searchParameters[2],
       city: '',
       locationId: '', //will be located by users location initially
-      checkin: today,
+      checkin: today.toString(),
       checkout: '',
       nights: 1,
       adults: 1,
       rooms: 1,
       priceRange: 'true',
-      pricesmMin: 0,
+      pricesMin: 0,
       pricesMax: 200,
-      hotelClass: 'ALL',
+      hotelClass: "3.0",
       subCategory: '',
     };
   }
@@ -52,11 +52,13 @@ class HotelSearchForm extends React.Component {
     var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
     console.log(monthDate1, '----', monthDate2, Difference_In_Days);
     this.setState({ nights: Difference_In_Days });
+    // Difference_In_Days.toString().split("-")[1].toString()
   };
   setTripData = (event) => {
     const key = event.target.name;
     const value = event.target.value;
     this.setState({ ...this.state, [key]: value });
+    console.log('00000000', this.state);
   };
   locationSearch = (event) => {
     const string = event.target.value;
@@ -106,9 +108,10 @@ class HotelSearchForm extends React.Component {
     priceRange === 'true'
       ? (pricesMaxselected = `&pricesmax=${pricesMax}`)
       : (pricesMaxselected = '');
-    const URL = ` https://tripadvisor1.p.rapidapi.com/hotels/list?pricesmin=${pricesMin}&offset=0${subCategory}${pricesMaxselected}${hotelClass}&currency=USD&limit=30&order=asc&lang=en_US&sort=recommended&location_id=${locationId}&adults=${adults}&checkin=${checkin}&rooms=${rooms}&nights=${nights}`;
-
-    fetch(URL, {
+    const HOTEL_FETCH_URL = ` https://tripadvisor1.p.rapidapi.com/hotels/list?pricesmin=${pricesMin}&offset=0&subcategory=${subCategory}${pricesMaxselected}&hotel_class=${hotelClass}&currency=USD&limit=30&order=asc&lang=en_US&sort=recommended&location_id=${locationId}&adults=${adults}&checkin=${checkin}&rooms=${rooms}&nights=${nights}`;
+    const FETCH_URL =
+"      https://tripadvisor1.p.rapidapi.com/hotels/list?pricesmin=0&offset=0&subcategory=hotel&pricesmax=419&hotel_class=3.0&currency=USD&limit=30&order=asc&lang=en_US&sort=recommended&location_id=35805&adults=4&checkin=2020-08-27&rooms=3&nights=1"
+  fetch(FETCH_URL, {
       method: 'GET',
       headers: {
         'Content-type': 'application/json',
@@ -120,8 +123,13 @@ class HotelSearchForm extends React.Component {
       .then((response) => response.json())
       .then((response) => {
         console.log('saa', response);
+        localStorage.removeItem('hotelSearch_API_URL')
+        localStorage.setItem('hotelSearch_API_URL', HOTEL_FETCH_URL);
         this.props.setHotelSearchResults(response);
-        this.props.history.push("./hotel-results")
+       this.props.setHotelSearchParameters(response)
+        console.log(localStorage.getItem('hotelSearch_API_URL'));
+        // this.props.history.push("./hotel-results")
+        const test = ` https://tripadvisor1.p.rapidapi.com/hotels/list?pricesmin=undefined&offset=0&pricesmax=260ALL&currency=USD&limit=30&order=asc&lang=en_US&sort=recommended&location_id=35805&adults=3&checkin=2020-08-26&rooms=2&nights=-7`;
       })
       .catch((err) => {
         console.log(err);
@@ -136,7 +144,7 @@ class HotelSearchForm extends React.Component {
       nights,
       adults,
       rooms,
-      pricesmMin,
+      pricesMin,
       pricesMax,
       subCategory,
       priceRange,
@@ -210,6 +218,7 @@ class HotelSearchForm extends React.Component {
                       </div>
                       <label htmlFor="children">
                         NIGHTS:{this.state.nights}
+                        {/* NIGHTS:{this.state.nights.toString().split("-")[1]} */}
                       </label>
                     </div>
                     <div id="flight-info">
@@ -246,31 +255,30 @@ class HotelSearchForm extends React.Component {
                         <select
                           name="hotelClass"
                           onChange={(e) => this.setTripData(e)}
+                          // defaultValue="3"
                         >
-                          <option value="">ALL</option>
-                          <option value="&hotel_class=1">1</option>
-                          <option value="&hotel_class=2">2</option>
-                          <option value="&hotel_class=3">3</option>
-                          <option value="&hotel_class=4">4</option>
-                          <option value="&hotel_class=5">5</option>
+                          {' '}
+                          <option value=""></option>
+                          <option value="1.0">1</option>
+                          <option value="2.0">2</option>
+                          <option value="3.0">3</option>
+                          <option value="4.0">4</option>
+                          <option value="5.0">5</option>
                         </select>
                       </div>
                       <div className="info-box">
-                        <label htmlFor="subcategory">CATEGORY</label>
+                        <label>CATEGORY</label>
                         <select
-                          name="subcategory"
-                          id="subcategory"
+                          name="subCategory"
+                          // defaultValue='hotel'
                           onChange={(e) => this.setTripData(e)}
                         >
-                          <option value="">ALL</option>
-                          <option value="&subcategory=hotel">Hotel</option>
-                          <option value="&subcategory=resort">Resort</option>
-                          <option value="&subcategory=bb">
-                            Bed + Breakfast
-                          </option>
-                          <option value="&subcategory=specialty">
-                            Specialty
-                          </option>
+                          {' '}
+                          <option value=""></option>
+                          <option value="hotel">Hotel</option>
+                          <option value="resort">Resort</option>
+                          <option value="bb">Bed + Breakfast</option>
+                          <option value="specialty">Specialty</option>
                         </select>
                       </div>
                     </div>
@@ -350,6 +358,14 @@ const mapDispatchToProps = (dispatch) => {
       const action = {
         type: 'SET_HOTEL_RESULTS',
         results: results,
+      };
+      dispatch(action);
+    },
+    setHotelSearchParameters: (results) => {
+      console.log("she made uir")
+      const action = {
+        type: 'GET_HOTEL_RESULTS_PARAMETERS',
+        results:results
       };
       dispatch(action);
     },
