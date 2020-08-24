@@ -122,7 +122,7 @@ componentDidMount(){
                 Find Hotels located near popular Hot-Spots at reduced rates!
               </p>
               <button>
-                <a href="/flightSearch">Find Hotels</a>
+                <a href="/hotel-search">Find Hotels</a>
               </button>
             </div>
             <div className="card">

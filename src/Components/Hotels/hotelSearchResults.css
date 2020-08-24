@@ -1,0 +1,157 @@
+.flight-search-results-page {
+    display: inline-block;
+    width: 100%;
+    background: rgb(220, 200, 197);
+  }
+  .flight-search-results-page h1 {
+    margin-top: 6rem;
+  }
+  .flight-search-results-page button {
+    position: relative;
+    height: 4rem;
+    margin-bottom: 2rem;
+  
+    line-height: 0px;
+  }
+  /* HERE WE WANT THE COLOR OF MY DISABLED BUTTONS TO BE DARKER , SELECTED DIV SHOULD BE VISUALIZED.GIT  */
+  .flight-search-results-page button:hover {
+    /* background-color:unset;
+    font-size: unset; */
+    
+  }
+  .flight-search-results-page section {
+    background: linear-gradient(rgb(21, 96, 158), transparent);
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 40px;
+    padding-bottom: 60px;
+    min-height: 100vh;
+  }
+  form hr {
+    padding-top: 2rem;
+  }
+  
+  form input {
+    margin-right: 3rem;
+    margin-bottom: 3rem;
+    display: inline-block;
+  }
+  form label{
+    margin-right: 1rem;
+    margin-bottom: -1rem;
+  }
+  section h5{
+    background:#ced;
+    box-shadow: 35px 20px 3px rgba(0, 0, 0, 0.5);
+    width: 30%;
+    margin: auto;
+    margin-top: 4rem;
+    color:white;
+    text-shadow: 0px 0px 6px black, 0 0.12em rgb(140, 140, 169), 0 0 7.2em blue;
+  font-size: 5rem;
+  /* font-family: 'Pattaya', sans-serif; */
+  }
+  .flight-details-card,.flight-details-card-selected-flight {
+    overflow-x:hidden;
+    overflow-y: hidden;
+    box-shadow: 0px 40px 10px rgba(0, 0, 0, 0.5);
+    width: 95%;
+    margin: auto;
+    margin-top: 20px;
+    min-height: 250px;
+    height: fit-content;
+    background: white;
+    /* display:flex; */
+    position: relative;
+  }
+  .flight-details-card-selected-flight{
+    border: 15px solid yellow;
+    outline-style: solid;
+    outline-color: invert
+  }
+  .details {
+    position: absolute;
+    top: 0%;
+    left: 5%;
+  }
+  .specifics {
+    display: block;
+    min-height:18rem;
+    position: absolute;
+    top: 35%;
+    left: 45%;
+  }
+  .select {
+    min-height:8rem;
+    position: absolute;
+    top: 45%;
+    left: 80%;
+  }
+  .select p{
+    min-height:4rem;
+    display: flex;
+    bottom:-25%;
+  }
+  .details img {
+    display: block;
+    max-width: 180px;
+    max-height: 180px;
+    width: auto;
+    height: auto;
+    margin-bottom: -5rem;
+    /* padding: 4rem; */
+    align-items: center;
+    justify-self: center;
+    text-align: center;
+  }
+  .details-img{
+  
+    margin-top: 4rem;
+     padding-bottom:4rem;
+  }
+  
+  .flight-details-card ul {
+    list-style: none;
+  }
+  #flight-type {
+    width: 100%;
+    margin: auto;
+    display: inline-flex;
+    position: relative;
+    justify-content: center;
+    align-self: center;
+    text-align: center;
+    color: blue;
+  }
+  #flight-type .info-box {
+    font: size 1;
+    margin-right: 5rem;
+    display: inline-table;
+    position: relative;
+  }
+  .continue-button{
+    background: green;
+  }
+  @media screen and (max-width: 952px) {
+    .flight-search-results-page {
+      display: inline-block;
+      width: 100%;
+      background: rgb(220, 200, 197);
+      margin-top: 0rem;
+    }
+    .flight-search-results-page h1, .flight-search-results-page h5 {
+      /* margin-top: 6rem; */
+      /* margin-bottom: 23rem; */
+      width: 100%;
+    }
+   .select{
+     position: absolute;;
+     display:flex;
+     left:45%;
+     top:70%;
+   }
+   .select p{
+     position: absolute;
+     bottom:-26%;
+   }
+  }
