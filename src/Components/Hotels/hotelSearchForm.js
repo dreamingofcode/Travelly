@@ -21,7 +21,7 @@ class HotelSearchForm extends React.Component {
       adults: 1,
       rooms: 1,
       priceRange: 'true',
-      pricesmMin: 0,
+      pricesMin: 0,
       pricesMax: 200,
       hotelClass: 'ALL',
       subCategory: '',
@@ -136,7 +136,7 @@ class HotelSearchForm extends React.Component {
       nights,
       adults,
       rooms,
-      pricesmMin,
+      pricesMin,
       pricesMax,
       subCategory,
       priceRange,
@@ -155,11 +155,10 @@ class HotelSearchForm extends React.Component {
                   <form id="flight-form">
                     <div id="flight-depart">
                       <div className="info-box">
-                        <label htmlFor="">CITY</label>
+                        <label >CITY</label>
                         <input
                           placeholder="Search by city"
                           type="text"
-                          id="dep-from"
                           name="city"
                           onChange={(e) => {
                             // this.setTripData(e);
