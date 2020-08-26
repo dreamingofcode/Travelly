@@ -1,139 +1,149 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import savingsIcon from '../../icons/savingsIcon.png';
+import savingsIcon from '../../icons/savingIcons.png';
+import star from '../../icons/star.png';
+import heart from '../../icons/heart.png';
+import filledHeart from '../../icons/filledHeart.png';
 function HotelDetailsCard(props) {
   const [toggleButtonClassName, setToggleButtonClassName] = useState(
-    'flight-details-card'
+    'hotel-details-card'
   );
+  const [favorited, setFavorited] = useState(false);
+
   const [toggleButtonStyle, setToggleButtonStyle] = useState('Select');
+  const [loaded, setLoaded] = useState(false);
+useEffect(() => {
+  
+  return () => {
+   
+  };
+}, [favorited]);
 
   const {
-    hotel,
+    // hotel,
     id,
-    // setToggleButtonDisplay,
-    // flightSelected,
-    // setFlightSelected,
+    setToggleButtonDisplay,
+    hotelSelected,
+    setHotelSelected,
   } = props;
-  const name = id;
-  const location = hotel.location_string;
-  const imageURL = hotel.photo.images.original.url;
-  const imageALT = hotel.photo.images.caption;
-  const price = hotel.price;
-  const priceLevel = hotel.price_level;
-  const rating = hotel.rating;
-  const reviews = hotel.num_reviews;
-  let savingsAlert = false;
-  {
-    hotel.saving_alert
-      ? (savingsAlert = hotel.saving_alert.message)
-      : (savingsAlert = false);
+  // const name = id;
+  // const location = hotel.location_string;
+  // const imageURL = hotel.photo.images.original.url;
+  // const imageALT = hotel.photo.images.caption;
+  // const price = hotel.price;
+  // const priceLevel = hotel.price_level;
+  // const rating = hotel.rating;
+  // const reviews = hotel.num_reviews;
+  // const name = id;
+  // let savingsAlert = false;
+  // {
+  //   hotel.saving_alert
+  //     ? (savingsAlert = hotel.saving_alert.message)
+  //     : (savingsAlert = false);
+  // }
+
+  const hotelName = 'TRUMP TOWERS';
+  const location = 'chicago,Illinois';
+  const imageURL =
+    'https://media-cdn.tripadvisor.com/media/photo-s/1b/34/ce/b2/swissotel-chicago.jpg';
+  const imageALT = 'cute hotel';
+  const price = '$$130-300';
+  const priceLevel = '$$';
+  const rating = '3.0';
+  const reviews = 22334;
+  const specialOffer = '$120';
+  const specialOfferLink =
+    'https://media-cdn.tripadvisor.com/media/photo-s/1b/34/ce/b2/swissotel-chicago.jpg';
+  const savingsAlert = '80% cheaper!';
+
+  let starRating = [];
+
+  for (let i = 0; i < parseInt(rating); i++) {
+    starRating.push(i);
   }
-  const specialOffer = hotel.hac_offers.offers[0].display_price;
-  const specialOfferLink = hotel.hac_offers.offers[0].link;
 
-  // const departureDate= '2020-08-14T14:02:00'
-  // console.log("hello",departureDate)
-  //   const carrierId = [881];
-  //   const price = 335;
-  //   const origin = 'ORD';
-  //   const destination = 'ATL';
-  //   const noneStop = false;
-  // const direct= noneStop? "Nonstop":"Layover"
-  // const setToggleButton = () => {
-  //   toggleButtonClassName === 'flight-details-card'
-  //     ? setToggleButtonClassName('flight-details-card-selected-flight')
-  //     : setToggleButtonClassName('flight-details-card');
-  //     if ( toggleButtonStyle === 'Select'){
-  //       setToggleButtonStyle('Remove')
-  //  }else if (toggleButtonStyle === 'Remove'){
-  //    setToggleButtonStyle('Select')
+  const toggleHeart = () => {
+   ;
+   setFavorited(!favorited)
+    setLoaded(!loaded)
+    console.log("ff",favorited)
+  };
+  const setToggleButton = () => {
 
-  //  }
+    toggleButtonClassName === 'hotel-details-card'
+      ? setToggleButtonClassName('hotel-details-card-selected-hotel')
+      : setToggleButtonClassName('hotel-details-card');
+    if (toggleButtonStyle === 'Select') {
+      setToggleButtonStyle('Remove');
+    } else if (toggleButtonStyle === 'Remove') {
+      setToggleButtonStyle('Select');
+    }
 
-  //   setToggleButtonDisplay(tripType, id,toggleButtonStyle);
-  // };
-  // const formatDepartureDate = () => {
-  //   const dateString = departureDate
-  //     .split('-')
-  //     .join()
-  //     .toString()
-  //     .replace(/,/g, '');
-  //   const year = dateString.substring(0, 4);
-  //   const month = dateString.substring(4, 6);
-  //   const day = dateString.substring(6, 8);
-  //   const date = new Date(year, month - 1, day);
-  //   return date.toString().split(' ').splice(0, 4).join().replace(/,/g, ' ');
-  // };
-  // const departureTime = () => {
-  //   let time = '2020-08-14T14:02:00';
-  //   // let time = result.QuoteDateTime;
-  //   time = time.split(':'); // convert to array
-  //   // fetch
-  //   var hours = Number(time[0].split('T')[1]);
-  //   var minutes = Number(time[1]);
-  //   var seconds = Number(time[2]);
-  //   // calculate
-  //   var timeValue;
-  //   if (hours > 0 && hours <= 12) {
-  //     timeValue = '' + hours;
-  //   } else if (hours > 12) {
-  //     timeValue = '' + (hours - 12);
-  //   } else if (hours == 0) {
-  //     timeValue = '12';
-  //   }
-
-  //   timeValue += minutes < 10 ? ':0' + minutes : ':' + minutes; // get minutes
-  //   //timeValue += (seconds < 10) ? ":0" + seconds : ":" + seconds; get seconds
-  //   timeValue += hours >= 12 ? ' PM' : ' AM'; // get AM/PM
-
-  //   // show
-  //   return timeValue;
-  // };
-  // const time = departureTime(); // your input
+    setToggleButtonDisplay(id, toggleButtonStyle);
+  };
 
   return (
     <div className={toggleButtonClassName}>
-      <div className="details">
-        <img className="details-img" src={imageURL} alt={imageALT} />
-        <hr />
-        <ul>
-          <li>{name}</li>
-          <li>{location}</li>
-        </ul>
+      <div className="details-image">
+        <img className="hotel-image" src={imageURL} alt={imageALT} />
+        <h5>{location}</h5>
       </div>
       <div className="specifics">
         <ul>
+          <h3>{price}</h3>
+          <h1>{hotelName}</h1>
+          <hr />
+          <li>
+            {starRating.map((rating) => {
+              return (
+                <img className="star-rating" src={star} alt="star rating" />
+              );
+            })}
+          </li>
+          <li>{reviews} reviews</li>
+        </ul>
+      </div>
+      <div className="specifics-row2">
+        <ul>
           <li>{priceLevel}</li>
           <li>
-            <h3>${price}</h3>
-          </li>
-
-          <li>
-            {rating} (  {reviews} reviews)
+            {' '}
+            <a href={specialOfferLink}>{specialOffer} Special Offer!</a>
           </li>
         </ul>
-        {savingsAlert ? (
-          <React.Fragment>
-            <img
-              style={{ height: '70px', position: "absolute", right: '10%' }}
-              src={savingsIcon}
-              alt="savings icon"
-            />
-            <p>{savingsAlert}!</p>
-          </React.Fragment>
-        ) : null}
-        <p>
-          <a href={specialOfferLink}>{specialOffer} Special Offer!</a>
-        </p>
       </div>
-      {/* <div className="select">
-        {flightSelected.boolean && flightSelected.id !== id ? null : (
-          <button id={`${id}`} onClick={(id) => setToggleButton()}>
+      {savingsAlert ? (
+        <div className="savings-alert">
+          <img
+            className="savings-alert-image"
+            src={savingsIcon}
+            alt="savings icon"
+          />
+          <p>{savingsAlert}!</p>
+        </div>
+      ) : null}
+      {favorited === "true" ? (
+        <img
+          src={heart}
+          alt="like/dislike button"
+          className="favorite-image"
+          onClick={() => toggleHeart()}
+        />
+      ) : (
+        <img
+          src={filledHeart}
+          alt="like/dislike button"
+          className="favorite-image"
+          onClick={() => toggleHeart()}
+        />
+      )}
+      <div className="select">
+        {hotelSelected.boolean && hotelSelected.id !== id ? null : (
+          <button id={`${id}`} onClick={(id) => setToggleButton(id)}>
             {toggleButtonStyle}
           </button>
         )}
-
-      </div> */}
+      </div>
     </div>
   );
 }

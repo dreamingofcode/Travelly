@@ -13,6 +13,7 @@ import linearAir from '../../images/airlines/linearAir.png';
 import southwest from '../../images/airlines/southwest.png';
 import volaris from '../../images/airlines/volaris.png';
 import klm from '../../images/airlines/klm.png';
+import noAirlinePicture from '../../icons/airplane.png';
 
 function FlightDetailsCard(props) {
   const [toggleButtonClassName, setToggleButtonClassName] = useState(
@@ -28,7 +29,7 @@ function FlightDetailsCard(props) {
     setToggleButtonDisplay,
     flightSelected,
     setFlightSelected,
-    departureDate
+    departureDate,
   } = props;
   const origin = places[1].IataCode;
   const destination = places[0].IataCode;
@@ -44,19 +45,17 @@ function FlightDetailsCard(props) {
   //   const destination = 'ATL';
   //   const noneStop = false;
   // const direct= noneStop? "Nonstop":"Layover"
-  const setToggleButton = () => {
+  const setToggleButton = (id, toggleButtonStyle) => {
     toggleButtonClassName === 'flight-details-card'
       ? setToggleButtonClassName('flight-details-card-selected-flight')
       : setToggleButtonClassName('flight-details-card');
-      if ( toggleButtonStyle === 'Select'){
-        setToggleButtonStyle('Remove')
-   }else if (toggleButtonStyle === 'Remove'){
-     setToggleButtonStyle('Select')
- 
+    if (toggleButtonStyle === 'Select') {
+      setToggleButtonStyle('Remove');
+    } else if (toggleButtonStyle === 'Remove') {
+      setToggleButtonStyle('Select');
+    }
 
-   }
-    
-    setToggleButtonDisplay(tripType, id,toggleButtonStyle);
+    setToggleButtonDisplay(id, toggleButtonStyle);
   };
   const formatDepartureDate = () => {
     const dateString = departureDate
@@ -71,8 +70,8 @@ function FlightDetailsCard(props) {
     return date.toString().split(' ').splice(0, 4).join().replace(/,/g, ' ');
   };
   const departureTime = () => {
-    let time = '2020-08-14T14:02:00';
-    // let time = result.QuoteDateTime;
+    // let time = '2020-08-14T14:02:00';
+    let time = result.QuoteDateTime;
     time = time.split(':'); // convert to array
     // fetch
     var hours = Number(time[0].split('T')[1]);
@@ -115,14 +114,19 @@ function FlightDetailsCard(props) {
       1107: { name: 'GOL Linhas Aéreas' },
       1218: { name: 'Iberia' },
       1317: { name: 'Korean Air' },
+      929:{name:"Air China",image: noAirlinePicture},
+      1: { name: 'Aeromexico', image: noAirlinePicture },
+      858: { name: 'Alitalia', image: noAirlinePicture },
     };
+    const noExistingAirline ={name:"unknown carrier",image:noAirlinePicture}
     if (airlines[`${carrierId}`]) return airlines[`${carrierId}`];
-    else return 'unknown carrier';
+    else if (!airlines[`${carrierId}`]) return noExistingAirline;
     // console.log("nuitt",event.target)
   };
   return (
     <div className={toggleButtonClassName}>
       <div className="details">
+        
         <img
           className="details-img"
           src={determineAirline(carrierId).image}
@@ -141,13 +145,13 @@ function FlightDetailsCard(props) {
           <li> {origin + '-' + destination + '(' + direct + ')'}</li>
           <li>
             {}
-            {departureTime()}
+            {time}
           </li>
         </ul>
       </div>
       <div className="select">
         {flightSelected.boolean && flightSelected.id !== id ? null : (
-          <button id={`${id}`} onClick={(id) => setToggleButton()}>
+          <button id={`${id}`} onClick={(id) => setToggleButton(id)}>
             {toggleButtonStyle}
           </button>
         )}

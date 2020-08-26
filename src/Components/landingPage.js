@@ -93,10 +93,10 @@ componentDidMount(){
 
         <section id="benefits">
           <header className="benefits-head">
-            <h2>All Your Travel Needs In One Place</h2>
+            <h2>The world is waiting for you...</h2>
             <img className="globe" src={logo} alt="animated-logo" />
             <h3>
-              Avoid the hazzle of Travelling by using resources readily
+              Start your perfect getaway today! <br/>Avoid the hazzle of Travelling by using resources readily
               available to you! Everything from picking the perfect hotel,
               flight, and travel destination!
             </h3>
@@ -104,14 +104,15 @@ componentDidMount(){
           <div className="cards">
             <div className="card">
               <div className="card-icon">
-                <img src={road} alt="road route symbol" />
+                <img src={airplaneIcon} alt="airplane! symbol" />
               </div>
-              <h4>Travel</h4>
+              <h4>Fly</h4>
               <p>
-                Discover new places by using our Trip Calculator to book a trip
-                based on your budget!
+                Browse through the lowest prices on flights and compare your options for the best deals!
               </p>
-              <button>Trip Calculator</button>
+              <button>
+                <a href="/flightSearch">Find Flights</a>
+              </button>
             </div>
             <div className="card">
               <div className="card-icon">
@@ -119,7 +120,7 @@ componentDidMount(){
               </div>
               <h4>Stay</h4>
               <p>
-                Find Hotels located near popular Hot-Spots at reduced rates!
+                Find the perfect Hotel located near popular Hot-Spots at reduced rates!
               </p>
               <button>
                 <a href="/hotel-search">Find Hotels</a>
@@ -127,16 +128,13 @@ componentDidMount(){
             </div>
             <div className="card">
               <div className="card-icon">
-                <img src={airplaneIcon} alt="airplane! symbol" />
+                <img src={road} alt="road route symbol" />
               </div>
-              <h4>Fly</h4>
+              <h4>Explore</h4>
               <p>
-                Search for the lowest prices and compare your flight options to
-                better accommodate you
+                Discover new adventures and see what both locals and tourists love to do!
               </p>
-              <button>
-                <a href="/flightSearch">Find Flights</a>
-              </button>
+              <button>Find Adventures</button>
             </div>
           </div>
         </section>
