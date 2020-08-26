@@ -1,0 +1,344 @@
+.hotel-search-results-page {
+  display: inline-block;
+  width: 100%;
+  background: rgb(220, 200, 197);
+  font-family: serif;
+}
+
+.hotel-search-results-page button {
+  position: relative;
+  height: 4rem;
+  margin-bottom: 2rem;
+
+  line-height: 0px;
+}
+
+.hotel-search-results-page a {
+  color: black;
+}
+.hotel-search-results-page a:hover {
+  color: blue;
+  text-decoration: underline;
+  overflow-y: hidden;
+}
+.hotel-search-results-page section {
+  background: linear-gradient(rgb(21, 96, 158), transparent);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-top: 40px;
+  padding-bottom: 60px;
+  min-height: 100vh;
+}
+.hotel-search-results-page form hr {
+  padding-top: 2rem;
+}
+
+.hotel-search-results-page form input {
+  margin-right: 3rem;
+  margin-bottom: 3rem;
+  display: inline-block;
+}
+.hotel-search-results-page form label {
+  margin-right: 1rem;
+  margin-bottom: -1rem;
+}
+.hotel-search-results-page form button {
+  width: 31rem;
+  font-size: 3rem;
+}
+.hotel-search-results-page section h4 {
+  margin-top: 3rem;
+  margin-bottom: -4rem;
+
+  /* font-family: 'Pattaya', sans-serif; */
+}
+#price-range {
+  width: 80%;
+  margin: auto;
+  display: inline-flex;
+  position: relative;
+  
+}
+#formControlRange{
+max-width: 800px;
+}
+#price-range label {
+  display: inline;
+  font-size: 2rem;
+}
+#hotel-type .info-box {
+  font: size 1;
+  margin-right: 5rem;
+  display: inline-table;
+  position: relative;
+}
+
+/* ///////////////////////HOTEL DETAILS CARD////////////////////////////// */
+.hotel-details-card,
+.hotel-details-card-selected-hotel {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  box-shadow: 0px 40px 10px rgba(0, 0, 0, 0.5);
+  width: 95%;
+  margin: auto;
+  margin-top: 20px;
+  height: fit-content;
+  height: 400px;
+  background: white;
+  position: relative;
+}
+.hotel-details-card-selected-hotel {
+  border: 15px solid yellow;
+  outline-style: solid;
+  outline-color: invert;
+}
+.results-header {
+  padding-top: 10rem;
+  width: 95%;
+  margin: auto;
+}
+.results-header h1{
+  padding-bottom: 5rem;
+  font-size: 5rem;
+}
+.details {
+  position: absolute;
+  top: 10%;
+  left: 5%;
+}
+.specifics {
+  display: block;
+  min-height: 18rem;
+  position: absolute;
+  top: 15%;
+  left: 45%;
+}
+.specifics-row2 {
+  display: block;
+  min-height: 18rem;
+  position: absolute;
+  top: 75%;
+  left: 53%;
+}
+.savings-alert-image {
+  height: 50px;
+}
+.favorite-image {
+  height: 30px;
+  position: absolute;
+  top: 5%;
+  right: 3%;
+}
+.savings-alert {
+  position: absolute;
+  top: 60%;
+  right: 5%;
+}
+.star-rating {
+  height: 30px;
+}
+.hotel-image {
+  height: 550px;
+  display: block;
+  min-width: 380px;
+  max-height: 380px;
+  width: auto;
+  height: auto;
+  margin-bottom: -5rem;
+  /* padding: 4rem; */
+}
+.select {
+  min-height: 8rem;
+  position: absolute;
+  top: 46%;
+  left: 83%;
+  align-content: center;
+  justify-content: center;
+  text-align: center;
+}
+.select p {
+  min-height: 4rem;
+  display: flex;
+  bottom: -25%;
+}
+.details-image img {
+  display: block;
+  min-width: 220px;
+  min-height: 350px;
+  height: auto;
+  width: auto;
+  padding: 4rem;
+  margin-bottom: -33px;
+}
+.details-image {
+  padding-bottom: 4rem;
+
+  display: block;
+  position: absolute;
+}
+
+.hotel-details-card ul {
+  list-style: none;
+}
+.continue-button {
+  background: green;
+}
+
+@media screen and (max-width: 1280px) {
+  .results-header {
+    padding-top: 13rem;
+  }
+  .results-header h1{
+    padding-bottom: 5rem;
+    font-size: 5rem;
+  }
+  .hotel-search-results-page form input[type='text'],
+  .hotel-search-results-page form input[type='date'],
+  .hotel-search-results-page form label {
+    font-size: 2rem;
+    max-width: 250px;
+    text-align: center;
+  }
+
+  .details-image {
+    height: 300px;
+    width: 300px;
+  }
+  .hotel-details-card {
+    min-height: 700px;
+  }
+  .hotel-details-card-selected-hotel {
+    border: 5px solid yellow;
+  }
+
+  .hotel-details-card .details {
+    position: absolute;
+    top: 10%;
+    left: 5%;
+  }
+  .hotel-details-card .specifics {
+    display: block;
+    min-height: 18rem;
+    position: absolute;
+    top: 10%;
+    left: 40%;
+  }
+  .hotel-details-card .specifics h3 {
+    font-size: 4rem;
+  }
+  /* for hotel name */
+  .hotel-details-card .specifics h1 {
+    font-size: 5rem;
+  }
+  .specifics-row2 {
+    display: block;
+    min-height: 18rem;
+    position: absolute;
+    top: 50%;
+    left: 3%;
+  }
+  .hotel-details-card li ,.savings-alert p{
+    font-size: 5rem;
+  }
+  .favorite-image {
+    height: 50px;
+    position: absolute;
+    top: 5%;
+    right: 3%;
+  }
+  .savings-alert-image {
+    height: 70px;
+  }
+  .savings-alert {
+    position: absolute;
+    top: 65%;
+    left: 15%;
+  }
+  
+  .select{
+    top: 85%;
+    left:40%;
+  }
+  .select button{
+    width: 31rem;
+    height: 6rem;
+    font-size: 5rem;
+  }
+}
+@media screen and (max-width: 550px) {
+  .results-header {
+    padding-top: 25rem;
+  }
+  .results-header h1{
+    padding-bottom: 5rem;
+    font-size: 6rem;
+  }
+  .hotel-search-results-page form input[type='text'],
+  .hotel-search-results-page form input[type='date'],
+  .hotel-search-results-page form label {
+    font-size: 3rem;
+    max-width: 150px;
+    text-align: center;
+  }
+
+  .details-image {
+    height: 300px;
+    width: 300px;
+  }
+  .hotel-details-card ,.hotel-details-card-selected-hotel{
+    min-height: 900px;
+  }
+  .hotel-details-card-selected-hotel {
+    border: 5px solid yellow;
+  }
+
+  
+  .hotel-details-card .specifics,.hotel-details-card-selected-hotel .specifics{
+    display: block;
+    min-height: 18rem;
+    position: absolute;
+    top: 40%;
+    left: 5%;
+  }
+  .hotel-details-card .specifics h3 {
+    font-size: 5rem;
+  }
+  /* for hotel name */
+  .hotel-details-card .specifics h1 {
+    font-size: 38px;
+  }
+  .specifics-row2 {
+    display: block;
+    min-height: 18rem;
+    position: absolute;
+    top: 73%;
+    left: 16%;
+  }
+  .hotel-details-card li ,.savings-alert p{
+    font-size: 4rem;
+  }
+  .favorite-image {
+    height: 35px;
+    position: absolute;
+    top: 65%;
+    right: 46%;
+  }
+  .savings-alert-image {
+    height: 50px;
+  }
+  .savings-alert {
+    position: absolute;
+    top: 82%;
+    left: 5%;
+  }
+  
+  .select{
+    top: 92%;
+    left:20%;
+  }
+  .select button{
+    width: 31rem;
+    height: 6rem;
+    font-size: 5rem;
+  }
+}

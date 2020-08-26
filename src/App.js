@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { getProfileFetch } from './reducers/actions/userActions';
+import { getHotelSearchData} from './reducers/actions/hotelSearchData';
 import ScrollToTop from './ScrollToTop';
 import './styles.css';
 import './App.css';
@@ -12,15 +13,17 @@ import instagram from './icons/instagram.svg';
 import LandingPage from './Components/landingPage';
 import SignUpModal from './Components/signUpModal';
 import AccountPage from './Components/accountPage';
-import BookingSearchForm from './Components/Flights/bookingSearchForm';
-import FlightSearchResults from './Components/Flights/flightSearchResults';
+import FlightSearchForm from './Components/Flights/flightSearchForm';
+import FlightResults from './Components/Flights/flightResults';
 import HotelSearchForm from './Components/Hotels/hotelSearchForm';
-import HotelSearchResults from './Components/Hotels/hotelSearchResults'
+import HotelResults from './Components/Hotels/hotelResults';
 // import FlightSearchResults from './reducers/flightSearchResults';
 class App extends Component {
   componentWillMount() {
+    this.props.getHotelSearchData()
     this.props.getProfileFetch();
   }
+  
   render() {
     return (
       <React.Fragment>
@@ -59,15 +62,10 @@ class App extends Component {
             {/* <Route path="/" render={()=><LandingPage history={history}/>} /> */}
             <Route exact path="/signup" component={SignUpModal} />
             <Route exact path="/signin" component={SignUpModal} />
-            <Route exact path="/flightSearch" component={BookingSearchForm} />
+            <Route exact path="/flightSearch" component={FlightSearchForm} />
             <Route exact path="/hotel-search" component={HotelSearchForm} />
-            <Route exact path="/hotel-results" component={HotelSearchResults} />
-
-            <Route
-              exact
-              path="/flightSearch-results"
-              component={FlightSearchResults}
-            />
+            <Route exact path="/hotel-results" component={HotelResults} />
+            <Route exact path="/flightSearch-results"component={FlightResults}/>
             <Route exact path="/account-page/:id" component={AccountPage} />
           </Switch>
           <ScrollToTop />
@@ -106,6 +104,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getProfileFetch: () => {
       dispatch(getProfileFetch());
+    },
+    getHotelSearchData: () => {
+      dispatch(getHotelSearchData());
     },
   };
 };

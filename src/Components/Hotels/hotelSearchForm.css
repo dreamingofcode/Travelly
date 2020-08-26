@@ -229,8 +229,8 @@ select {
   flex-wrap: wrap;
 }
 .amenities label {
-  display: block;
-
+  display: inline;
+  position: relative;
   min-height: 5rem;
 }
 .amenities input,
