@@ -90,10 +90,6 @@ function FlightSearchResults(props) {
       });
   };
     const setToggleButtonDisplay = (tripType, id, toggleButtonStyle) => {
-      //user should pick one ticket from departure and one ticket from return
-      //my code should be aware if one of each has been selected
-      //once one of each is seleceted, the continue button becomes apparent
-      // if i unselect a ticket  all ticket select buttons appear/enabled again .departure and returns are handled seperately
       if (tripType === 'departure') {
         if (toggleButtonStyle === 'Select')
           setDepartureFlightSelected({ boolean: true, id: id });
@@ -106,12 +102,8 @@ function FlightSearchResults(props) {
         if (toggleButtonStyle === 'Remove')
           setReturnFlightSelected({ boolean: false, id: '' });
       }
-      console.log(
-        'depTTERTWGRTG',
-        departureFlightSelected,
-        returnFlightSelected
-      );
-      // document.getElementById(id).disabled = true;
+     
+      
     };
     return (
       <div className="flight-search-results-page">

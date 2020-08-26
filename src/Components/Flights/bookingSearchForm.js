@@ -4,7 +4,7 @@ import './bookingSearchForm.css';
 
 import cloud from '../../images/cloud.png';
 import plane from '../../icons/planeicon.svg';
-
+////////////////SHOULD BE REFACTORED
 const API_KEY = '78658dd993msha58b4f039c6c59ep11289djsn173e61927b34';
 const API_HOST = 'skyscanner-skyscanner-flight-search-v1.p.rapidapi.com';
 
@@ -28,9 +28,7 @@ class BookingSearchForm extends React.Component {
       locationDestinationResult: false,
     };
   }
-  //  componentDidMount(){
-  //     this.setState({})
-  //  }
+  
   setTripData = (event) => {
     const key = event.target.name;
     const value = event.target.value;
@@ -81,7 +79,7 @@ class BookingSearchForm extends React.Component {
     const API_URL = `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/${origin}/${destination}/${departureDate}${setTripType}`;
     const TEMP_API_URL =
       'https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/ATLA-sky/LASA-sky/2020-08-28?inboundpartialdate=2020-08-31';
-    fetch(TEMP_API_URL, {
+    fetch(API_URL, {
       method: 'GET',
       headers: {
         'x-rapidapi-host': API_HOST,

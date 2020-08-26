@@ -5,10 +5,18 @@
   padding: 0;
   box-sizing: border-box;
 }
-* h1,* header,* h5, * h2, * h3, * button,* .select{
+* h1,
+* header,
+* h5,
+* h2,
+* h3,
+* button,
+* .select,
+* a,
+* img, * div{
   overflow-y: hidden;
 }
- 
+
 html {
   font-size: 62.5%;
 }
@@ -52,9 +60,9 @@ button:hover {
   background-color: #334459;
   font-size: 2rem;
 }
-a:hover{
+a:hover {
   text-decoration: none;
-  color:white;
+  color: white;
 }
 .modal {
   width: 100%;
@@ -75,14 +83,13 @@ a:hover{
   margin-bottom: 4rem;
 }
 .modal h1 {
-  text-shadow: 1px 1px 2px red, 0  .1em brown, 0 0 7.2em rgb(251, 255, 7);
+  text-shadow: 1px 1px 2px red, 0 0.1em brown, 0 0 7.2em rgb(251, 255, 7);
   font-size: 10rem;
   margin-top: 3rem;
-
 }
-.modal a{
+.modal a {
   text-decoration: underline !important;
-  color:black
+  color: black;
 }
 .modal form {
   flex-wrap: wrap;
@@ -98,7 +105,6 @@ a:hover{
   background-size: cover;
   min-height: 420px;
   max-width: 620px;
-
 }
 .modal input {
   border: black solid 4px;
@@ -109,7 +115,7 @@ a:hover{
   display: flex;
   min-width: 300px;
 }
-.modal label{
+.modal label {
   display: flex;
   text-align: center;
   justify-content: center;
@@ -153,7 +159,7 @@ nav {
   width: 90%;
   /* padding: 2rem; */
   /* vertical? */
-  margin-top:600px;
+  margin-top: 600px;
   margin: auto;
   flex-wrap: wrap; /*for mobile resposiveness on the nav buttons*/
 }
@@ -225,9 +231,13 @@ nav ul {
   height: 250px;
   animation: globeAnimation 15s infinite linear;
 }
-@keyframes globeAnimation{
-  0% {transform: rotateY(0deg) translateX(0%);}
-  100% {transform: rotateY(360deg);}
+@keyframes globeAnimation {
+  0% {
+    transform: rotateY(0deg) translateX(0%);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
 }
 
 .cloud {
@@ -238,10 +248,10 @@ nav ul {
   pointer-events: none;
 }
 .moving-cloud-1 {
-  animation: cloudAnimations 3s infinite alternate-reverse;
+  animation: cloudAnimations 4s infinite alternate-reverse;
 }
 .moving-cloud-2 {
-  animation: cloudAnimations 5s infinite alternate-reverse;
+  animation: cloudAnimations 9s infinite alternate-reverse;
 
   top: 10%;
   z-index: -1;
@@ -431,21 +441,20 @@ footer ul {
     width: 100%;
     text-align: center;
     position: fixed;
-    background:#131c27;
+    background: #131c27;
   }
   #logo {
-    min-width:160px;
-    min-height:80px;
+    min-width: 160px;
+    min-height: 80px;
     padding: 2rem;
     justify-content: center;
-  display: flex;
-  flex: 5 4 40rem;
-  align-items: center;
+    display: flex;
+    flex: 5 4 40rem;
+    align-items: center;
   }
 
   .cloud {
     display: none;
-
   }
   .moving-cloud-2 {
     top: 5%;
@@ -484,7 +493,8 @@ footer ul {
     /* align-items: center; */
   }
 
-  .locations-head h3,.locations-head h2 {
+  .locations-head h3,
+  .locations-head h2 {
     display: flex;
     align-items: start;
     /* background: #4c6e97; */
@@ -520,9 +530,8 @@ footer ul {
   .modal form {
     min-height: 80rem;
     min-width: 85rem;
-
   }
- 
+
   .modal button {
     display: flex;
     margin-top: 3rem;
@@ -533,10 +542,9 @@ footer ul {
 @media screen and (max-height: 600px) {
   .modal header {
     margin-top: 15rem;
-   
   }
   .modal form {
-    max-height: 30px; 
+    max-height: 30px;
   }
   .modal input {
     margin-top: 9rem;

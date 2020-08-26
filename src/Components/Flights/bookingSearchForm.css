@@ -29,14 +29,13 @@
   align-content: center;
   justify-content: center;
 }
-h1 {
-  font-family: 'Pattaya', sans-serif;
-}
-
 .booking-page h1 {
+  font-family: 'Pattaya', sans-serif; 
   font-size: 10rem;
   padding: 4rem;
 }
+
+
 .booking-page body{
   background:transparent;
 }
