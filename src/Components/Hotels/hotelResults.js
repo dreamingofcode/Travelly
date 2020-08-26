@@ -2,15 +2,24 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import './hotelResults.css';
 import HotelDetailCards from './hotelDetailsCard';
-import AmenitiesInput from './amenitiesInput'
+import AmenitiesInput from './amenitiesInput';
+// import locationSearch  from './formFunctions';
 ////Todo: error handling for when there is not locastorage set url/////////////////
 function HotelResults(props) {
-  const { searchParameters, setReturnFlightSearchResults,hotelSearchDataSucess } = props;
-  const API_KEY = searchParameters[0];
-  const API_HOST = searchParameters[1];
-  console.log("checkin", props.hotelSearchDataSucess,props.userLoaded)
+  const {
+    searchParameters,
+    setReturnFlightSearchResults,
+    history,
+    hotelSearchResults,
+    hotelSearchDataSucess,
+  } = props;
+  const API_KEY = searchParameters.key;
+  const API_HOST = searchParameters.tripAdvisor;
+  console.log('checkin', props.hotelSearchDataSucess, props.userLoaded);
+
   let FETCH_URL = localStorage.getItem('HOTEL_SEARCH_URL'); ///api url from initial search here
   const [searchData, setSearchData] = useState({
+    city: '',
     locationID: hotelSearchDataSucess,
     checkin: FETCH_URL.split('&')[12].split('=')[1],
     checkout: FETCH_URL.split('&')[12].split('=')[1],
@@ -21,6 +30,7 @@ function HotelResults(props) {
     hotelClass: FETCH_URL.split('&')[4].split('=')[1],
     subcatergory: FETCH_URL.split('&')[2],
     priceRange: 'true',
+    amenities: [],
   });
   const [hotelSelected, setHotelSelected] = useState({
     boolean: false,
@@ -28,6 +38,7 @@ function HotelResults(props) {
   });
 
   const {
+    city,
     priceRange,
     rooms,
     subcatergory,
@@ -37,8 +48,8 @@ function HotelResults(props) {
     checkout,
     checkin,
     locationID,
+    amenities,
   } = searchData;
-  const { history, hotelSearchResults } = props;
 
   // if (hotelSearchResults === null || hotelSearchResults.message ||hotelSearchResults.data.length === 0)
   //   history.push('/hotel-search');
@@ -47,33 +58,68 @@ function HotelResults(props) {
   const setTripData = (event) => {
     const key = event.target.name;
     const value = event.target.value;
-    setSearchData({ ...searchData, [key]: value });
+    if (key === 'amenities') {
+      amenities.includes(value)
+        ? setSearchData({ amenities: amenities.filter((a) => a !== value) })
+        : setSearchData({
+            ...searchData,
+            amenities: [...amenities, value],
+          });
+    } else setSearchData({ ...searchData, [key]: value });
+    console.log('ssdd', searchData);
+  };
+  const locationSearch = (event) => {
+    const string = event.target.value;
+  
+    string !== ''
+      ? fetch(
+          `https://tripadvisor1.p.rapidapi.com/locations/search?location_id=1&limit=30&sort=relevance&offset=0&lang=en_US&currency=USD&units=km&query=${string}`,
+          {
+            method: 'GET',
+            headers: {
+              'x-rapidapi-host': 'tripadvisor1.p.rapidapi.com',
+              'x-rapidapi-key':
+                '78658dd993msha58b4f039c6c59ep11289djsn173e61927b34',
+            },
+          }
+        )
+          .then((response) => response.json())
+          .then((response) => {
+            console.log(response);
+       
+            const data = response.data[0].result_object.location_id;
+       setSearchData({
+         ...searchData, city:response.data[0].result_object.name , locationID:response.data[0].result_object.location_id
+       })
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+      : console.log('hi');
+   
   };
   const sendSearch = (e) => {
-  //   const { origin, destination } = searchData;
-
-  //   e.preventDefault();
-
-  //   FETCH_URL = `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/`;
-
-  //   fetch(FETCH_URL, {
-  //     method: 'GET',
-  //     headers: {
-  //       'x-rapidapi-host': API_HOST,
-  //       'x-rapidapi-key': API_KEY,
-  //     },
-  //   })
-  //     .then((resp) => resp.json())
-  //     .then((response) => {
-  //       localStorage.setItem('hotelSearch_API_URL', FETCH_URL);
-  //       props.setHotelSearchResults(response);
-  //       response.message || response.Quotes.length <= 0
-  //         ? alert('No Avialable Flights available please try')
-  //         : this.props.history.push('/hotel-results');
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
+    //   const { origin, destination } = searchData;
+    //   e.preventDefault();
+    //   FETCH_URL = `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/`;
+    //   fetch(FETCH_URL, {
+    //     method: 'GET',
+    //     headers: {
+    //       'x-rapidapi-host': API_HOST,
+    //       'x-rapidapi-key': API_KEY,
+    //     },
+    //   })
+    //     .then((resp) => resp.json())
+    //     .then((response) => {
+    //       localStorage.setItem('hotelSearch_API_URL', FETCH_URL);
+    //       props.setHotelSearchResults(response);
+    //       response.message || response.Quotes.length <= 0
+    //         ? alert('No Avialable Flights available please try')
+    //         : this.props.history.push('/hotel-results');
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
   };
   const setToggleButtonDisplay = (id, toggleButtonStyle) => {
     if (toggleButtonStyle === 'Select')
@@ -88,15 +134,15 @@ function HotelResults(props) {
 
         <form>
           <hr />
-    
+
           <div>
             <label htmlFor="city">CITY: </label>
             <input
               type="text"
               id="city"
               name="city"
-              defaultValue={"looj"}
-              onChange={(e) => setTripData(e)}
+              defaultValue={''}
+              onChange={(e) =>locationSearch(e)}
             />
 
             <label htmlFor="checkin">CHECK-IN: </label>
@@ -119,24 +165,24 @@ function HotelResults(props) {
               onChange={(e) => setTripData(e)}
             />
           </div>
-          <AmenitiesInput/>
+          <AmenitiesInput setTripData={setTripData} />
+
           {priceRange === 'true' ? (
-            <React.Fragment>
-              <label for="formControlRange">
-                PRICE RANGE $0-${searchData.pricesMax}
-              </label>
+            <div>
+              <label for="formControlRange">PRICE RANGE $0-${pricesMAX}</label>
               <input
                 type="range"
                 class="form-control-range"
                 id="formControlRange"
-                name="pricesMax"
+                name="pricesMAX"
                 min="0"
-                max="1000"
+                max="700"
+                defaultValue={pricesMAX}
                 onChange={(e) => {
-                  this.setTripData(e);
+                  setTripData(e);
                 }}
               />
-            </React.Fragment>
+            </div>
           ) : null}
           <div id="price-range">
             <div className="info-box">
@@ -168,28 +214,24 @@ function HotelResults(props) {
           setToggleButtonDisplay={setToggleButtonDisplay}
           setHotelSelected={setHotelSelected}
           hotelSelected={hotelSelected}
-          
         />
         <HotelDetailCards
           id={2}
           setToggleButtonDisplay={setToggleButtonDisplay}
           setHotelSelected={setHotelSelected}
           hotelSelected={hotelSelected}
-          
         />
         <HotelDetailCards
           id={3}
           setToggleButtonDisplay={setToggleButtonDisplay}
           setHotelSelected={setHotelSelected}
           hotelSelected={hotelSelected}
-          
         />
         <HotelDetailCards
           id={4}
           setToggleButtonDisplay={setToggleButtonDisplay}
           setHotelSelected={setHotelSelected}
           hotelSelected={hotelSelected}
-          
         />
 
         {/* {hotelSearchResults !== null && !hotelSearchResults.message ? (
@@ -223,7 +265,7 @@ const mapStateToProps = (state) => {
     returnFlightSearchResults: state.returnFlightSearchResults,
     searchParameters: state.searchParameters,
     hotelSearchDataSucess: state.hotelSearchDataSucess,
-    userLoaded: state.userLoaded
+    userLoaded: state.userLoaded,
   };
 };
 const mapDispatchToProps = (dispatch) => {

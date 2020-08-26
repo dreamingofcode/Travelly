@@ -4,7 +4,7 @@ import './flightSearchForm.css';
 
 import cloud from '../../images/cloud.png';
 import plane from '../../icons/planeicon.svg';
-////////////////SHOULD BE REFACTORED
+////////////////SHOULD BE REFACTORED///////struggle to set globally using searchparams redux state due to need of initalitaztion 
 const API_KEY = '78658dd993msha58b4f039c6c59ep11289djsn173e61927b34';
 const API_HOST = 'skyscanner-skyscanner-flight-search-v1.p.rapidapi.com';
 
