@@ -8,10 +8,11 @@ function HotelDetailsCard(props) {
   const [toggleButtonClassName, setToggleButtonClassName] = useState(
     'hotel-details-card'
   );
-  const [favorited, setFavorited] = useState(false);
-
   const [toggleButtonStyle, setToggleButtonStyle] = useState('Select');
+ 
+  const [favorited, setFavorited] = useState(false);
   const [loaded, setLoaded] = useState(false);
+
 useEffect(() => {
   
   return () => {

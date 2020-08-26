@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import './bookingSearchForm.css';
+import './flightSearchForm.css';
 
 import cloud from '../../images/cloud.png';
 import plane from '../../icons/planeicon.svg';
@@ -8,7 +8,7 @@ import plane from '../../icons/planeicon.svg';
 const API_KEY = '78658dd993msha58b4f039c6c59ep11289djsn173e61927b34';
 const API_HOST = 'skyscanner-skyscanner-flight-search-v1.p.rapidapi.com';
 
-class BookingSearchForm extends React.Component {
+class FlightSearchForm extends React.Component {
   constructor(props) {
     super(props);
     this.wrapper = React.createRef();
@@ -353,4 +353,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapsStateToProps, mapDispatchToProps)(BookingSearchForm);
+export default connect(mapsStateToProps, mapDispatchToProps)(FlightSearchForm);

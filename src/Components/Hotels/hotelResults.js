@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import './hotelSearchResults.css';
-import HotelDetailCards from '../Hotels/hotelDetailsCard';
-////Todo: airport options will remain here , airport options saved to redux store,
-function HotelSearchResults(props) {
-  const { searchParameters, setReturnFlightSearchResults } = props;
+import './hotelResults.css';
+import HotelDetailCards from './hotelDetailsCard';
+import AmenitiesInput from './amenitiesInput'
+////Todo: error handling for when there is not locastorage set url/////////////////
+function HotelResults(props) {
+  const { searchParameters, setReturnFlightSearchResults,hotelSearchDataSucess } = props;
   const API_KEY = searchParameters[0];
   const API_HOST = searchParameters[1];
-  let FETCH_URL = localStorage.getItem('hotelSearch_API_URL'); ///api url from initial search here
+  console.log("checkin", props.hotelSearchDataSucess,props.userLoaded)
+  let FETCH_URL = localStorage.getItem('HOTEL_SEARCH_URL'); ///api url from initial search here
   const [searchData, setSearchData] = useState({
-    locationID: FETCH_URL.split('&')[10],
+    locationID: hotelSearchDataSucess,
     checkin: FETCH_URL.split('&')[12].split('=')[1],
     checkout: FETCH_URL.split('&')[12].split('=')[1],
-    nights: FETCH_URL.split('&')[14].split('-')[1],
+    // nights: FETCH_URL.split('&')[14].split('-')[1],
     adults: FETCH_URL.split('&')[11].split('=')[1],
-    rooms: FETCH_URL.split('&')[13].split('=')[1],
+    // rooms: FETCH_URL.split('&')[13].split('=')[1],
     pricesMAX: FETCH_URL.split('&')[3].split('=')[1],
     hotelClass: FETCH_URL.split('&')[4].split('=')[1],
     subcatergory: FETCH_URL.split('&')[2],
@@ -48,30 +50,30 @@ function HotelSearchResults(props) {
     setSearchData({ ...searchData, [key]: value });
   };
   const sendSearch = (e) => {
-    const { origin, destination } = searchData;
+  //   const { origin, destination } = searchData;
 
-    e.preventDefault();
+  //   e.preventDefault();
 
-    FETCH_URL = `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/`;
+  //   FETCH_URL = `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/`;
 
-    fetch(FETCH_URL, {
-      method: 'GET',
-      headers: {
-        'x-rapidapi-host': API_HOST,
-        'x-rapidapi-key': API_KEY,
-      },
-    })
-      .then((resp) => resp.json())
-      .then((response) => {
-        localStorage.setItem('hotelSearch_API_URL', FETCH_URL);
-        props.setHotelSearchResults(response);
-        response.message || response.Quotes.length <= 0
-          ? alert('No Avialable Flights available please try')
-          : this.props.history.push('/hotel-results');
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  //   fetch(FETCH_URL, {
+  //     method: 'GET',
+  //     headers: {
+  //       'x-rapidapi-host': API_HOST,
+  //       'x-rapidapi-key': API_KEY,
+  //     },
+  //   })
+  //     .then((resp) => resp.json())
+  //     .then((response) => {
+  //       localStorage.setItem('hotelSearch_API_URL', FETCH_URL);
+  //       props.setHotelSearchResults(response);
+  //       response.message || response.Quotes.length <= 0
+  //         ? alert('No Avialable Flights available please try')
+  //         : this.props.history.push('/hotel-results');
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
   };
   const setToggleButtonDisplay = (id, toggleButtonStyle) => {
     if (toggleButtonStyle === 'Select')
@@ -86,31 +88,38 @@ function HotelSearchResults(props) {
 
         <form>
           <hr />
-          <label>CITY: </label>
-          <input
-            type="text"
-            name="city"
-            defaultValue={''}
-            onChange={(e) => setTripData(e)}
-          />
+    
+          <div>
+            <label htmlFor="city">CITY: </label>
+            <input
+              type="text"
+              id="city"
+              name="city"
+              defaultValue={"looj"}
+              onChange={(e) => setTripData(e)}
+            />
 
-          <label>CHECK-IN: </label>
-          <input
-            type="date"
-            name="checkin"
-            min={searchParameters[2]}
-            defaultValue={checkin}
-            onChange={(e) => setTripData(e)}
-          />
+            <label htmlFor="checkin">CHECK-IN: </label>
+            <input
+              type="date"
+              name="checkin"
+              id="checkin"
+              min={searchParameters[2]}
+              defaultValue={checkin}
+              onChange={(e) => setTripData(e)}
+            />
 
-          <label>CHECK-OUT: </label>
-          <input
-            type="date"
-            name="checkout"
-            min={checkin}
-            defaultValue={checkout || ''}
-            onChange={(e) => setTripData(e)}
-          />
+            <label htmlFor="checkout">CHECK-OUT: </label>
+            <input
+              type="date"
+              name="checkout"
+              id="checkout"
+              min={checkin}
+              defaultValue={checkout || ''}
+              onChange={(e) => setTripData(e)}
+            />
+          </div>
+          <AmenitiesInput/>
           {priceRange === 'true' ? (
             <React.Fragment>
               <label for="formControlRange">
@@ -122,14 +131,14 @@ function HotelSearchResults(props) {
                 id="formControlRange"
                 name="pricesMax"
                 min="0"
-                max="1500"
+                max="1000"
                 onChange={(e) => {
                   this.setTripData(e);
                 }}
               />
             </React.Fragment>
           ) : null}
-          <div id="hotel-type">
+          <div id="price-range">
             <div className="info-box">
               <input
                 type="radio"
@@ -159,24 +168,28 @@ function HotelSearchResults(props) {
           setToggleButtonDisplay={setToggleButtonDisplay}
           setHotelSelected={setHotelSelected}
           hotelSelected={hotelSelected}
+          
         />
         <HotelDetailCards
           id={2}
           setToggleButtonDisplay={setToggleButtonDisplay}
           setHotelSelected={setHotelSelected}
           hotelSelected={hotelSelected}
+          
         />
         <HotelDetailCards
           id={3}
           setToggleButtonDisplay={setToggleButtonDisplay}
           setHotelSelected={setHotelSelected}
           hotelSelected={hotelSelected}
+          
         />
         <HotelDetailCards
           id={4}
           setToggleButtonDisplay={setToggleButtonDisplay}
           setHotelSelected={setHotelSelected}
           hotelSelected={hotelSelected}
+          
         />
 
         {/* {hotelSearchResults !== null && !hotelSearchResults.message ? (
@@ -209,6 +222,8 @@ const mapStateToProps = (state) => {
     hotelSearchResults: state.hotelSearchResults,
     returnFlightSearchResults: state.returnFlightSearchResults,
     searchParameters: state.searchParameters,
+    hotelSearchDataSucess: state.hotelSearchDataSucess,
+    userLoaded: state.userLoaded
   };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -229,4 +244,4 @@ const mapDispatchToProps = (dispatch) => {
     },
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(HotelSearchResults);
+export default connect(mapStateToProps, mapDispatchToProps)(HotelResults);

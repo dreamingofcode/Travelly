@@ -2,9 +2,14 @@ import React, { useEffect } from 'react';
 // import Slider from 'bootstrap-slider'
 import { connect } from 'react-redux';
 import './hotelSearchForm.css';
-import { detectOverflow } from '@popperjs/core';
+import { getHotelSearchData} from '../../reducers/actions/hotelSearchData';
+import AmenitiesInput from './amenitiesInput'
 
 class HotelSearchForm extends React.Component {
+  componentWillMount(){
+   
+
+  }
   constructor(props) {
     super(props);
     this.wrapper = React.createRef();
@@ -35,9 +40,9 @@ class HotelSearchForm extends React.Component {
     function convert(time) {
       const year = time.split('-')[0].toString();
       let monthDate = time.split('-').splice(1, 2).join().toString();
-      monthDate = (monthDate + ',' + year).replace(/,/g, '/')
-      return monthDate
-    } 
+      monthDate = (monthDate + ',' + year).replace(/,/g, '/');
+      return monthDate;
+    }
     var date1 = new Date(checkin);
     var date2 = new Date(checkout);
     const Difference_In_Time = date1.getTime() - date2.getTime();
@@ -48,14 +53,15 @@ class HotelSearchForm extends React.Component {
   setTripData = (event) => {
     const key = event.target.name;
     const value = event.target.value;
-    const {amenities}=this.state
+    const { amenities } = this.state;
     if (key === 'amenities') {
-    amenities.includes(value)?
-this.setState({amenities: amenities.filter(a=>a!==value)}):
-      this.setState({
-        ...this.state,
-        amenities: [...amenities, value],
-      });
+     
+      amenities.includes(value)
+        ? this.setState({ amenities: amenities.filter((a) => a !== value) })
+        : this.setState({
+            ...this.state,
+            amenities: [...amenities, value],
+          });
     } else this.setState({ ...this.state, [key]: value });
   };
   locationSearch = (event) => {
@@ -100,14 +106,19 @@ this.setState({amenities: amenities.filter(a=>a!==value)}):
       pricesMax,
       subCategory,
       priceRange,
-      amenities
+      amenities,
     } = this.state;
+    //will have to check if amenities have been selected
+    //if they have been selected, send a second request with those filters.
+    //the response includes location ID'S , use those to fileter through inital search response.
+    // localStorage.removeItem('HOTEL_SEARCH_URL');
+
     event.preventDefault();
     let pricesMaxselected = '';
     priceRange === 'true'
       ? (pricesMaxselected = `&pricesmax=${pricesMax}`)
       : (pricesMaxselected = '');
-    const URL = ` https://tripadvisor1.p.rapidapi.com/hotels/list?pricesmin=${pricesMin}&offset=0${subCategory}${pricesMaxselected}${hotelClass}&currency=USD&limit=30&order=asc&lang=en_US&sort=recommended&location_id=${locationId}&adults=${adults}&checkin=${checkin}&rooms=${rooms}&nights=${nights}`;
+    const URL = ` https://tripadvisor1.p.rapidapi.com/hotels/list?pricesmin=${pricesMin}&offset=0&subcategory=${subCategory}${pricesMaxselected}&hotel_class=${hotelClass}&currency=USD&limit=30&order=asc&lang=en_US&sort=recommended&location_id=${locationId}&adults=${adults}&checkin=${checkin}&rooms=${rooms}&nights=${nights}`;
     fetch(URL, {
       method: 'GET',
       headers: {
@@ -119,12 +130,15 @@ this.setState({amenities: amenities.filter(a=>a!==value)}):
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log('saa', response);
+        localStorage.setItem('HOTEL_SEARCH_URL', URL);
+        this.props.getHotelSearchData()
+        console.log('saa', response, URL);
         this.props.setHotelSearchResults(response);
         this.props.history.push('./hotel-results');
       })
       .catch((err) => {
         console.log(err);
+        alert("Please Try again or check input fields")
       });
   }
 
@@ -231,103 +245,30 @@ this.setState({amenities: amenities.filter(a=>a!==value)}):
                           onChange={(e) => this.setTripData(e)}
                         >
                           <option value="all">ALL</option>
-                          <option value="&hotel_class=1">1</option>
-                          <option value="&hotel_class=2">2</option>
-                          <option value="&hotel_class=3">3</option>
-                          <option value="&hotel_class=4">4</option>
-                          <option value="&hotel_class=5">5</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
                         </select>
                       </div>
                       <div className="info-box">
                         <label htmlFor="subcategory">CATEGORY</label>
                         <select
-                          name="subcategory"
+                          name="subCategory"
                           id="subcategory"
                           onChange={(e) => this.setTripData(e)}
                         >
                           <option value="all">ALL</option>
-                          <option value="&subcategory=hotel">Hotel</option>
-                          <option value="&subcategory=resort">Resort</option>
-                          <option value="&subcategory=bb">
-                            Bed + Breakfast
-                          </option>
-                          <option value="&subcategory=specialty">
-                            Specialty
-                          </option>
+                          <option value="hotel">Hotel</option>
+                          <option value="resort">Resort</option>
+                          <option value="bb">Bed + Breakfast</option>
+                          <option value="specialty">Specialty</option>
                         </select>
                       </div>
                     </div>
-                    <div className="amenities">
-                      <label
-                        class="btn btn-link"
-                        data-toggle="collapse"
-                        data-target="#collapseOne"
-                        aria-expanded="true"
-                        aria-controls="collapseOne"
-                      >
-                        <label>AMENITIES</label>
-                      </label>
-
-                      <div
-                        id="collapseOne"
-                        class="collapse hide"
-                        aria-labelledby="headingOne"
-                        data-parent="#accordion"
-                      >
-                        <div class="card-body">
-                          <input
-                            type="checkbox"
-                            name="amenities"
-                            value="airport_transportation"
-                            onChange={(event) => this.setTripData(event)}
-                          />
-                          <p>Airport-Shuttle</p>
-                          <input
-                            type="checkbox"
-                            name="amenities"
-                            value="smoking_rooms"
-                            onChange={(event) => this.setTripData(event)}
-                          />
-                          <p>Smoking-room</p>
-                          <input
-                            type="checkbox"
-                            name="amenities"
-                            value="free-internet"
-                            onChange={(event) => this.setTripData(event)}
-                          />
-                          <p>Free-Wifi</p>
-                          <br />
-                          <input
-                            type="checkbox"
-                            name="amenities"
-                            value="free_breakfast"
-                            onChange={(event) => this.setTripData(event)}
-                          />
-                          <p>Free-Breakfast</p>
-                          <input
-                            type="checkbox"
-                            name="amenities"
-                            value="pets_allowed"
-                            onChange={(event) => this.setTripData(event)}
-                          />
-                          <p>Pets-Allowed</p>
-                          <input
-                            type="checkbox"
-                            name="amenities"
-                            value="swimming_pool"
-                            onChange={(event) => this.setTripData(event)}
-                          />
-                          <p>Swimming-Pool</p>
-                          <input
-                            type="checkbox"
-                            name="amenities"
-                            value="fitness_center"
-                            onChange={(event) => this.setTripData(event)}
-                          />
-                          <p>Fitness-Center</p>
-                        </div>
-                      </div>
-                    </div>
+                    <AmenitiesInput setTripData={this.setTripData}/>
+                   
                     <div className="price-range">
                       {priceRange === 'true' ? (
                         <React.Fragment>
@@ -404,6 +345,9 @@ const mapDispatchToProps = (dispatch) => {
         results: results,
       };
       dispatch(action);
+    },
+    getHotelSearchData: () => {
+      dispatch(getHotelSearchData());
     },
   };
 };

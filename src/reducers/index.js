@@ -5,7 +5,7 @@ import userData from './userData'
 import flightSearchResults from './flightSearchResults'
 import returnFlightSearchResults from './returnFlightSearchResults'
 import searchParameters from './searchParameters'
-import   hotelSearchResults from "./hotelSearchResults";
+import   hotelSearchDataSuccess from "./hotelSearchParameters";
 const allReducers= combineReducers({
    userAuth: userAuth,
    userLoaded:userLoaded,
@@ -13,6 +13,6 @@ const allReducers= combineReducers({
 flightSearchResults:flightSearchResults,
 returnFlightSearchResults: returnFlightSearchResults,
 searchParameters:searchParameters,
-hotelSearchResults: hotelSearchResults
+hotelSearchDataSuccess: hotelSearchDataSuccess
  })
  export default allReducers

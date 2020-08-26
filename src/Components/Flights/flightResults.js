@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import './flightSearchResults.css';
+import './flightResults.css';
 import FlightDetailCards from './flightDetailsCard';
 ////Todo: airport options will remain here , airport options saved to redux store,
-function FlightSearchResults(props) {
+function FlightResults(props) {
   const { searchParameters, setReturnFlightSearchResults } = props;
   const API_KEY = searchParameters[0];
   const API_HOST = searchParameters[1];
@@ -259,4 +259,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(FlightSearchResults);
+)(FlightResults);
