@@ -5,8 +5,8 @@ import FlightDetailCards from './flightDetailsCard';
 ////Todo: airport options will remain here , airport options saved to redux store,
 function FlightResults(props) {
   const { searchParameters, setReturnFlightSearchResults } = props;
-  const API_KEY = searchParameters[0];
-  const API_HOST = searchParameters[1];
+  const API_KEY = searchParameters.key;
+  const API_HOST = searchParameters.skyscanner;
   let API_URL = localStorage.getItem('flightSearch_API_URL'); ///api url from initial search here
   let RETURN_API_URL = localStorage.getItem('flightSearch_RETURN_API_URL'); ///////////
   const [searchData, setSearchData] = useState({
