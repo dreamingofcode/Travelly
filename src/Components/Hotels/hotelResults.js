@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import './hotelResults.css';
+import Map from '../map'
 import HotelDetailCards from './hotelDetailsCard';
 import AmenitiesInput from './amenitiesInput'
 ////Todo: error handling for when there is not locastorage set url/////////////////
@@ -163,6 +164,10 @@ function HotelResults(props) {
         </form>
       </div>
       <section>
+      
+     <Map hotelSearchResults={props.hotelSearchResults}/>
+
+     
         <HotelDetailCards
           id={1}
           setToggleButtonDisplay={setToggleButtonDisplay}
@@ -223,6 +228,7 @@ const mapStateToProps = (state) => {
     returnFlightSearchResults: state.returnFlightSearchResults,
     searchParameters: state.searchParameters,
     hotelSearchDataSucess: state.hotelSearchDataSucess,
+    hotelSearchResults: state.hotelSearchResults,
     userLoaded: state.userLoaded
   };
 };
