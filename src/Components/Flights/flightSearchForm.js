@@ -20,7 +20,7 @@ class FlightSearchForm extends React.Component {
       origin: 'ATLA-sky',
       destination: 'LASA-sky',
       departureDate: '',
-      returnDate: '2020-08-31',
+      returnDate: '2021-08-31',
       adults: 1,
       children: 0,
       tripClass: 'economy',

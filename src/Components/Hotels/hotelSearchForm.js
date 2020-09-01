@@ -2,14 +2,11 @@ import React, { useEffect } from 'react';
 // import Slider from 'bootstrap-slider'
 import { connect } from 'react-redux';
 import './hotelSearchForm.css';
-import { getHotelSearchData} from '../../reducers/actions/hotelSearchData';
-import AmenitiesInput from './amenitiesInput'
+import { getHotelSearchData } from '../../reducers/actions/hotelSearchData';
+import AmenitiesInput from './amenitiesInput';
 
 class HotelSearchForm extends React.Component {
-  componentWillMount(){
-   
-
-  }
+  componentWillMount() {}
   constructor(props) {
     super(props);
     this.wrapper = React.createRef();
@@ -55,7 +52,6 @@ class HotelSearchForm extends React.Component {
     const value = event.target.value;
     const { amenities } = this.state;
     if (key === 'amenities') {
-     
       amenities.includes(value)
         ? this.setState({ amenities: amenities.filter((a) => a !== value) })
         : this.setState({
@@ -93,7 +89,7 @@ class HotelSearchForm extends React.Component {
           })
       : console.log('hi');
   };
-
+  
   sendSearch(event) {
     const {
       hotelClass,
@@ -131,14 +127,23 @@ class HotelSearchForm extends React.Component {
       .then((response) => response.json())
       .then((response) => {
         localStorage.setItem('HOTEL_SEARCH_URL', URL);
-        this.props.getHotelSearchData()
+        // const coordinates = this.setHotelCoordinates(response);
+        const coordinates = [];
+        response.data.map((hotel) => {
+          coordinates.push([hotel.latitude, hotel.longitude]);
+        });
+
+        this.props.setHotelCoordinates(coordinates);
+        this.props.setHotelSearchResults(response);
+        this.props.getHotelSearchData();
         console.log('saa', response, URL);
         this.props.setHotelSearchResults(response);
+
         this.props.history.push('./hotel-results');
       })
       .catch((err) => {
         console.log(err);
-        alert("Please Try again or check input fields")
+        alert('Please Try again or check input fields');
       });
   }
 
@@ -267,8 +272,8 @@ class HotelSearchForm extends React.Component {
                         </select>
                       </div>
                     </div>
-                    <AmenitiesInput setTripData={this.setTripData}/>
-                   
+                    <AmenitiesInput setTripData={this.setTripData} />
+
                     <div className="price-range">
                       {priceRange === 'true' ? (
                         <React.Fragment>
@@ -348,6 +353,13 @@ const mapDispatchToProps = (dispatch) => {
     },
     getHotelSearchData: () => {
       dispatch(getHotelSearchData());
+    },
+    setHotelCoordinates: (results) => {
+      const action = {
+        type: 'SET_HOTEL_COORDINATES',
+        hotelCoordinates: results,
+      };
+      dispatch(action);
     },
   };
 };

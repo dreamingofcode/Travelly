@@ -1,40 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import './hotelResults.css';
+import Map from '../map';
 import HotelDetailCards from './hotelDetailsCard';
 import AmenitiesInput from './amenitiesInput';
-// import locationSearch  from './formFunctions';
+
+
 ////Todo: error handling for when there is not locastorage set url/////////////////
 function HotelResults(props) {
   const {
     searchParameters,
-    setReturnFlightSearchResults,
-    history,
-    hotelSearchResults,
-    hotelSearchDataSucess,
-  } = props;
-  const API_KEY = searchParameters.key;
-  const API_HOST = searchParameters.tripAdvisor;
-  console.log('checkin', props.hotelSearchDataSucess, props.userLoaded);
 
+    hotelSearchDataSuccess,
+    setHotelSearchResults,
+    hotelSearchResults,
+    history,
+  } = props;
+
+  const API_KEY = searchParameters[0];
+  const API_HOST = searchParameters[1];
   let FETCH_URL = localStorage.getItem('HOTEL_SEARCH_URL'); ///api url from initial search here
-  const [searchData, setSearchData] = useState({
-    city: '',
-    locationID: hotelSearchDataSucess,
-    checkin: FETCH_URL.split('&')[12].split('=')[1],
-    checkout: FETCH_URL.split('&')[12].split('=')[1],
-    // nights: FETCH_URL.split('&')[14].split('-')[1],
-    adults: FETCH_URL.split('&')[11].split('=')[1],
-    // rooms: FETCH_URL.split('&')[13].split('=')[1],
-    pricesMAX: FETCH_URL.split('&')[3].split('=')[1],
-    hotelClass: FETCH_URL.split('&')[4].split('=')[1],
-    subcatergory: FETCH_URL.split('&')[2],
-    priceRange: 'true',
-    amenities: [],
-  });
+
   const [hotelSelected, setHotelSelected] = useState({
     boolean: false,
     id: '',
+  });
+  const [searchData, setSearchData] = useState({
+    locationID: props.hotelSearchDataSuccess.locationID,
+    checkin: hotelSearchDataSuccess.checkin,
+    checkout: hotelSearchDataSuccess.checkout,
+    nights: 1,
+    adults: hotelSearchDataSuccess.adults,
+    rooms: hotelSearchDataSuccess.rooms,
+    pricesMAX: hotelSearchDataSuccess.pricesMax,
+    hotelClass: hotelSearchDataSuccess.hotelClass,
+    subcatergory: hotelSearchDataSuccess.subCategory,
+    priceRange: 'true',
+    pricesMin: 0,
   });
 
   const {
@@ -98,29 +100,52 @@ function HotelResults(props) {
       : console.log('hi');
    
   };
-  const sendSearch = (e) => {
-    //   const { origin, destination } = searchData;
-    //   e.preventDefault();
-    //   FETCH_URL = `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/`;
-    //   fetch(FETCH_URL, {
-    //     method: 'GET',
-    //     headers: {
-    //       'x-rapidapi-host': API_HOST,
-    //       'x-rapidapi-key': API_KEY,
-    //     },
-    //   })
-    //     .then((resp) => resp.json())
-    //     .then((response) => {
-    //       localStorage.setItem('hotelSearch_API_URL', FETCH_URL);
-    //       props.setHotelSearchResults(response);
-    //       response.message || response.Quotes.length <= 0
-    //         ? alert('No Avialable Flights available please try')
-    //         : this.props.history.push('/hotel-results');
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-  };
+
+
+  function sendSearch(event) {
+    const {
+      hotelClass,
+      locationID,
+      checkin,
+      nights,
+      adults,
+      rooms,
+      pricesMin,
+      pricesMax,
+      subCategory,
+      priceRange,
+      amenities,
+    } = searchData;
+
+    event.preventDefault();
+    let pricesMaxselected = '';
+    priceRange === 'true'
+      ? (pricesMaxselected = `&pricesmax=${pricesMax}`)
+      : (pricesMaxselected = '');
+    const temp =
+      'https://tripadvisor1.p.rapidapi.com/hotels/list?pricesmin=0&offset=0&subcategory=all&pricesmax=200&hotel_class=all&currency=USD&limit=30&order=asc&lang=en_US&sort=recommended&location_id=35805&adults=1&checkin=2020-09-03&rooms=1&nights=1';
+    const URL = ` https://tripadvisor1.p.rapidapi.com/hotels/list?pricesmin=${pricesMin}&offset=0&subcategory=${subCategory}${pricesMaxselected}&hotel_class=${hotelClass}&currency=USD&limit=30&order=asc&lang=en_US&sort=recommended&location_id=${locationID}&adults=${adults}&checkin=${checkin}&rooms=${rooms}&nights=${nights}`;
+    console.log('dfe', URL, searchData);
+
+    fetch(URL, {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json',
+        'x-rapidapi-host': 'tripadvisor1.p.rapidapi.com',
+        'x-rapidapi-key': '78658dd993msha58b4f039c6c59ep11289djsn173e61927b34',
+        Accept: 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        setHotelSearchResults(response);
+      })
+      .catch((err) => {
+        console.log(err);
+        alert('Please Try again or check input fields');
+      });
+  }
+
   const setToggleButtonDisplay = (id, toggleButtonStyle) => {
     if (toggleButtonStyle === 'Select')
       setHotelSelected({ boolean: true, id: id });
@@ -141,9 +166,10 @@ function HotelResults(props) {
               type="text"
               id="city"
               name="city"
-              defaultValue={''}
-              onChange={(e) =>locationSearch(e)}
-            />
+
+              // defaultValue={hotelSearchResults.status.doubleClickZone.split(".").pop()}
+              onChange={(e) => setTripData(e)}
+
 
             <label htmlFor="checkin">CHECK-IN: </label>
             <input
@@ -165,7 +191,8 @@ function HotelResults(props) {
               onChange={(e) => setTripData(e)}
             />
           </div>
-          <AmenitiesInput setTripData={setTripData} />
+
+          <AmenitiesInput />
 
           {priceRange === 'true' ? (
             <div>
@@ -209,7 +236,13 @@ function HotelResults(props) {
         </form>
       </div>
       <section>
-        <HotelDetailCards
+        {hotelSearchResults ? (
+          <Map hotelSearchResults={props.hotelSearchResults} />
+        ) : (
+          <div className="loader"></div>
+        )}
+
+        {/* <HotelDetailCards
           id={1}
           setToggleButtonDisplay={setToggleButtonDisplay}
           setHotelSelected={setHotelSelected}
@@ -232,24 +265,29 @@ function HotelResults(props) {
           setToggleButtonDisplay={setToggleButtonDisplay}
           setHotelSelected={setHotelSelected}
           hotelSelected={hotelSelected}
-        />
 
-        {/* {hotelSearchResults !== null && !hotelSearchResults.message ? (
-          <div>{' '}
-          {hotelSearchResults.data.map((hotel) => {
-                return (
-                  <HotelDetailCards
-                    id={hotel.name}
-                    hotel={hotel}
           
-                    // setFlightSelected={setDepartureFlightSelected}
-                    // flightSelected={departureFlightSelected}
-                    // setToggleButtonDisplay={setToggleButtonDisplay}
-                  />
-                );
-              })}
-            </div>
-          ) : null} */}
+        /> */}
+
+
+        {hotelSearchResults !== null && !hotelSearchResults.message ? (
+          <div>
+            {' '}
+            {hotelSearchResults.data.map((hotel) => {
+              return (
+                <HotelDetailCards
+                  id={hotel.name}
+                  hotel={hotel}
+                  setToggleButtonDisplay={setToggleButtonDisplay}
+                  setHotelSelected={setHotelSelected}
+                  hotelSelected={hotelSelected}
+                />
+              );
+            })}
+          </div>
+        ) : (
+          <div className="loader"></div>
+        )}
       </section>
       {hotelSelected.boolean ? (
         <button className="continue-button">Continue</button>
@@ -261,25 +299,19 @@ function HotelResults(props) {
 }
 const mapStateToProps = (state) => {
   return {
-    hotelSearchResults: state.hotelSearchResults,
-    returnFlightSearchResults: state.returnFlightSearchResults,
     searchParameters: state.searchParameters,
-    hotelSearchDataSucess: state.hotelSearchDataSucess,
+
+    hotelSearchDataSuccess: state.hotelSearchDataSuccess,
+    hotelSearchResults: state.hotelSearchResults,
+
     userLoaded: state.userLoaded,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    setFlightSearchResults: (results) => {
+    setHotelSearchResults: (results) => {
       const action = {
-        type: 'SET_FLIGHT_RESULTS',
-        results: results,
-      };
-      dispatch(action);
-    },
-    setReturnFlightSearchResults: (results) => {
-      const action = {
-        type: 'SET_RETURN_FLIGHT_RESULTS',
+        type: 'SET_HOTEL_RESULTS',
         results: results,
       };
       dispatch(action);

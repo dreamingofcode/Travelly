@@ -1,0 +1,8 @@
+.adventures-form{
+    min-height: 120vh;
+    background: url("../../images/japan.jpg");
+}
+.adventures-form h1{
+    color: white;
+    margin-top: 7rem;
+}
