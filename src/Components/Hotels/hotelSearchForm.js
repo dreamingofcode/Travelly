@@ -11,13 +11,13 @@ class HotelSearchForm extends React.Component {
     super(props);
     this.wrapper = React.createRef();
     const { searchParameters } = props;
-    const today = searchParameters[2];
+   
 
     this.state = {
-      today: searchParameters[2],
+      today: searchParameters.today,
       city: '',
       locationId: '', //will be located by users location initially
-      checkin: today,
+      checkin: searchParameters.today,
       checkout: '',
       nights: 1,
       adults: 1,
