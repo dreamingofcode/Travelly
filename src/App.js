@@ -17,7 +17,7 @@ import FlightSearchForm from './Components/Flights/flightSearchForm';
 import FlightResults from './Components/Flights/flightResults';
 import HotelSearchForm from './Components/Hotels/hotelSearchForm';
 import HotelResults from './Components/Hotels/hotelResults';
-// import FlightSearchResults from './reducers/flightSearchResults';
+import AdventuresForm from './Components/Adventures/adventuresForm'
 class App extends Component {
   componentWillMount() {
     this.props.getHotelSearchData()
@@ -67,6 +67,8 @@ class App extends Component {
             <Route exact path="/hotel-results" component={HotelResults} />
             <Route exact path="/flightSearch-results"component={FlightResults}/>
             <Route exact path="/account-page/:id" component={AccountPage} />
+            <Route exact path="/adventures-search" component={AdventuresForm} />
+
           </Switch>
           <ScrollToTop />
           <footer>

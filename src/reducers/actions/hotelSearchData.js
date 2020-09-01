@@ -2,7 +2,6 @@ const determineData = () => {
   const hotelFetchURL = localStorage.getItem('HOTEL_SEARCH_URL');
   let data = {}
   if (hotelFetchURL && hotelFetchURL.split("&").length === 15) {
-    console.log("up inside detrmineDATa()",hotelFetchURL.split("&").length)
      data = {
       locationID: hotelFetchURL.split('&')[10].split('=')[1],
       checkin: hotelFetchURL.split('&')[12].split('=')[1],
@@ -33,7 +32,6 @@ const determineData = () => {
 };
 
 export const getHotelSearchData = () => {
-  console.log('inside');
   const data= determineData()
   return (dispatch) => {
     dispatch(hotelSeachDataSuccess(data));

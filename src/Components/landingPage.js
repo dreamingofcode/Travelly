@@ -6,15 +6,26 @@ import road from '../icons/route-solid.svg';
 import cloud from '../images/cloud.png';
 import logo from '../icons/airplane.svg';
 
-let token = localStorage.getItem('token')
-class LandingPage extends React.Component {
-  
-componentWillMount(){
-token = localStorage.getItem('token')
+let token = localStorage.getItem('token');
 
-};
-componentDidMount(){
-  token = localStorage.getItem('token')
+function setLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  }
+}
+
+function showPosition(position) {
+  const coordinates = [position.coords.latitude, position.coords.longitude];
+  localStorage.setItem('USER_LOCATION', coordinates);
+  console.log('oo', position.coords.latitude, position.coords.longitude);
+}
+class LandingPage extends React.Component {
+  componentWillMount() {
+    token = localStorage.getItem('token');
+  }
+  componentDidMount() {
+    token = localStorage.getItem('token');
+    setLocation();
   }
   render() {
     const { userData } = this.props;
@@ -52,10 +63,14 @@ componentDidMount(){
               {' '}
               Over 250 countries at the lowest rates possible!
             </h3>
-            {token != undefined? (
+            {token != undefined ? (
               <div>
-                <button onClick={()=> this.props.history.push(`/account-page/${userData.id}`)}>
-                VIEW ACCOUNT
+                <button
+                  onClick={() =>
+                    this.props.history.push(`/account-page/${userData.id}`)
+                  }
+                >
+                  VIEW ACCOUNT
                 </button>
                 <button
                   onClick={(event) => {
@@ -74,20 +89,28 @@ componentDidMount(){
                     this.props.history.push('/signin');
                   }}
                 >
-                  LOGIN 
+                  LOGIN
                 </button>
                 <button
                   onClick={() => {
                     this.props.history.push('/signup');
                   }}
                 >
-                 SIGN UP
+                  SIGN UP
                 </button>
               </div>
             )}
 
-            <img src={cloud} className="moving-cloud-1 cloud" alt="animated moving cloud" />
-            <img src={cloud} className="moving-cloud-2 cloud" alt="animated moving cloud" />
+            <img
+              src={cloud}
+              className="moving-cloud-1 cloud"
+              alt="animated moving cloud"
+            />
+            <img
+              src={cloud}
+              className="moving-cloud-2 cloud"
+              alt="animated moving cloud"
+            />
           </header>
         </section>
 
@@ -96,7 +119,8 @@ componentDidMount(){
             <h2>The world is waiting for you...</h2>
             <img className="globe" src={logo} alt="animated-logo" />
             <h3>
-              Start your perfect getaway today! <br/>Avoid the hazzle of Travelling by using resources readily
+              Start your perfect getaway today! <br />
+              Avoid the hazzle of Travelling by using resources readily
               available to you! Everything from picking the perfect hotel,
               flight, and travel destination!
             </h3>
@@ -108,7 +132,8 @@ componentDidMount(){
               </div>
               <h4>Fly</h4>
               <p>
-                Browse through the lowest prices on flights and compare your options for the best deals!
+                Browse through the lowest prices on flights and compare your
+                options for the best deals!
               </p>
               <button>
                 <a href="/flightSearch">Find Flights</a>
@@ -120,7 +145,8 @@ componentDidMount(){
               </div>
               <h4>Stay</h4>
               <p>
-                Find the perfect Hotel located near popular Hot-Spots at reduced rates!
+                Find the perfect Hotel located near popular Hot-Spots at reduced
+                rates!
               </p>
               <button>
                 <a href="/hotel-search">Find Hotels</a>
@@ -132,9 +158,10 @@ componentDidMount(){
               </div>
               <h4>Explore</h4>
               <p>
-                Discover new adventures and see what both locals and tourists love to do!
+                Discover new adventures and see what both locals and tourists
+                love to do!
               </p>
-              <button>Find Adventures</button>
+              <button><a href="/adventures-search">Find Adventures</a></button>
             </div>
           </div>
         </section>

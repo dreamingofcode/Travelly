@@ -25,37 +25,39 @@ useEffect(() => {
     id,
     setToggleButtonDisplay,
     hotelSelected,
+    hotel,
     setHotelSelected,
   } = props;
-  // const name = id;
-  // const location = hotel.location_string;
-  // const imageURL = hotel.photo.images.original.url;
-  // const imageALT = hotel.photo.images.caption;
-  // const price = hotel.price;
-  // const priceLevel = hotel.price_level;
-  // const rating = hotel.rating;
-  // const reviews = hotel.num_reviews;
-  // const name = id;
-  // let savingsAlert = false;
-  // {
-  //   hotel.saving_alert
-  //     ? (savingsAlert = hotel.saving_alert.message)
-  //     : (savingsAlert = false);
-  // }
+  const hotelName = id;
+  const location = hotel.location_string;
+  const imageURL = hotel.photo.images.original.url;
+  const imageALT = hotel.photo.images.caption;
+  const price = hotel.price;
+  const priceLevel = hotel.price_level;
+  const rating = hotel.rating;
+  const reviews = hotel.num_reviews;
+  // const specialOffer= hotel.hac_offers.offers[0]
+  // const specialOfferLink= specialOffer.link
+  let savingsAlert = false;
+  {
+    hotel.saving_alert
+      ? (savingsAlert = hotel.saving_alert.message)
+      : (savingsAlert = false);
+  }
 
-  const hotelName = 'TRUMP TOWERS';
-  const location = 'chicago,Illinois';
-  const imageURL =
-    'https://media-cdn.tripadvisor.com/media/photo-s/1b/34/ce/b2/swissotel-chicago.jpg';
-  const imageALT = 'cute hotel';
-  const price = '$$130-300';
-  const priceLevel = '$$';
-  const rating = '3.0';
-  const reviews = 22334;
+  // const hotelName = 'TRUMP TOWERS';
+  // const location = 'chicago,Illinois';
+  // const imageURL =
+  //   'https://media-cdn.tripadvisor.com/media/photo-s/1b/34/ce/b2/swissotel-chicago.jpg';
+  // const imageALT = 'cute hotel';
+  // const price = '$$130-300';
+  // const priceLevel = '$$';
+  // const rating = '3.0';
+  // const reviews = 22334;
   const specialOffer = '$120';
   const specialOfferLink =
     'https://media-cdn.tripadvisor.com/media/photo-s/1b/34/ce/b2/swissotel-chicago.jpg';
-  const savingsAlert = '80% cheaper!';
+  // const savingsAlert = '80% cheaper!';
 
   let starRating = [];
 

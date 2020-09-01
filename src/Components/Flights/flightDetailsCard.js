@@ -55,7 +55,7 @@ function FlightDetailsCard(props) {
       setToggleButtonStyle('Select');
     }
 
-    setToggleButtonDisplay(id, toggleButtonStyle);
+    setToggleButtonDisplay(id, toggleButtonStyle,tripType);
   };
   const formatDepartureDate = () => {
     const dateString = departureDate

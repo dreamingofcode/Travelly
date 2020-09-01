@@ -89,7 +89,7 @@ class HotelSearchForm extends React.Component {
           })
       : console.log('hi');
   };
-
+  
   sendSearch(event) {
     const {
       hotelClass,
@@ -127,6 +127,13 @@ class HotelSearchForm extends React.Component {
       .then((response) => response.json())
       .then((response) => {
         localStorage.setItem('HOTEL_SEARCH_URL', URL);
+        // const coordinates = this.setHotelCoordinates(response);
+        const coordinates = [];
+        response.data.map((hotel) => {
+          coordinates.push([hotel.latitude, hotel.longitude]);
+        });
+
+        this.props.setHotelCoordinates(coordinates);
         this.props.setHotelSearchResults(response);
         this.props.getHotelSearchData();
         console.log('saa', response, URL);
@@ -346,6 +353,13 @@ const mapDispatchToProps = (dispatch) => {
     },
     getHotelSearchData: () => {
       dispatch(getHotelSearchData());
+    },
+    setHotelCoordinates: (results) => {
+      const action = {
+        type: 'SET_HOTEL_COORDINATES',
+        hotelCoordinates: results,
+      };
+      dispatch(action);
     },
   };
 };
