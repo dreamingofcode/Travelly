@@ -1,67 +1,35 @@
 .accountPage {
-  position: relative;
-  background-repeat: no-repeat;
+  min-height: 120vh;
+  background: url('../images/italy-1587287_1920.jpg');
   background-position: center;
+  background-repeat: no-repeat;
   background-size: cover;
-  background: linear-gradient(rgba(19, 155, 213, 0.5), transparent);
-  min-height: 110vh;
-  align-items: center;
-  justify-content: center;
-  left: 0px;
-  overflow: hidden;
 }
 .accountPage button {
   flex-wrap: wrap;
   position: relative;
   border: black 1rem solid;
-  border-radius: 100%;
-
   background-color: rgb(40, 41, 39);
   text-align: center;
   justify-content: center;
   align-self: center;
+  margin:2rem;
   /* opacity: 0.9; */
 }
-.button2 {
-  bottom: 6rem;
-  z-index: 1;
-  height: 24rem;
-}
-.button1 {
-  height: 21rem;
-  bottom: 1rem;
-  width: 30rem;
-  left: 5%;
-}
-.button3 {
-  height: 21rem;
-  left: -5%;
-  width: 30rem;
-  /* z-index: -1; */
-  bottom: 1rem;
-}
-.accountDetails {
-  width: 90%;
+.accountDetails{
+  width: 80%;
   margin: auto;
-  position: relative;
-  display: flex;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  text-shadow: 1px 1px 2px red, 0 0.6em blue, 0 0 7.2em blue;
-  background-size: cover;
-  background-position: center;
-  background-image: url('../images/moutainRoad.png');
-  width: 90rem;
-  height: 30rem;
-  margin-top: 1rem;
-  margin-bottom: 40rem;
-  border: #131c27 3rem solid;
-  border-radius: 15%;
+  min-height: 60vh;
+  margin-top: 15rem;
+  background: #ced4da;
+  opacity: .88;
 }
+
 .accountDetails h1 {
-  font-size: 9rem;
+  font-size: 6rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+
 }
 .dashBoard {
   position: absolute;
@@ -72,13 +40,13 @@
   z-index: -2;
 }
 .paper {
-  opacity: .4rem;
+  opacity: 0.4rem;
   text-align: center;
   position: relative;
-background:  url('../images/vectorstock_1462080.jpg');
-background-position: center;
-background-repeat: no-repeat;
-background-size: cover;
+  background: url('../images/vectorstock_1462080.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   top: 3%;
   width: 70%;
   margin: auto;
@@ -87,7 +55,6 @@ background-size: cover;
   justify-content: center;
   text-align: center;
   border: brown solid 1rem;
-
 }
 
 .paper li {
@@ -106,22 +73,21 @@ background-size: cover;
 }
 .paper button {
   margin-top: 2rem;
-  margin-bottom: 2rem ;
+  margin-bottom: 2rem;
   margin-right: 3rem;
   height: 4rem;
   width: fit-content;
-  color:white;
-  font-family:sans-serif;
- 
+  color: white;
+  font-family: sans-serif;
+
   line-height: 0em;
 }
-.closing-icon{
+.closing-icon {
   height: 5rem;
-  color:black;
+  color: black;
   position: absolute;
-  right:1%;
-  top:1%;
-
+  right: 1%;
+  top: 1%;
 }
 .updateForm {
   background: blanchedalmond;
@@ -129,7 +95,7 @@ background-size: cover;
   flex-wrap: wrap;
   width: 80%;
   margin: auto;
-min-height: 480px;
+  min-height: 480px;
 }
 .dateForm {
   display: inline;
@@ -138,14 +104,6 @@ min-height: 480px;
   border-radius: 4%;
 }
 
-.carScent {
-  display: flex;
-  position: absolute;
-  max-height: 25rem;
-  top: 100%;
-  z-index: -1;
-  animation: swingingScent 3s infinite alternate-reverse;
-}
 @keyframes swingingScent {
   0% {
     transform: translate(0%, 1%);
@@ -157,40 +115,11 @@ min-height: 480px;
   }
 }
 @media screen and (max-width: 956px) {
-  .accountPage button {
-    flex-wrap: wrap;
-    position: relative;
-    border: black 1rem solid;
-    border-radius: 0%;
-    height: 4rem;
-    background-color: rgb(40, 41, 39);
-    width: 40rem;
-    bottom: 0rem;
-    left: 0%;
-    margin-bottom: 4rem;
-    /* opacity: 0.9; */
+  .accountDetails{
+    margin-top: 25rem;
   }
-  .dashBoard {
-    display: none;
-  }
-  .accountDetails {
-    width: 90%;
-    margin: auto;
-    position: relative;
-    display: flex;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    text-shadow: 1px 1px 2px red, 0 0.6em blue, 0 0 7.2em blue;
-    background-size: cover;
-    background-position: center;
-    background-image: url('../images/moutainRoad.png');
-    /* width: fit-content; */
-    height: 30rem;
-    margin-top: 1rem;
-    margin-bottom: 30rem;
-    border: #131c27 3rem solid;
-    border-radius: 15%;
-  }
+
+
+  
+    
 }

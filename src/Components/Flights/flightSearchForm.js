@@ -157,7 +157,7 @@ class FlightSearchForm extends React.Component {
                           defaultChecked="true"
                           id="return"
                           onClick={(e) => this.setTripData(e)}
-                        />
+                   n     />
                         <label htmlFor="roundtrip">ROUND TRIP</label>
                       </div>
                       <div className="info-box">

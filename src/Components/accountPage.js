@@ -4,10 +4,8 @@ import { useHistory } from 'react-router-dom';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import AccountDetails from './accountDetails';
 import AccountEditForm from './accountEditForm';
 import './accountPage.css';
-import dash from '../images/dash.png';
 import arrow from '../icons/arrow.png';
 
 function AccountPage(props) {
@@ -31,20 +29,20 @@ function AccountPage(props) {
   return (
     <div className="accountPage">
       {token ? null : history.push('/')}
-      <div className="accountDetail">
-        {props.userLoaded === false ? (
+      <div className="accountDetails">
+        {userData ? null : (
           <div className="d-flex justify-content-center">
             <h1>IS LOADING..</h1>
             <div className="spinner-border" role="status">
               <span className="sr-only">Loading...</span>
             </div>
           </div>
-        ) : (
-          <AccountDetails 
-           />
         )}
-        ;
-        <img className="dashBoard" src={dash} />
+        {props.userLoaded === false ? null : (
+          <h1>Welcome {props.userData.name}</h1>
+        )}
+        <h4>You currently have {0} trips booked</h4>
+        {props.userLoaded && userData.address === "Please Update!" ?<h4>In order to better serve you, please update your Account Details</h4>:null}
         <button className="button1" onClick={handleOpen}>
           Account Details
         </button>
@@ -96,10 +94,12 @@ function AccountPage(props) {
                   {!editUser ? (
                     <div>
                       <ul>
-                        <li>Name:   {userData.name}</li>
-                        <li>Date of Birth:   {userData.DOB}</li>
+                        <li>Name: {userData.name}</li>
+                        <li>Date of Birth: {userData.DOB}</li>
                         <li>Email: {userData.email}</li>
-                        <li>Address: <br/> {userData.address}</li>
+                        <li>
+                          Address: <br /> {userData.address}
+                        </li>
                       </ul>
                       <button onClick={() => seteditUser(true)}>
                         Edit Details

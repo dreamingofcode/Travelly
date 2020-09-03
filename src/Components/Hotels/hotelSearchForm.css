@@ -3,8 +3,11 @@
   overflow-y: hidden;
   min-height: 150vh;
   box-sizing: border-box;
-  background: linear-gradient(#46a8be80, transparent),
-    url('../../images/hotelBackground2.png');
+  background: 
+  /* linear-gradient(#20495280, transparent), */
+      url('../../images/hotel.jpg');
+
+    /* url('../../images/hotelBackground2.png'); */
   /* url('../../images/hotelFormBackG.png'); */
   background-size: cover;
   background-position: bottom;

@@ -21,6 +21,33 @@ function HotelResults(props) {
   const API_HOST = searchParameters[1];
   let FETCH_URL = localStorage.getItem('HOTEL_SEARCH_URL'); ///api url from initial search here
 
+
+  //   setReturnFlightSearchResults,
+  //   history,
+  //   hotelSearchResults,
+  //   hotelSearchDataSucess,
+  // } = props;
+  // const API_KEY = searchParameters.key;
+  // const API_HOST = searchParameters.tripAdvisor;
+  // console.log('checkin', props.hotelSearchDataSucess, props.userLoaded);
+
+  // let FETCH_URL = localStorage.getItem('HOTEL_SEARCH_URL'); ///api url from initial search here
+  // const [searchData, setSearchData] = useState({
+  //   city: '',
+  //   locationID: hotelSearchDataSucess,
+  //   checkin: FETCH_URL.split('&')[12].split('=')[1],
+  //   checkout: FETCH_URL.split('&')[12].split('=')[1],
+  //   // nights: FETCH_URL.split('&')[14].split('-')[1],
+  //   adults: FETCH_URL.split('&')[11].split('=')[1],
+  //   // rooms: FETCH_URL.split('&')[13].split('=')[1],
+  //   pricesMAX: FETCH_URL.split('&')[3].split('=')[1],
+  //   hotelClass: FETCH_URL.split('&')[4].split('=')[1],
+  //   subcatergory: FETCH_URL.split('&')[2],
+  //   priceRange: 'true',
+  //   amenities: [],
+  // });
+
+
   const [hotelSelected, setHotelSelected] = useState({
     boolean: false,
     id: '',
@@ -69,6 +96,8 @@ function HotelResults(props) {
           });
     } else setSearchData({ ...searchData, [key]: value });
     console.log('ssdd', searchData);
+
+
   };
   const locationSearch = (event) => {
     const string = event.target.value;
@@ -100,6 +129,7 @@ function HotelResults(props) {
       : console.log('hi');
    
   };
+
 
 
   function sendSearch(event) {
@@ -171,6 +201,11 @@ function HotelResults(props) {
               onChange={(e) => setTripData(e)}
 
 
+              // onChange={(e) =>locationSearch(e)}
+
+            />
+
+
             <label htmlFor="checkin">CHECK-IN: </label>
             <input
               type="date"
@@ -192,7 +227,10 @@ function HotelResults(props) {
             />
           </div>
 
-          <AmenitiesInput />
+
+          <AmenitiesInput setTripData={setTripData} />
+
+
 
           {priceRange === 'true' ? (
             <div>
@@ -269,6 +307,9 @@ function HotelResults(props) {
           
         /> */}
 
+       
+
+
 
         {hotelSearchResults !== null && !hotelSearchResults.message ? (
           <div>
@@ -303,6 +344,7 @@ const mapStateToProps = (state) => {
 
     hotelSearchDataSuccess: state.hotelSearchDataSuccess,
     hotelSearchResults: state.hotelSearchResults,
+
 
     userLoaded: state.userLoaded,
   };
