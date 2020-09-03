@@ -1,5 +1,7 @@
- const locationSearch = (event) => {
+
+export const locationSearch = (event) => {
   const string = event.target.value;
+event.preventDefault()
 
   string !== ''
     ? fetch(
@@ -18,7 +20,8 @@
           console.log(response);
           console.log('sss', response.data[0].result_object.location_id);
           const data = response.data[0].result_object.location_id;
-          return data;
+localStorage.setItem("locationID",data)
+localStorage.setItem("location_coordinates",[response.data[0].latitude,response.data[0].longitude])
         })
         .catch((err) => {
           console.log(err);
@@ -26,4 +29,3 @@
     : console.log('hi');
  
 };
-export default locationSearch

@@ -1,24 +1,41 @@
-.adventures-form{
-    min-height: 120vh;
-    background: url("../../images/japan.jpg");
+.adventures-form {
+  min-height: 120vh;
+  background: url('../../images/japan.jpg');
 }
-.adventures-form h1{
-    color: white;
-    font-family: 'Pattaya', sans-serif; 
+.adventures-form h1 {
+  color: white;
+  font-family: 'Pattaya', sans-serif;
   font-size: 10rem;
   padding: 4rem;
+  margin-bottom: -50px;
 }
-.adventures-form input{
-height: 60px;
-width: 250px;
+.adventures-form button{
+   height: 50px;
+   line-height: 0;
+  }
+.adventures-form input[type='text'] {
+  height: 50px;
+  width: 350px;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+  text-align: center;
 }
-.adventures-map{
-    display: inline-block;
-    /* position: absolute; */
+.adventures-form input[type='checkbox'] {
+
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+  }
+.adventures-form label {
+  margin-bottom: -1rem;
+  margin-right: 3rem;
+}
+.adventures-map {
+  display: inline-block;
+  /* position: absolute; */
   justify-content: center;
   align-content: center;
   text-align: center;
-  margin:0px;
+  margin: 0px;
   margin-top: 0px;
   margin-left: 0px;
   margin-bottom: 0px;
@@ -31,18 +48,33 @@ width: 250px;
   -moz-osx-font-smoothing: grayscale;
   border: solid black 1rem;
 }
-.adventures-map img{
-    height: 60px;
-    width: 60px;
- /* position: absolute; */
+.adventures-map img {
+  height: 60px;
+  width: 60px;
+  /* position: absolute; */
 }
- .marker{
-    padding: 0;
-    margin-top: 0px !important;
-    line-height: 0px !important;
-    margin-top: 0px;
-    margin-left: 0px;
-    margin-bottom: 0px;
-    position: absolute;
-   display: inline-flex;
+.pop-up img{
+ min-height: 220px;
+  min-width: 220px;
+}
+.pop-up a{
+  text-decoration: underline;
+  color:black;
+}
+.marker {
+  padding: 0;
+  margin-top: 0px !important;
+  line-height: 0px !important;
+  margin-top: 0px;
+  margin-left: 0px;
+  margin-bottom: 0px;
+  /* position: absolute; */
+  display: block;
+}
+.search-form {
+  background:#ced4da;
+  width: 65%;
+  margin: auto;
+  min-height: 150px;
+  margin-bottom: 4rem;
 }

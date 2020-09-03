@@ -2,33 +2,60 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import arrow from '../../icons/arrow.png';
-import './adventuresForm.css'
-import 'mapbox-gl/dist/mapbox-gl.css'
+import userMarker from '../../icons/userMarker.png';
+import foodMarker from '../../icons/burger.png';
+
+
+import './adventuresForm.css';
+import 'mapbox-gl/dist/mapbox-gl.css';
+import { viewport } from '@popperjs/core';
+import { isConstructorDeclaration } from 'typescript';
 
 //a viewport must be set to set where the map will load up.
 //ideally we want a users location to determine where the map viewport is
 
 function AdventuresMap(props) {
+  const { searchData } = props;
   const USER_LOCATION = localStorage.getItem('USER_LOCATION');
-  const USER_LATITUDE= parseFloat(USER_LOCATION.split(',')[0])
-  const USER_LONGITUDE = parseFloat(USER_LOCATION.split(',')[1])
+
+  const locationCoordinate= localStorage.getItem("location_coordinates")
+  let SEARCH_LATITUDE =""
+  let SEARCH_LONGITUDE =""
+console.log("locationID",searchData.locationID)
+  if (searchData.nearMe) {
+     SEARCH_LATITUDE = parseFloat(USER_LOCATION.split(',')[0]);
+    SEARCH_LONGITUDE = parseFloat(USER_LOCATION.split(',')[1]);
+  }
+  else {
+    SEARCH_LATITUDE = parseFloat(locationCoordinate.split(',')[0]);
+    SEARCH_LONGITUDE = parseFloat(locationCoordinate.split(',')[1]);
+  
+  }
   const [viewportState, setViewport] = useState({
     width: 1000,
     height: 500,
-    latitude: USER_LATITUDE,
-    longitude: USER_LONGITUDE,
+    latitude: SEARCH_LATITUDE,
+    longitude: SEARCH_LONGITUDE,
     zoom: 15,
   });
-  const [selectedHotel, setSelectedHotel] = useState(null);
-  const hotelCoordinates = [
-    // [41.886063, -87.62064],
-    // [41.888565, -87.62734],
-    // [parseFloat(USER_LOCATION.split(',')[0]),parseFloat(USER_LOCATION.split(',')[1])]
-]
+  const [selectedItem, setSelectedItem] = useState(null);
+  
+  function setLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    }
+  }
+
+  function showPosition(position) {
+    const coordinates = [position.coords.latitude, position.coords.longitude];
+    localStorage.setItem('USER_LOCATION', coordinates);
+  }
+
   useEffect(() => {
+    setLocation();
     const listener = (e) => {
       if (e.key === 'Escape') {
-        setSelectedHotel(null);
+        setSelectedItem(null);
       }
     };
     window.addEventListener('keydown', listener);
@@ -37,12 +64,11 @@ function AdventuresMap(props) {
       window.removeEventListener('keydown', listener);
     };
   }, []);
-  const { hotelSearchResults } = props;
+  const { attractions, restaurants } = props;
   const TOKEN =
     'pk.eyJ1IjoiY2VzYXJtb3RhMTIzIiwiYSI6ImNrZWRjNjlxaTBmbTUydGs5cDRib2JsaW4ifQ.zBj3f9fd5ukPTjXjTO6f5A';
   return (
     <div className="adventures-map">
-
       <ReactMapGL
         {...viewportState}
         mapboxApiAccessToken={TOKEN}
@@ -51,56 +77,88 @@ function AdventuresMap(props) {
         }}
       >
         <Marker
-            key={"2"}
+          key={'2'}
           longitude={parseFloat(USER_LOCATION.split(',')[1])}
           latitude={parseFloat(USER_LOCATION.split(',')[0])}
         >
           <div className="marker">
-     <p>YOU ARE HERE</p>
-            <img src={arrow} alt="hotel icon" />
+            <p>YOU ARE HERE</p>
+            <img src={userMarker} alt="hotel icon" />
           </div>{' '}
         </Marker>
-       
-
-        {/* {hotelSearchResults
-          ? hotelSearchResults.data.map((hotel) => {
+        {attractions && !attractions.errors
+          ? attractions.data.map((attraction) => {
               return (
                 <Marker
-                  key={hotel.location_id}
-                  longitude={parseFloat(hotel.longitude)}
-                  latitude={parseFloat(hotel.latitude)}
+                  key={attraction.location_id}
+                  longitude={parseFloat(attraction.longitude)}
+                  latitude={parseFloat(attraction.latitude)}
                 >
                   <div className="marker">
                     <img
                       src={arrow}
-                      alt="hotel icon"
+                      alt="attraction icon"
                       onClick={(e) => {
                         e.preventDefault();
-                        setSelectedHotel(hotel);
+                        setSelectedItem(attraction);
                       }}
                     />
                   </div>{' '}
                 </Marker>
               );
             })
-          : console.log('not eworki')} */}
-        {selectedHotel ? (
+          : console.log('not eworki')}
+        {restaurants && !restaurants.errors
+          ? restaurants.data.map((restaurant) => {
+              if (restaurant.longitude && restaurant.latitude) {
+                return (
+                  <Marker
+                    key={restaurant.location_id}
+                    longitude={parseFloat(restaurant.longitude)}
+                    latitude={parseFloat(restaurant.latitude)}
+                  >
+                    <div className="marker">
+                      <img
+                        src={foodMarker}
+                        style={{ height: '20px', width: '20px' }}
+                        alt="restaurant icon"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setSelectedItem(restaurant);
+                        }}
+                      />
+                    </div>{' '}
+                  </Marker>
+                );
+              }
+            })
+          : console.log('not eworki')}
+        {selectedItem ? (
           <Popup
-            latitude={parseFloat(selectedHotel.latitude)}
-            longitude={parseFloat(selectedHotel.longitude)}
+            latitude={parseFloat(selectedItem.latitude)}
+            longitude={parseFloat(selectedItem.longitude)}
             onClose={() => {
-              setSelectedHotel(null);
+              setSelectedItem(null);
             }}
           >
             <div className="pop-up">
-              <img
-                src={selectedHotel.photo.images.original.url}
-                alt="hotel image"
-              />
+              {selectedItem.photo ? (
+                <img
+                  src={selectedItem.photo.images.original.url}
+                  alt="hotel image"
+                />
+              ) : null}
+              <p>{selectedItem.name}</p>
+              <p>{selectedItem.rating}</p>
+              <p>{selectedItem.phone}</p>
+              <p>{selectedItem.address}</p>
               <p>
-                <a href={`#${selectedHotel.name}`}>{selectedHotel.name}</a>
+                <a href={selectedItem.web_url} target="blank">
+                  Website
+                </a>
               </p>
-              <p>{selectedHotel.price}</p>
+
+              {selectedItem.is_closed ? <p>Closed Now</p> : <p>Open Now</p>}
             </div>
           </Popup>
         ) : null}
@@ -124,7 +182,8 @@ function AdventuresMap(props) {
 }
 const mapStateToProps = (state) => {
   return {
-    hotelSearchResults: state.hotelSearchResults,
+    attractions: state.attractions,
+    restaurants: state.restaurants,
     // hotelCoordinates: state.hotelCoordinates,
   };
 };
