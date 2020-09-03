@@ -21,6 +21,7 @@ function HotelResults(props) {
   const API_HOST = searchParameters[1];
   let FETCH_URL = localStorage.getItem('HOTEL_SEARCH_URL'); ///api url from initial search here
 
+
   //   setReturnFlightSearchResults,
   //   history,
   //   hotelSearchResults,
@@ -45,6 +46,7 @@ function HotelResults(props) {
   //   priceRange: 'true',
   //   amenities: [],
   // });
+
 
   const [hotelSelected, setHotelSelected] = useState({
     boolean: false,
@@ -94,6 +96,8 @@ function HotelResults(props) {
           });
     } else setSearchData({ ...searchData, [key]: value });
     console.log('ssdd', searchData);
+
+
   };
   const locationSearch = (event) => {
     const string = event.target.value;
@@ -125,6 +129,7 @@ function HotelResults(props) {
       : console.log('hi');
    
   };
+
 
 
   function sendSearch(event) {
@@ -195,9 +200,11 @@ function HotelResults(props) {
               // defaultValue={hotelSearchResults.status.doubleClickZone.split(".").pop()}
               onChange={(e) => setTripData(e)}
 
+
               // onChange={(e) =>locationSearch(e)}
 
             />
+
 
             <label htmlFor="checkin">CHECK-IN: </label>
             <input
@@ -220,7 +227,9 @@ function HotelResults(props) {
             />
           </div>
 
+
           <AmenitiesInput setTripData={setTripData} />
+
 
 
           {priceRange === 'true' ? (
@@ -294,11 +303,12 @@ function HotelResults(props) {
           setToggleButtonDisplay={setToggleButtonDisplay}
           setHotelSelected={setHotelSelected}
           hotelSelected={hotelSelected}
-<<<<<<< HEAD
+
           
         /> */}
 
        
+
 
 
         {hotelSearchResults !== null && !hotelSearchResults.message ? (
