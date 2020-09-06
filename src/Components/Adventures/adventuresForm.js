@@ -98,26 +98,26 @@ function AdventureForm(props) {
         : setAttractions(null);
     }
 
-    {
-      attractions
-        ? fetch(ATTRACTIONS_URL, {
-            method: 'GET',
-            headers: {
-              'x-rapidapi-host': 'tripadvisor1.p.rapidapi.com',
-              'x-rapidapi-key':
-                '78658dd993msha58b4f039c6c59ep11289djsn173e61927b34',
-            },
-          })
-            .then((resp) => resp.json())
-            .then((response) => {
-              console.log(response);
-              setAttractions(response);
-            })
-            .catch((err) => {
-              console.log(err);
-            })
-        : setAttractions(null);
-    }
+    // {
+    //   attractions
+    //     ? fetch(ATTRACTIONS_URL, {
+    //         method: 'GET',
+    //         headers: {
+    //           'x-rapidapi-host': 'tripadvisor1.p.rapidapi.com',
+    //           'x-rapidapi-key':
+    //             '78658dd993msha58b4f039c6c59ep11289djsn173e61927b34',
+    //         },
+    //       })
+    //         .then((resp) => resp.json())
+    //         .then((response) => {
+    //           console.log(response);
+    //           setAttractions(response);
+    //         })
+    //         .catch((err) => {
+    //           console.log(err);
+    //         })
+    //     : setAttractions(null);
+    // }
   };
   return (
     <div className="adventures-form">
