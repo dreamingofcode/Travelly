@@ -22,14 +22,19 @@ function AdventuresMap(props) {
   let SEARCH_LATITUDE =""
   let SEARCH_LONGITUDE =""
 console.log("locationID",searchData.locationID)
+
+console.log("coordinates",locationCoordinate.split(','),locationCoordinate.split(',')[1],typeof(locationCoordinate.split(',')[0]))
+
   if (searchData.nearMe) {
      SEARCH_LATITUDE = parseFloat(USER_LOCATION.split(',')[0]);
     SEARCH_LONGITUDE = parseFloat(USER_LOCATION.split(',')[1]);
   }
   else {
-    SEARCH_LATITUDE = parseFloat(locationCoordinate.split(',')[0]);
-    SEARCH_LONGITUDE = parseFloat(locationCoordinate.split(',')[1]);
-  
+    // SEARCH_LATITUDE = parseFloat(locationCoordinate.split(',')[0]);
+    // SEARCH_LONGITUDE = parseFloat(locationCoordinate.split(',')[1]);
+    SEARCH_LATITUDE = parseFloat(USER_LOCATION.split(',')[0]);
+    SEARCH_LONGITUDE = parseFloat(USER_LOCATION.split(',')[1]);
+  console.log("triggered no near me",SEARCH_LATITUDE,SEARCH_LONGITUDE,typeof(SEARCH_LONGITUDE))
   }
   const [viewportState, setViewport] = useState({
     width: 1000,
@@ -48,11 +53,11 @@ console.log("locationID",searchData.locationID)
 
   function showPosition(position) {
     const coordinates = [position.coords.latitude, position.coords.longitude];
-    localStorage.setItem('USER_LOCATION', coordinates);
+    // localStorage.setItem('USER_LOCATION', coordinates);
   }
 
   useEffect(() => {
-    setLocation();
+    // setLocation();
     const listener = (e) => {
       if (e.key === 'Escape') {
         setSelectedItem(null);
