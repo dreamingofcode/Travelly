@@ -1,4 +1,4 @@
-<h1>:earth_americas: *TRAVELLY* :earth_americas:*</h1>
+<h1>:earth_americas: *TRAVELLY* :earth_americas:</h1>
 </hr>
 Find all of your travel needs in ONE place! From booking a flight :airplane:, finding the perfect hotel :hotel:, or discovering restaurants :hamburger: :cocktail: and attractions :statue_of_liberty: 	:roller_coaster: anywhere you go! Come and explore all your ticket options for both one-way and roundtrip flights at the lowest possible rates by browsing through real live ticket information by multiple carriers. Discover unexpected adventures and hotels in every corner of the world! Browse through multiple hotel prices and latest deals available. Never again will you go bored while on vacation by using our restraunts and attractions locator. Create an account and start using Travelly to plan your next wild 	:leopard: :earth_americas:adventure!
 ## Available Scripts
