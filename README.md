@@ -15,16 +15,16 @@ RapidAPI Key </br>
 <h2>Installation</h2>
 A step by step series of examples that tell you how to get a development env running </br>
 
-1.Download and open Visual Studios code editor
-2. visit [Rapid-API](https://rapidapi.com/) and create an account to gain access key.
-3.Clone this repo to your local machine
-terminal command: git clone https://github.com/dreamingofcode/Travelly.git
-4.Install NPM packages 
-terminal command: npm install npm@latest -g
-5.Enter your API in config.js
-const API_KEY = 'ENTER YOUR API';
-6.start your local server
-terminal command: npm start
+1.Download and open Visual Studios code editor </br>
+2. visit [Rapid-API](https://rapidapi.com/) and create an account to gain access key </br>
+3.Clone this repo to your local machine </br>
+terminal command: git clone https://github.com/dreamingofcode/Travelly.git </br>
+4.Install NPM packages </br>
+terminal command: npm install npm@latest -g </br>
+5.Enter your API in config.js </br>
+const API_KEY = 'ENTER YOUR API'; </br>
+6.start your local server </br>
+terminal command: npm start </br>
 
 <h2>Using Travelly</h2>
 * Create an account and update your profile information to avoid filling forms.</br>
