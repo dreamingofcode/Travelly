@@ -7,104 +7,49 @@ These instructions will get you a copy of the project up and running on your loc
 </hr>
 
 <h2>Prerequisites</h2>
-* npm
-> npm install npm@latest -g
+**Visual Studios**
+**npm**
+**RapidAPI Key**
 
-Give examples
-Installing
+
+<h2>Installation</h2>
 A step by step series of examples that tell you how to get a development env running
 
-Say what the step will be
+1.Download and open Visual Studios code editor
+2. visit [Rapid-API](https://rapidapi.com/) and create an account to gain access key.
+3.Clone this repo to your local machine
+terminal command: git clone https://github.com/dreamingofcode/Travelly.git
+4.Install NPM packages 
+terminal command: npm install npm@latest -g
+5.Enter your API in config.js
+const API_KEY = 'ENTER YOUR API';
+6.start your local server
+terminal command: npm start
 
-Give the example
-And repeat
+<h2>Using Travelly</h2>
+*Create an account and update your profile information to avoid filling forms.
+*Browse for flights using the flights search form.
+*Browse for hotel using the hotel search form.
+*Browse for restaurants and attractions near you or other cities using the todo's locator.
+* Create a trip and begin to asssign it with plane tickets, hotel options, and todo's
 
-until finished
-End with an example of getting some data out of the system or using it for a little demo
+<h2>Built With</h2>
+*React- Javascript framework
+*Redux and Hooks- React processes
+*Bootstrap - React extension
+*Material ui - styling library
+*Mapbox - Map API
+*React map GL- React extension
+*Jquery
+*HTML5- Hyper Text Markup Language
+*CSS3- Cascading Style Sheets
 
-Running the tests
-Explain how to run the automated tests for this system
+<h2>Author's Contact Information</h2>
+Cesar Mota
+[Personal Website] (https://www.cesarmota.com/)
+[Linkedin] (https://www.linkedin.com/in/cesar-mota365/)
+Email: cesarmota@ymail.com
+Phone Number: 773-664-5734
 
-Break down into end to end tests
-Explain what these tests test and why
 
-Give an example
-And coding style tests
-Explain what these tests test and why
 
-Give an example
-Deployment
-Add additional notes about how to deploy this on a live system
-
-Built With
-Dropwizard - The web framework used
-Maven - Dependency Management
-ROME - Used to generate RSS Feeds
-Contributing
-Please read CONTRIBUTING.md for details on our code of conduct, and the process for submitting pull
-## Available Scripts
-
-In the project directory, you can run:
-
-### `yarn start`
-
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
