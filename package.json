@@ -31,7 +31,7 @@
     },
     "scripts": {
         "start": "react-scripts start",
-        "build": "react-scripts build",
+        "build": "CI= react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
     },
@@ -51,6 +51,8 @@
         ]
     },
     "devDependencies": {
+        "enzyme": "^3.11.0",
+        "enzyme-adapter-react-16": "^1.15.4",
         "redux-devtools": "^3.5.0"
     }
 }
