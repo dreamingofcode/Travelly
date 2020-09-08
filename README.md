@@ -27,28 +27,28 @@ const API_KEY = 'ENTER YOUR API';
 terminal command: npm start
 
 <h2>Using Travelly</h2>
-*Create an account and update your profile information to avoid filling forms.
-*Browse for flights using the flights search form.
-*Browse for hotel using the hotel search form.
-*Browse for restaurants and attractions near you or other cities using the todo's locator.
-* Create a trip and begin to asssign it with plane tickets, hotel options, and todo's
+*Create an account and update your profile information to avoid filling forms.</br>
+*Browse for flights using the flights search form.</br>
+*Browse for hotel using the hotel search form.</br>
+*Browse for restaurants and attractions near you or other cities using the todo's locator.</br>
+* Create a trip and begin to asssign it with plane tickets, hotel options, and todo's.</br>
 
 <h2>Built With</h2>
-*React- Javascript framework
-*Redux and Hooks- React processes
-*Bootstrap - React extension
-*Material ui - styling library
-*Mapbox - Map API
-*React map GL- React extension
-*Jquery
-*HTML5- Hyper Text Markup Language
-*CSS3- Cascading Style Sheets
+*React- Javascript framework </br>
+*Redux and Hooks- React processes </br>
+*Bootstrap - React extension </br>
+*Material ui - styling library </br>
+*Mapbox - Map API </br>
+*React map GL- React extension </br>
+*Jquery </br>
+*HTML5- Hyper Text Markup Language </br>
+*CSS3- Cascading Style Sheets </br>
 
 <h2>Author's Contact Information</h2>
-Cesar Mota
-[Personal Website] (https://www.cesarmota.com/)
-[Linkedin] (https://www.linkedin.com/in/cesar-mota365/)
-Email: cesarmota@ymail.com
+Cesar Mota </br>
+[Personal Website](https://www.cesarmota.com/) </br>
+[Linkedin](https://www.linkedin.com/in/cesar-mota365/) </br>
+Email: cesarmota@ymail.com </br>
 Phone Number: 773-664-5734
 
 
