@@ -24,7 +24,7 @@ function AccountPage(props) {
   // const [userInfo, setUserInfo] = useState(props.userData);
   useEffect(() => {
     // setUserInfo(props.userData);
-  }, []);
+  }, [userData]);
 
   return (
     <div className="accountPage">

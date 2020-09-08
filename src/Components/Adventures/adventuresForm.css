@@ -48,6 +48,12 @@
   -moz-osx-font-smoothing: grayscale;
   border: solid black 1rem;
 }
+.adventures-map-container h1{
+  text-shadow: 1px 1px 2px rgb(177, 155, 27), 0 0.1em rgba(247, 9, 9, 0.797), 0 0 7.2em rgb(152, 7, 255);
+
+
+  /* max-height: 80vh; */
+}
 .adventures-map img {
   height: 60px;
   width: 60px;

@@ -55,9 +55,19 @@ console.log("coordinates",locationCoordinate.split(','),locationCoordinate.split
     const coordinates = [position.coords.latitude, position.coords.longitude];
     // localStorage.setItem('USER_LOCATION', coordinates);
   }
-
+const flyTo=()=>{
+  setViewport({
+    ...viewportState,
+    center: [
+    -74.5 + (Math.random() - 0.5) * 10,
+    40 + (Math.random() - 0.5) * 10
+    ],
+    essential: true // this animation is considered essential with respect to prefers-reduced-motion
+    });
+}
   useEffect(() => {
     // setLocation();
+   searchData.nearMe? console.log() : flyTo()
     const listener = (e) => {
       if (e.key === 'Escape') {
         setSelectedItem(null);

@@ -55,6 +55,7 @@ function AccountEditForm(props) {
           alert(data.error);
         }
         console.log('newupdaTTTT', data);
+        history.push("/account-page/:id")
       });
     seteditUser(false);
   };
