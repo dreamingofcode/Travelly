@@ -96,6 +96,8 @@ function AdventureForm(props) {
               console.log(err);
             })
         : setAttractions(null);
+
+        
     }
 
     // {
@@ -121,9 +123,10 @@ function AdventureForm(props) {
   };
   return (
     <div className="adventures-form">
+      <div className="adventures-map-container">
       <h1>Find Your Next Adventure</h1>
       <AdventuresMap searchData={searchData} />
-
+      </div>
       <div className="search-form">
         <div className="selectors">
           <input
@@ -153,7 +156,7 @@ function AdventureForm(props) {
               //   sendSearch(e);
             }}
           />
-          <label> Attractions</label>
+          <label> Attractions </label>
         </div>
         {nearMe?
         <button onClick={(e) => sendSearch(e)}>Search</button>:null}
