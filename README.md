@@ -7,8 +7,8 @@ These instructions will get you a copy of the project up and running on your loc
 </hr>
 
 <h2>Prerequisites</h2>
-*npm
->npm install npm@latest -g
+* npm
+> npm install npm@latest -g
 
 Give examples
 Installing
