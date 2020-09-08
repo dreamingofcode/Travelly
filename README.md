@@ -18,7 +18,7 @@ A step by step series of examples that tell you how to get a development env run
 1.Download and open Visual Studios code editor </br></br>
 2. visit [Rapid-API](https://rapidapi.com/) and create an account to gain access key </br></br>
 3.Clone this repo to your local machine </br> 
-terminal command: git clone (https://github.com/dreamingofcode/Travelly.git) </br> </br>
+terminal command: git clone https://github.com/dreamingofcode/Travelly.git </br> </br>
 4.Install NPM packages </br>
 terminal command: npm install npm@latest -g </br></br>
 5.Enter your API in config.js </br>
