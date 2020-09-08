@@ -7,13 +7,13 @@ These instructions will get you a copy of the project up and running on your loc
 </hr>
 
 <h2>Prerequisites</h2>
-*Visual Studios* </br>
-*npm* </br>
-*RapidAPI Key* </br>
+Visual Studios </br>
+npm </br>
+RapidAPI Key </br>
 
 
 <h2>Installation</h2>
-A step by step series of examples that tell you how to get a development env running
+A step by step series of examples that tell you how to get a development env running </br>
 
 1.Download and open Visual Studios code editor
 2. visit [Rapid-API](https://rapidapi.com/) and create an account to gain access key.
