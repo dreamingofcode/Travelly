@@ -7,9 +7,9 @@ These instructions will get you a copy of the project up and running on your loc
 </hr>
 
 <h2>Prerequisites</h2>
-**Visual Studios**
-**npm**
-**RapidAPI Key**
+*Visual Studios* </br>
+*npm* </br>
+*RapidAPI Key* </br>
 
 
 <h2>Installation</h2>
