@@ -13,10 +13,10 @@ RapidAPI Key </br>
 
 
 <h2>Installation</h2>
-A step by step series of examples that tell you how to get a development env running </br>
+A step by step series of examples that tell you how to get a development env running </br></br>
 
 1.Download and open Visual Studios code editor </br>
-2. visit [Rapid-API](https://rapidapi.com/) and create an account to gain access key </br>
+2. visit [Rapid-API](https://rapidapi.com/) and create an account to gain access key </br></br>
 3.Clone this repo to your local machine </br> 
 terminal command: git clone https://github.com/dreamingofcode/Travelly.git </br> </br>
 4.Install NPM packages </br>
