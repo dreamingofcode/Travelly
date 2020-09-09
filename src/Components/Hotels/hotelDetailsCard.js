@@ -125,21 +125,7 @@ useEffect(() => {
           <p>{savingsAlert}!</p>
         </div>
       ) : null}
-      {favorited === "true" ? (
-        <img
-          src={heart}
-          alt="like/dislike button"
-          className="favorite-image"
-          onClick={() => toggleHeart()}
-        />
-      ) : (
-        <img
-          src={filledHeart}
-          alt="like/dislike button"
-          className="favorite-image"
-          onClick={() => toggleHeart()}
-        />
-      )}
+       
       <div className="select">
         {hotelSelected.boolean && hotelSelected.id !== id ? null : (
           <button id={`${id}`} onClick={(id) => setToggleButton(id)}>

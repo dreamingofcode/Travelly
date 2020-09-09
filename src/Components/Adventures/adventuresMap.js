@@ -23,7 +23,7 @@ function AdventuresMap(props) {
   let SEARCH_LONGITUDE =""
 console.log("locationID",searchData.locationID)
 
-console.log("coordinates",locationCoordinate.split(','),locationCoordinate.split(',')[1],typeof(locationCoordinate.split(',')[0]))
+// console.log("coordinates",locationCoordinate.split(','),locationCoordinate.split(',')[1],typeof(locationCoordinate.split(',')[0]))
 
   if (searchData.nearMe) {
      SEARCH_LATITUDE = parseFloat(USER_LOCATION.split(',')[0]);
