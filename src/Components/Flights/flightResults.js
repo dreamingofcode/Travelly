@@ -89,7 +89,7 @@ function FlightResults(props) {
         console.log(err);
       });
   };
-    const setToggleButtonDisplay = (tripType, id, toggleButtonStyle) => {
+    const setToggleButtonDisplay = ( id, toggleButtonStyle,tripType) => {
       if (tripType === 'departure') {
         if (toggleButtonStyle === 'Select')
           setDepartureFlightSelected({ boolean: true, id: id });
@@ -184,12 +184,12 @@ function FlightResults(props) {
                 return (
                   <FlightDetailCards
                     id={result.QuoteId}
-                    setToggleButtonDisplay={setToggleButtonDisplay}
+                    setToggleButtonDisplay={setToggleButtonDisplay}//important
 
                     result={result}
                     tripType={'departure'}
-                    setFlightSelected={setDepartureFlightSelected}
-                    flightSelected={departureFlightSelected}
+                    setFlightSelected={setDepartureFlightSelected}//important
+                    flightSelected={departureFlightSelected}//important
                     departureDate={departureDate}
                     places={flightSearchResults.Places}
                   />

@@ -66,30 +66,30 @@ form label {
   outline-style: solid;
   outline-color: invert;
 }
-.details {
+.flight-search-results-page .details {
   position: absolute;
   top: 0%;
   left: 5%;
 }
-.specifics {
+.flight-search-results-page .specifics {
   display: block;
   min-height: 18rem;
   position: absolute;
   top: 35%;
   left: 45%;
 }
-.select {
+.flight-search-results-page .select {
   min-height: 8rem;
   position: absolute;
   top: 45%;
   left: 80%;
 }
-.select p {
+.flight-search-results-page .select p {
   min-height: 4rem;
   display: flex;
   bottom: -25%;
 }
-.details img {
+.flight-search-results-page .details img {
   display: block;
   max-width: 180px;
   max-height: 180px;
@@ -101,7 +101,7 @@ form label {
   justify-self: center;
   text-align: center;
 }
-.details-img {
+.flight-search-results-page .details-img {
   margin-top: 4rem;
   padding-bottom: 4rem;
 }
