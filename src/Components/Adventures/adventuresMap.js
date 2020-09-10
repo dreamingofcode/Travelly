@@ -5,7 +5,6 @@ import arrow from '../../icons/arrow.png';
 import userMarker from '../../icons/userMarker.png';
 import foodMarker from '../../icons/burger.png';
 
-
 import './adventuresForm.css';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { viewport } from '@popperjs/core';
@@ -18,23 +17,32 @@ function AdventuresMap(props) {
   const { searchData } = props;
   const USER_LOCATION = localStorage.getItem('USER_LOCATION');
 
-  const locationCoordinate= localStorage.getItem("location_coordinates")
-  let SEARCH_LATITUDE =""
-  let SEARCH_LONGITUDE =""
-console.log("locationID",searchData.locationID)
+  const locationCoordinate = localStorage.getItem('location_coordinates');
+  let SEARCH_LATITUDE = '';
+  let SEARCH_LONGITUDE = '';
+  console.log('locationID', searchData.locationID);
 
-console.log("coordinates",locationCoordinate.split(','),locationCoordinate.split(',')[1],typeof(locationCoordinate.split(',')[0]))
+  console.log(
+    'coordinates',
+    locationCoordinate.split(','),
+    locationCoordinate.split(',')[1],
+    typeof locationCoordinate.split(',')[0]
+  );
 
   if (searchData.nearMe) {
-     SEARCH_LATITUDE = parseFloat(USER_LOCATION.split(',')[0]);
+    SEARCH_LATITUDE = parseFloat(USER_LOCATION.split(',')[0]);
     SEARCH_LONGITUDE = parseFloat(USER_LOCATION.split(',')[1]);
-  }
-  else {
+  } else {
     // SEARCH_LATITUDE = parseFloat(locationCoordinate.split(',')[0]);
     // SEARCH_LONGITUDE = parseFloat(locationCoordinate.split(',')[1]);
     SEARCH_LATITUDE = parseFloat(USER_LOCATION.split(',')[0]);
     SEARCH_LONGITUDE = parseFloat(USER_LOCATION.split(',')[1]);
-  console.log("triggered no near me",SEARCH_LATITUDE,SEARCH_LONGITUDE,typeof(SEARCH_LONGITUDE))
+    console.log(
+      'triggered no near me',
+      SEARCH_LATITUDE,
+      SEARCH_LONGITUDE,
+      typeof SEARCH_LONGITUDE
+    );
   }
   const [viewportState, setViewport] = useState({
     width: 1000,
@@ -44,7 +52,7 @@ console.log("coordinates",locationCoordinate.split(','),locationCoordinate.split
     zoom: 15,
   });
   const [selectedItem, setSelectedItem] = useState(null);
-  
+
   function setLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition);
@@ -55,19 +63,19 @@ console.log("coordinates",locationCoordinate.split(','),locationCoordinate.split
     const coordinates = [position.coords.latitude, position.coords.longitude];
     // localStorage.setItem('USER_LOCATION', coordinates);
   }
-const flyTo=()=>{
-  setViewport({
-    ...viewportState,
-    center: [
-    -74.5 + (Math.random() - 0.5) * 10,
-    40 + (Math.random() - 0.5) * 10
-    ],
-    essential: true // this animation is considered essential with respect to prefers-reduced-motion
+  const flyTo = () => {
+    setViewport({
+      ...viewportState,
+      center: [
+        -74.5 + (Math.random() - 0.5) * 10,
+        40 + (Math.random() - 0.5) * 10,
+      ],
+      essential: true, // this animation is considered essential with respect to prefers-reduced-motion
     });
-}
+  };
   useEffect(() => {
     // setLocation();
-   searchData.nearMe? console.log() : flyTo()
+    searchData.nearMe ? console.log() : flyTo();
     const listener = (e) => {
       if (e.key === 'Escape') {
         setSelectedItem(null);
@@ -103,24 +111,27 @@ const flyTo=()=>{
         </Marker>
         {attractions && !attractions.errors
           ? attractions.data.map((attraction) => {
-              return (
-                <Marker
-                  key={attraction.location_id}
-                  longitude={parseFloat(attraction.longitude)}
-                  latitude={parseFloat(attraction.latitude)}
-                >
-                  <div className="marker">
-                    <img
-                      src={arrow}
-                      alt="attraction icon"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setSelectedItem(attraction);
-                      }}
-                    />
-                  </div>{' '}
-                </Marker>
-              );
+            console.log("yup",parseFloat(attraction.longitude))
+              if (attraction.location_id !== "36511") {
+                return (
+                  <Marker
+                    key={attraction.location_id}
+                    longitude={parseFloat(attraction.longitude)}
+                    latitude={parseFloat(attraction.latitude)}
+                  >
+                    <div className="marker">
+                      <img
+                        src={arrow}
+                        alt="attraction icon"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setSelectedItem(attraction);
+                        }}
+                      />
+                    </div>{' '}
+                  </Marker>
+                );
+              }
             })
           : console.log('not eworki')}
         {restaurants && !restaurants.errors
