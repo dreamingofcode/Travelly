@@ -45,7 +45,7 @@ function FlightDetailsCard(props) {
   //   const destination = 'ATL';
   //   const noneStop = false;
   // const direct= noneStop? "Nonstop":"Layover"
-  const setToggleButton = (id, toggleButtonStyle) => {
+  const setToggleButton = (id) => {
     toggleButtonClassName === 'flight-details-card'
       ? setToggleButtonClassName('flight-details-card-selected-flight')
       : setToggleButtonClassName('flight-details-card');

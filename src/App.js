@@ -59,7 +59,6 @@ class App extends Component {
 
           <Switch>
             <Route exact path="/" component={LandingPage} />
-            {/* <Route path="/" render={()=><LandingPage history={history}/>} /> */}
             <Route exact path="/signup" component={SignUpModal} />
             <Route exact path="/signin" component={SignUpModal} />
             <Route exact path="/flightSearch" component={FlightSearchForm} />
