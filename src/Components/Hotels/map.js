@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import './map.css';
-import arrow from '../icons/arrow.png';
+import arrow from '../../icons/arrow.png';
 //a viewport must be set to set where the map will load up.
 //ideally we want a users location to determine where the map viewport is
 

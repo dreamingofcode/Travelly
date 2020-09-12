@@ -9,7 +9,7 @@ import './App.css';
 import twitter from './icons/twitter.svg';
 import youtube from './icons/youtube.svg';
 import instagram from './icons/instagram.svg';
-
+import TripCreator from './Components/tripCreator'
 import LandingPage from './Components/landingPage';
 import SignUpModal from './Components/signUpModal';
 import AccountPage from './Components/accountPage';
@@ -62,6 +62,7 @@ class App extends Component {
             {/* <Route path="/" render={()=><LandingPage history={history}/>} /> */}
             <Route exact path="/signup" component={SignUpModal} />
             <Route exact path="/signin" component={SignUpModal} />
+            <Route exact path="/trip-creator" component={TripCreator} />
             <Route exact path="/flightSearch" component={FlightSearchForm} />
             <Route exact path="/hotel-search" component={HotelSearchForm} />
             <Route exact path="/hotel-results" component={HotelResults} />

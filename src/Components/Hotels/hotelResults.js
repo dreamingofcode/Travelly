@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import './hotelResults.css';
-import Map from '../map';
+import Map from './map';
 import HotelDetailCards from './hotelDetailsCard';
 import AmenitiesInput from './amenitiesInput';
 

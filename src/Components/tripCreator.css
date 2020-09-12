@@ -1,0 +1,55 @@
+.trip-creator-page{
+    min-height: 110vh;
+    background: url('../images/tripCreator2.jpg');
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+.trip-creator-page a{
+    color:black;
+    text-decoration: underline;
+    }
+.trip-creator-page button{
+    padding:1rem;
+margin: 1rem;
+}
+.trip-creator-page header{
+margin-top: 10rem;
+}
+.trip-creator-container{
+    background:rgb(226, 235, 231);
+    display: inline-block;
+    position: relative;
+    width: 35%;
+    margin: auto;
+    margin-top: 2rem;
+    margin-bottom: 9rem;
+    border:black solid 1px
+}
+.trip-creator-container form{
+    margin-top: 4rem;
+}
+.trip-creator-container input, .trip-creator-container p{
+    justify-content: center;
+    align-content: center;
+}
+.trip-creator-container input[type="text"]{
+    margin-bottom: 3rem;
+    margin-top: 0rem;
+    min-width: 300px;
+text-align: center;
+}
+.trip-creator-container  input[type="submit"]{
+    width: 150px;
+    display: flex;
+    margin: auto;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    background-color: green;
+    color: white;
+
+}
+.trip-creator-container  input[type="date"]{
+    margin-right:1rem ;
+}

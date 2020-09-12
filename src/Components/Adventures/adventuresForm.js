@@ -27,13 +27,7 @@ function AdventureForm(props) {
   const location = localStorage.getItem('locationID');
   console.log('data', searchData);
   useEffect(() => {
-    // attractions=== false? setAttractions(null):console.log()
-    // restaurants=== false? setRestaurants(null):console.log()
-    {
-    nearMe
-        ? localStorage.removeItem('locationID')
-        : console.log();
-    }
+ 
     setSearchData({ ...searchData, locationID: location });
   }, [location]);
   const sendSearch = (e) => {
@@ -96,36 +90,13 @@ function AdventureForm(props) {
               console.log(err);
             })
         : setAttractions(null);
-
-        
     }
-
-    // {
-    //   attractions
-    //     ? fetch(ATTRACTIONS_URL, {
-    //         method: 'GET',
-    //         headers: {
-    //           'x-rapidapi-host': 'tripadvisor1.p.rapidapi.com',
-    //           'x-rapidapi-key':
-    //             '78658dd993msha58b4f039c6c59ep11289djsn173e61927b34',
-    //         },
-    //       })
-    //         .then((resp) => resp.json())
-    //         .then((response) => {
-    //           console.log(response);
-    //           setAttractions(response);
-    //         })
-    //         .catch((err) => {
-    //           console.log(err);
-    //         })
-    //     : setAttractions(null);
-    // }
   };
   return (
     <div className="adventures-form">
       <div className="adventures-map-container">
-      <h1>Find Your Next Adventure</h1>
-      <AdventuresMap searchData={searchData} />
+        <h1>Find Your Next Adventure</h1>
+        <AdventuresMap searchData={searchData} />
       </div>
       <div className="search-form">
         <div className="selectors">
@@ -158,13 +129,12 @@ function AdventureForm(props) {
           />
           <label> Attractions </label>
         </div>
-        {nearMe?
-        <button onClick={(e) => sendSearch(e)}>Search</button>:null}
+        {nearMe ? <button onClick={(e) => sendSearch(e)}>Search</button> : null}
         {nearMe ? null : (
           <div>
             <input
               type="text"
-             placeholder="Search By City"
+              placeholder="Search By City"
               onChange={(e) => {
                 setSearchData({ ...searchData, locationID: locationSearch(e) });
               }}

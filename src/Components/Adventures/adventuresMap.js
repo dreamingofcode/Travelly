@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import ReactMapGL, { Marker, Popup } from 'react-map-gl';
+import ReactMapGL, { Marker, Popup, FlyToInterpolator } from 'react-map-gl';
+
 import arrow from '../../icons/arrow.png';
 import userMarker from '../../icons/userMarker.png';
 import foodMarker from '../../icons/burger.png';
 
 import './adventuresForm.css';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { viewport } from '@popperjs/core';
-import { isConstructorDeclaration } from 'typescript';
 
 //a viewport must be set to set where the map will load up.
 //ideally we want a users location to determine where the map viewport is
@@ -33,10 +32,8 @@ function AdventuresMap(props) {
     SEARCH_LATITUDE = parseFloat(USER_LOCATION.split(',')[0]);
     SEARCH_LONGITUDE = parseFloat(USER_LOCATION.split(',')[1]);
   } else {
-    // SEARCH_LATITUDE = parseFloat(locationCoordinate.split(',')[0]);
-    // SEARCH_LONGITUDE = parseFloat(locationCoordinate.split(',')[1]);
-    SEARCH_LATITUDE = parseFloat(USER_LOCATION.split(',')[0]);
-    SEARCH_LONGITUDE = parseFloat(USER_LOCATION.split(',')[1]);
+    SEARCH_LATITUDE = parseFloat(locationCoordinate.split(',')[0]);
+    SEARCH_LONGITUDE = parseFloat(locationCoordinate.split(',')[1]);
     console.log(
       'triggered no near me',
       SEARCH_LATITUDE,
@@ -64,18 +61,22 @@ function AdventuresMap(props) {
     // localStorage.setItem('USER_LOCATION', coordinates);
   }
   const flyTo = () => {
-    setViewport({
+    const newVieport = {
       ...viewportState,
-      center: [
-        -74.5 + (Math.random() - 0.5) * 10,
-        40 + (Math.random() - 0.5) * 10,
-      ],
-      essential: true, // this animation is considered essential with respect to prefers-reduced-motion
-    });
+      latitude: SEARCH_LATITUDE,
+      longitude: SEARCH_LONGITUDE,
+      zoom:15,
+      transitionDuration: 5000,
+      transitionInterpolator: new FlyToInterpolator(),
+      // transitionEasing: d3.easeCubic,
+    };
+    setViewport(newVieport);
   };
+  const { attractions, restaurants } = props;
   useEffect(() => {
     // setLocation();
-    searchData.nearMe ? console.log() : flyTo();
+    flyTo()
+    // searchData.nearMe ? console.log() : flyTo();
     const listener = (e) => {
       if (e.key === 'Escape') {
         setSelectedItem(null);
@@ -86,8 +87,7 @@ function AdventuresMap(props) {
     return () => {
       window.removeEventListener('keydown', listener);
     };
-  }, []);
-  const { attractions, restaurants } = props;
+  }, [attractions,restaurants]);
   const TOKEN =
     'pk.eyJ1IjoiY2VzYXJtb3RhMTIzIiwiYSI6ImNrZWRjNjlxaTBmbTUydGs5cDRib2JsaW4ifQ.zBj3f9fd5ukPTjXjTO6f5A';
   return (
@@ -111,8 +111,8 @@ function AdventuresMap(props) {
         </Marker>
         {attractions && !attractions.errors
           ? attractions.data.map((attraction) => {
-            console.log("yup",parseFloat(attraction.longitude))
-              if (attraction.location_id !== "36511") {
+              console.log('yup', parseFloat(attraction.longitude));
+              if (!attraction.ad_position) {
                 return (
                   <Marker
                     key={attraction.location_id}
