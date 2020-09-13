@@ -97,7 +97,7 @@ function TripCreator(props) {
             }}
             required
           />
-          <AutoComplete/>
+          {/* <AutoComplete/> */}
           <p>Select your Travel dates</p>
           <input
             type="date"

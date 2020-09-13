@@ -21,14 +21,14 @@ function AdventuresMap(props) {
   let SEARCH_LONGITUDE = '';
   console.log('locationID', searchData.locationID);
 
-  console.log(
-    'coordinates',
-    locationCoordinate.split(','),
-    locationCoordinate.split(',')[1],
-    typeof locationCoordinate.split(',')[0]
-  );
+  // console.log(
+  //   'coordinates',
+  //   locationCoordinate.split(','),
+  //   locationCoordinate.split(',')[1],
+  //   typeof locationCoordinate.split(',')[0]
+  // );
 
-  if (searchData.nearMe) {
+  if (searchData.nearMe || !locationCoordinate) {
     SEARCH_LATITUDE = parseFloat(USER_LOCATION.split(',')[0]);
     SEARCH_LONGITUDE = parseFloat(USER_LOCATION.split(',')[1]);
   } else {
@@ -46,7 +46,7 @@ function AdventuresMap(props) {
     height: 500,
     latitude: SEARCH_LATITUDE,
     longitude: SEARCH_LONGITUDE,
-    zoom: 15,
+    zoom: 13,
   });
   const [selectedItem, setSelectedItem] = useState(null);
 
@@ -58,7 +58,7 @@ function AdventuresMap(props) {
 
   function showPosition(position) {
     const coordinates = [position.coords.latitude, position.coords.longitude];
-    // localStorage.setItem('USER_LOCATION', coordinates);
+    localStorage.setItem('USER_LOCATION', coordinates);
   }
   const flyTo = () => {
     const newVieport = {
@@ -76,7 +76,6 @@ function AdventuresMap(props) {
   useEffect(() => {
     // setLocation();
     flyTo()
-    // searchData.nearMe ? console.log() : flyTo();
     const listener = (e) => {
       if (e.key === 'Escape') {
         setSelectedItem(null);

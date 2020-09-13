@@ -65,15 +65,21 @@ function AdventureForm(props) {
           })
             .then((resp) => resp.json())
             .then((response) => {
-              console.log(response);
+              console.log("resp",response);
+              console.log(ATTRACTIONS_URL)
               setRestaurants(response);
             })
             .catch((err) => {
               console.log(err);
+              console.log(ATTRACTIONS_URL)
             })
         : setRestaurants(null);
       attractions
-        ? fetch(ATTRACTIONS_URL, {
+
+        ? 
+
+       ( 
+         fetch(ATTRACTIONS_URL, {
             method: 'GET',
             headers: {
               'x-rapidapi-host': 'tripadvisor1.p.rapidapi.com',
@@ -83,12 +89,12 @@ function AdventureForm(props) {
           })
             .then((resp) => resp.json())
             .then((response) => {
-              console.log(response);
+              console.log("resp",response);
               setAttractions(response);
             })
             .catch((err) => {
               console.log(err);
-            })
+            }))
         : setAttractions(null);
     }
   };
