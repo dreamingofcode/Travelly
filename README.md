@@ -21,8 +21,8 @@ A step by step series of examples that tell you how to get a development env run
 terminal command: git clone https://github.com/dreamingofcode/Travelly.git </br> </br>
 4.Install NPM packages </br>
 terminal command: npm install npm@latest -g </br></br>
-5.Enter your API key inside redudcers/searchParameters.js initial state </br>
-const initialState= { key: '78658dd993msha58b4f039c6c59ep11289djsn173e61927b34'....} </br></br>
+5.Enter your API key inside reducers/searchParameters.js  </br>
+const initialState= { key: 'YOUR API KEY'....} </br></br>
 6.start your local server </br>
 terminal command: npm start </br></br>
 
