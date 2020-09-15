@@ -16,6 +16,7 @@ function AdventuresMap(props) {
   const { searchData } = props;
   const USER_LOCATION = localStorage.getItem('USER_LOCATION');
 
+
   const locationCoordinate = localStorage.getItem('location_coordinates');
   let SEARCH_LATITUDE = '';
   let SEARCH_LONGITUDE = '';
@@ -76,6 +77,7 @@ function AdventuresMap(props) {
   useEffect(() => {
     // setLocation();
     flyTo()
+
     const listener = (e) => {
       if (e.key === 'Escape') {
         setSelectedItem(null);
@@ -112,6 +114,7 @@ function AdventuresMap(props) {
           ? attractions.data.map((attraction) => {
               console.log('yup', parseFloat(attraction.longitude));
               if (!attraction.ad_position) {
+
                 return (
                   <Marker
                     key={attraction.location_id}
@@ -131,6 +134,7 @@ function AdventuresMap(props) {
                   </Marker>
                 );
               }
+
             })
           : console.log('not eworki')}
         {restaurants && !restaurants.errors

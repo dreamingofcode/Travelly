@@ -11,6 +11,7 @@
         "@testing-library/user-event": "^7.1.2",
         "bootstrap": "^4.5.0",
         "bootstrap-slider": "^11.0.2",
+        "is-buffer": "^2.0.4",
         "jquery": "^3.5.1",
         "popper.js": "^1.16.1",
         "query-string": "^6.8.2",
