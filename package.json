@@ -1,5 +1,6 @@
 {
-    "name": "travelly",
+    "name": "travelly", 
+    "homepage": "https://nervous-lovelace-0d5b8e.netlify.app/",
     "version": "0.1.0",
     "private": true,
     "dependencies": {
