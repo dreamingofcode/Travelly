@@ -10,7 +10,7 @@ import * as serviceWorker from './serviceWorker';
 
 const composeElements = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(allReducers, composeElements(applyMiddleware(thunk)));
-import * as serviceWorker from './serviceWorker';
+// import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <Provider store={store}>
