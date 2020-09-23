@@ -40,7 +40,7 @@ class LandingPage extends React.Component {
             with Travelly <br />
           </h3>
           <button>
-            <a href="/hotel-search">Start Your Trip</a>
+            <a href="/adventures-search">Find Adventure!</a>
           </button>
         </section>
         <section id="locations">

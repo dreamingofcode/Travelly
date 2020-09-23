@@ -77,8 +77,6 @@ class FlightSearchForm extends React.Component {
       ? (setTripType = `?inboundpartialdate=${returnDate}`)
       : (setTripType = '');
     const API_URL = `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/${origin}/${destination}/${departureDate}${setTripType}`;
-    const TEMP_API_URL =
-      'https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/ATLA-sky/LASA-sky/2020-08-28?inboundpartialdate=2020-08-31';
     fetch(API_URL, {
       method: 'GET',
       headers: {
@@ -88,7 +86,7 @@ class FlightSearchForm extends React.Component {
     })
       .then((resp) => resp.json())
       .then((response) => {
-        localStorage.setItem('flightSearch_API_URL', TEMP_API_URL);
+        localStorage.setItem('flightSearch_API_URL', API_URL);
 
         this.props.flightSearchResults(response);
         response.message || response.Quotes.length <= 0
